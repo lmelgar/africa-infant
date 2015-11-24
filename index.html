@@ -1,1 +1,53 @@
-<h1>Hello, World!</h1>
+<!DOCTYPE html>
+<!-- A modified example from Scott Murray's Knight d3 course. -->
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Infant Mortality</title>
+		<link media="screen" href="style.css" rel="stylesheet" />
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
+
+	</head>
+	<body>
+
+		<div id="text">
+		<h1>Data exploration</h1>
+
+				<p>Source: <a href="http://www.who.int/gho/en/">Global Health Observatory (GHO)</a> and <a href="http://data.worldbank.org/">World Bank</a>.</p>
+			</div>
+		</div>
+		<h3>Total infant mortality rate in Africa by country</h3>
+		<div id="graph3"></div>
+		<br>
+		<h3>Infant mortality rate since 2000</h3>
+		<div id="graph2"></div>
+		<br>
+		<div id="form">
+			<label><input type="radio" name="mode" value="bycount" checked>Raw Count</label>
+			<label><input type="radio" name="mode" value="bypercent">Percent of Illness</label>
+		</div>
+		<h3>Infant mortality rate divided by illnesses</h3>
+		<div id="graph1"></div>
+		<br>
+		<h3>Infant mortality rate vs improved water use</h3>
+		<div class="btn-group" role="group" aria-label="...">
+				<button type="button" class="btn btn-default" id="drinking">Improved drinking-water</button>
+				<button type="button" class="btn btn-default" id="sanitation">Improved sanitation-water</button>
+		</div>
+		<div id="graph4"></div>
+	</body>
+
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="http://d3js.org/queue.v1.min.js"></script>
+	<script type="text/javascript" src="js/tooltip.js"></script>
+	<script type="text/javascript" src="js/d3-legend.min.js"></script>
+	<script type="text/javascript" src="//d3js.org/topojson.v1.min.js"></script>
+	<script type="text/javascript" src="js/graph1.js"></script>
+	<script type="text/javascript" src="js/graph2.js"></script>
+	<script type="text/javascript" src="js/graph3.js"></script>
+	<script type="text/javascript" src="js/graph4.js"></script>
+</html>
