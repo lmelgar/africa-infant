@@ -1,4 +1,4 @@
-    var width_graph4 = 700;
+    var width_graph4 = 800;
     var height_graph4 = 450;
 
     var margin_graph4 = { top: 20, right: 10, bottom: 60, left: 80 };
@@ -62,7 +62,7 @@
             }
 
             else {
-              return "#B8C76D";
+              return "#FCE4C2";
             }
 
         })
@@ -102,7 +102,7 @@
 
   var xlabel = svg_graph4.append("text")
         .attr("class", "xlabel")
-        .attr("transform", "translate(" + (width_graph4 / 1.4) + " ," +
+        .attr("transform", "translate(" + (width_graph4 / 1.32) + " ," +
               (height_graph4 - 15) + ")")
         .style("text-anchor", "middle")
         .attr("dy", "12")
@@ -199,6 +199,56 @@
 
         xlabel
                .text("Population using improved sanitation-water (%)")
+               .transition()
+               .duration(2000)
+               .call(xlabel);
+
+        });
+
+
+
+        d3.select("#rural").on("click", function() {
+
+
+          yScale_graph4
+            .domain(d3.extent(data, function(d){
+            return + d.rate;
+                      }));
+          svg_graph4.select(".y.axis")
+              .transition()
+              .duration(2000)
+              .call(yAxis_graph4);
+
+          circles
+            .transition()
+            .duration(2000)
+            .attr("cx", function(d) {
+              return xScale_graph4(+d.rural_pop);
+
+            })
+            .attr("cy", function(d) {
+              return yScale_graph4(+d.rate);
+            });
+
+          circles
+                 .on("mouseover", mouseoverFunc_graph4)
+
+      function mouseoverFunc_graph4(d) {
+        d3.select(this)
+          .transition()
+          .attr("r", 6)
+          .attr("fill-opacity", 1)
+        tooltip_graph4
+        .style("display", null)
+        .html("<p>" + "<span>" + d.country + "</span>" +
+              "<br>Infant mortality rate: " + "<span>" + d3.format("s")(d.rate) + "</span>" +
+              "<br>Population living in rural areas: <span>%" + d.rural_pop + "</span>" + "</p>");
+        d3.selectAll("circle").classed("unfocused", true);
+              d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
+        };
+
+        xlabel
+               .text("Population living in rural areas (%)")
                .transition()
                .duration(2000)
                .call(xlabel);

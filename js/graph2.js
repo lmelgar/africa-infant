@@ -7,8 +7,8 @@ var margin_graph2 = {
     left: 70
 };
 
-var width_graph2 = 700;
-var height_graph2 = 450;
+var width_graph2 = 450;
+var height_graph2 = 350;
 
 
 //Set up date formatting and years

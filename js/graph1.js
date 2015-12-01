@@ -1,5 +1,5 @@
-var margin_graph1 = {top: 20, right: 185, bottom: 130, left: 70};
-var width_graph1 = 1000 - margin_graph1.left - margin_graph1.right;
+var margin_graph1 = {top: 20, right: 185, bottom: 130, left: 45};
+var width_graph1 = 800 - margin_graph1.left - margin_graph1.right;
 var height_graph1 = 550 - margin_graph1.top - margin_graph1.bottom;
 
 var xScale_graph1 = d3.scale.ordinal()
@@ -84,7 +84,7 @@ svg1.append("g")
     .append("text")
       .attr("class", "y label")
       .attr("transform", "rotate(-90)")
-      .attr("y", -60)
+      .attr("y", -40)
       .attr("dy", ".5em")
       .attr("dx", 5)
       .style("text-anchor", "end")

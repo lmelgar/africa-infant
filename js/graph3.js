@@ -1,13 +1,13 @@
 var margin_graph3 = {top: 20, right: 120, bottom: 120, left: 70};
-var width_graph3 = 1000 - margin_graph3.left - margin_graph3.right;
-var height_graph3 = 650 - margin_graph3.top - margin_graph3.bottom;
+var width_graph3 = 600 - margin_graph3.left - margin_graph3.right;
+var height_graph3 = 450 - margin_graph3.top - margin_graph3.bottom;
 
 var svg3 = d3.select('#graph3').append('svg')
     .attr('width', width_graph3)
     .attr('height', height_graph3);
 
 var projection = d3.geo.mercator()
-    .scale(380) // mess with this if you want
+    .scale(230) // mess with this if you want
     .translate([width_graph3 / 2.4, height_graph3 / 1.9]);
 
 var path = d3.geo.path()
