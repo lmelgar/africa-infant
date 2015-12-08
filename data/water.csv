@@ -1,190 +1,190 @@
-country,rate,Rural_drinking,Urban_drinking,Total_drinking,Rural_sanitation,Urban_sanitation,Total_sanitation,rural_pop
-Afghanistan,99.3,56,90,64,23,47,29,74.532
-Albania,15.4,94,97,96,86,95,91,45.67
-Algeria,25.4,79,85,84,88,98,95,31.13
-Andorra,2.9,100,100,100,100,100,100,13.292
-Angola,171.1,34,68,54,20,87,60,58.301
-Antigua and Barbuda,9.6,98,98,98,,,,74.865
-Argentina,13.7,95,99,99,99,97,97,8.705
-Armenia,16.5,100,100,100,81,96,91,36.839
-Australia,4.3,100,100,100,100,100,100,10.985
-Austria,4,100,100,100,100,100,100,34.136
-Azerbaijan,35.1,71,88,80,78,86,82,46.144
-Bahamas,13.2,98,98,98,92,92,92,17.333
-Bahrain,6.7,100,100,100,99,99,99,11.381
-Bangladesh,43.3,84,86,85,58,55,57,68.01
-Barbados,14.4,100,100,100,,,,68.231
-Belarus,5.2,99,100,100,95,94,94,24.533
-Belgium,4.4,100,100,100,100,100,100,2.268
-Belize,17.2,100,98,99,88,94,91,55.504
-Benin,86.5,69,85,76,5,25,14,57.333
-Bhutan,37.8,97,99,98,31,75,47,63.632
-Bolivia,40.2,72,96,88,24,57,46,32.721
-Bosnia and Herzegovina,6.9,99,100,100,92,99,95,60.622
-Botswana,47,93,99,97,42,78,64,43.301
-Brazil,14.4,85,100,98,49,87,81,15.099
-Bulgaria,12,99,100,99,100,100,100,27.029
-Burkina Faso,99.8,76,97,82,7,50,19,72.654
-Burundi,82.7,73,92,75,48,43,47,88.811
-Cabo Verde,26.7,86,91,89,47,75,65,36.611
-Cambodia,38.7,66,94,71,25,82,37,79.863
-Cameroon,96.3,52,94,74,27,62,45,47.323
-Canada,5.3,99,100,100,99,100,100,18.707
-Central African Republic,141.3,54,90,68,7,44,22,60.742
-Chad,147.7,45,72,51,6,31,12,77.871
-Chile,8.4,91,100,99,89,100,99,11.014
-China,13.3,85,98,92,56,74,65,48.111
-Colombia,17.4,74,97,91,66,85,80,24.397
-Comoros,79.2,97,,,,,,71.971
-Congo,51.1,39,96,75,6,20,15,35.9
-Cook Islands,7.9,100,100,100,97,97,97,
-Costa Rica,9.8,91,100,97,92,95,94,26.06
-Cote d'Ivoire,100.1,68,92,80,10,33,22,47.959
-Croatia,4.8,97,100,99,98,99,98,41.926
-Cuba,6.6,87,96,94,88,94,93,23.219
-Cyprus,3.6,100,100,100,100,100,100,32.739
-Czech Republic,3.9,100,100,100,100,100,100,26.885
-Democratic Republic of the Congo,119.4,29,79,46,33,29,31,59.05
-Denmark,3.6,100,100,100,100,100,100,12.858
-Djibouti,84.7,65,100,92,22,73,61,22.883
-Dominica,11.3,,96,,,,,31.319
-Dominican Republic,29.2,77,82,81,74,86,82,23.961
-Ecuador,23,75,92,86,76,86,83,36.912
-Egypt,22,99,100,99,94,98,96,56.998
-El Salvador,16,81,95,90,53,80,70,34.713
-Eritrea,52.8,,,,4,,,78.648
-Estonia,3.7,98,100,99,94,96,95,32.165
-Ethiopia,66.1,42,97,52,23,27,24,81.84
-Fiji,23.8,92,100,96,82,92,87,47.404
-Finland,2.7,100,100,100,100,100,100,16.181
-France,4.3,100,100,100,100,100,100,21.18
-Gabon,56.9,63,97,92,32,43,41,13.633
-Gambia,73.8,84,94,90,55,64,60,42.294
-Georgia,14,97,100,99,91,96,93,46.838
-Germany,4,100,100,100,100,100,100,25.312
-Ghana,79.1,81,93,87,8,20,14,47.931
-Greece,4.5,99,100,100,97,99,99,23
-Grenada,12.3,95,99,97,98,98,98,64.399
-Guatemala,32,89,99,94,72,88,80,49.788
-Guinea,103.3,65,92,75,11,33,19,64.252
-Guinea-Bissau,125.7,56,96,74,8,34,20,53.076
-Guyana,38.4,98,97,98,82,88,84,71.681
-Haiti,74.6,47,75,62,16,31,24,45.159
-Honduras,22.9,82,97,90,74,85,80,47.07
-Hungary,6.2,100,100,100,100,100,100,30.168
-Iceland,2.3,100,100,100,100,100,100,6.16
-India,54.1,91,97,93,25,60,36,68.369
-Indonesia,30.7,76,93,85,46,71,59,48.512
-Iran,17.3,92,98,96,82,93,89,28.231
-Iraq,34.5,69,94,85,82,86,85,30.825
-Ireland,3.9,100,100,100,98,100,99,37.614
-Israel,4.4,100,100,100,100,100,100,8.051
-Italy,3.6,100,100,100,,,,31.44
-Jamaica,17,89,97,93,82,78,80,45.873
-Japan,3.1,100,100,100,100,100,100,8.098
-Jordan,18.9,90,97,96,98,98,98,17.03
-Kazakhstan,17.7,86,99,93,98,97,97,46.542
-Kenya,72.3,55,82,62,29,31,30,75.63
-Kiribati,59.2,51,87,67,31,51,40,56.052
-Kuwait,9.7,99,99,99,100,100,100,1.706
-Kyrgyzstan,25.7,82,97,88,92,92,92,64.597
-Laos,72.9,65,84,72,50,90,65,64.632
-Latvia,8.6,96,100,98,,,,32.452
-Lebanon,9.5,100,100,100,,100,,12.574
-Lesotho,97.8,77,93,81,27,37,30,74.24
-Liberia,74.2,63,87,75,6,28,17,51.459
-Libya,15.4,,,,96,97,97,22.012
-Lithuania,5.4,89,99,96,85,99,94,33.396
-Luxembourg,2.2,100,100,100,100,100,100,10.753
-Macedonia,13,99,100,99,83,97,91,43.041
-Madagascar,57.3,35,78,50,11,19,14,66.804
-Malawi,69.9,83,95,85,8,22,10,84.202
-Malaysia,8.4,99,100,100,95,96,96,27.474
-Maldives,10.6,98,100,99,100,97,99,57.697
-Mali,121,54,91,67,15,35,22,62.421
-Malta,6,100,100,100,100,100,100,5.009
-Marshall Islands,38.5,98,93,95,56,84,76,28.109
-Mauritania,91,48,52,50,9,51,27,42
-Mauritius,14.8,100,100,100,90,92,91,59.836
-Mexico,15.3,91,96,95,79,87,85,21.593
-Micronesia,37.5,87,95,89,49,85,57,77.683
-Moldova,15.9,94,99,97,84,89,87,55.143
-Monaco,3.3,,100,100,,100,100,0
-Mongolia,32.3,61,95,85,35,65,56,30.528
-Montenegro,5.6,95,100,98,87,92,90,36.543
-Morocco,30.6,64,98,84,63,85,75,41.303
-Mozambique,89.8,35,80,49,11,44,21,68.583
-Myanmar,52.4,81,95,86,74,84,77,67.531
-Namibia,49.5,87,98,92,17,56,32,56.334
-Nauru,40.2,,96,96,,66,66,
-Nepal,45.7,88,90,88,34,51,37,82.482
-Netherlands,4.3,100,100,100,100,100,100,11.425
-New Zealand,6.3,100,100,100,,,,13.8
-Nicaragua,24.2,68,98,85,37,63,52,42.159
-Niger,105.1,42,99,52,4,33,9,82.014
-Nigeria,117.8,49,79,64,25,31,28,54.766
-Niue,47.6,99,99,99,100,100,100,
-North Korea,28.6,97,99,98,73,88,82,39.564
-Norway,2.8,100,100,100,100,100,100,20.335
-Oman,11,86,95,93,95,97,97,23.796
-Pakistan,85.8,89,96,91,34,72,48,62.572
-Palau,20,,97,,100,100,100,14.961
-Panama,18.5,87,97,94,52,80,73,34.302
-Papua New Guinea,62.7,33,88,40,13,56,19,87.018
-Paraguay,22.6,83,100,94,53,96,80,41.06
-Peru,17.5,72,91,87,45,81,73,22.384
-Philippines,30.4,91,92,92,69,79,74,55.19
-Poland,5.3,,100,,,96,,39.312
-Portugal,3.8,100,100,100,100,100,100,38.242
-Qatar,8.1,100,100,100,100,100,100,1.054
-Romania,12.5,,99,,,,,45.909
-Russia,10.5,92,99,97,59,74,70,26.214
-Rwanda,53.2,68,81,71,64,61,64,74.106
-Saint Kitts and Nevis,10.2,98,98,98,,,,68.156
-Saint Lucia,15,93,99,94,,,,81.55
-Saint Vincent and the Grenadines,19.3,95,95,95,,,,50.505
-Samoa,18.4,99,97,99,91,93,92,80.361
-Sao Tome and Principe,52.6,94,99,97,23,41,34,36.735
-Saudi Arabia,16.2,97,97,97,100,100,100,17.49
-Senegal,56.9,60,92,74,40,67,52,57.219
-Serbia,7.1,99,99,99,96,99,97,44.693
-Seychelles,14.4,96,96,96,97,97,97,47.085
-Sierra Leone,167.4,42,87,60,7,22,13,61.115
-Singapore,2.9,,100,100,,100,100,
-Slovakia,9.4,100,100,100,100,100,100,45.837
-Slovenia,4.1,99,100,100,100,100,100,50.144
-Solomon Islands,34.8,77,93,81,15,81,29,79.036
-Somalia,169.9,88,99,95,62,82,74,61.847
-South Africa,75.9,55,63,57,7,16,9,36.728
-South Korea,3.9,88,100,98,100,100,100,17.859
-Spain,5.4,100,100,100,100,100,100,21.098
-Sri Lanka,12.8,93,99,94,94,83,92,81.703
-Sudan,87.5,50,66,55,13,44,24,66.685
-Suriname,29,88,98,95,61,88,80,33.792
-Swaziland,122.6,69,94,74,56,63,57,78.626
-Sweden,3.3,100,100,100,100,100,100,14.637
-Switzerland,5,100,100,100,100,100,100,26.261
-Syria,18.1,87,92,90,95,96,96,43.541
-Tajikistan,61.1,64,93,72,95,94,94,73.432
-Tanzania,80.3,44,78,53,7,25,12,70.507
-Thailand,17.2,95,97,96,96,89,93,53.318
-Timor-Leste,75.7,61,95,70,27,69,39,69.168
-Togo,101.2,41,92,61,2,25,11,61.507
-Tonga,14.9,99,99,99,89,99,91,76.502
-Trinidad and Tobago,26,,97,,92,92,92,91.205
-Tunisia,21.1,90,100,97,77,97,90,33.726
-Turkey,29.2,99,100,100,75,97,91,28.166
-Turkmenistan,68.2,54,89,71,98,100,99,50.977
-Tuvalu,37.2,97,98,98,80,86,83,43.185
-Uganda,98.1,71,95,75,34,33,34,84.885
-Ukraine,13.6,98,98,98,89,96,94,30.928
-United Arab Emirates,9.4,100,100,100,95,98,98,15.316
-United Kingdom,6,100,100,100,100,100,100,18.166
-United States of America,7.9,98,99,99,100,100,100,18.892
-Uruguay,14.2,95,100,99,96,96,96,5.197
-Uzbekistan,55.1,81,98,87,100,100,100,63.818
-Vanuatu,20.9,88,98,91,55,65,58,74.8
-Viet Nam,28.3,94,98,95,67,93,75,68.332
-Yemen,75.2,47,72,55,34,93,53,67.126
-Zambia,124.6,49,85,63,34,56,43,60.413
-Zimbabwe,96.4,69,97,80,32,52,40,67.166
+country,region,rate,Rural_drinking,Urban_drinking,Total_drinking,Rural_sanitation,Urban_sanitation,Total_sanitation,rural_pop
+Afghanistan,South Asia,99,56,90,64,23,47,29,74.5
+Albania,Europe & Central Asia,15,94,97,96,86,95,91,45.7
+Algeria,Middle East & North Africa,25,79,85,84,88,98,95,31.1
+Andorra,Europe & Central Asia,3,100,100,100,100,100,100,13.3
+Angola,Sub-Saharan Africa,171,34,68,54,20,87,60,58.3
+Antigua and Barbuda,Latin America & Caribbean,10,98,98,98,,,,74.9
+Argentina,Latin America & Caribbean,14,95,99,99,99,97,97,8.7
+Armenia,Europe & Central Asia,17,100,100,100,81,96,91,36.8
+Australia,East Asia & Pacific,4,100,100,100,100,100,100,11.0
+Austria,Europe & Central Asia,4,100,100,100,100,100,100,34.1
+Azerbaijan,Europe & Central Asia,35,71,88,80,78,86,82,46.1
+Bahamas,Latin America & Caribbean,13,98,98,98,92,92,92,17.3
+Bahrain,Middle East & North Africa,7,100,100,100,99,99,99,11.4
+Bangladesh,South Asia,43,84,86,85,58,55,57,68.0
+Barbados,Latin America & Caribbean,14,100,100,100,,,,68.2
+Belarus,Europe & Central Asia,5,99,100,100,95,94,94,24.5
+Belgium,Europe & Central Asia,4,100,100,100,100,100,100,2.3
+Belize,Latin America & Caribbean,17,100,98,99,88,94,91,55.5
+Benin,Sub-Saharan Africa,87,69,85,76,5,25,14,57.3
+Bhutan,South Asia,38,97,99,98,31,75,47,63.6
+Bolivia,Latin America & Caribbean,40,72,96,88,24,57,46,32.7
+Bosnia and Herzegovina,Europe & Central Asia,7,99,100,100,92,99,95,60.6
+Botswana,Sub-Saharan Africa,47,93,99,97,42,78,64,43.3
+Brazil,Latin America & Caribbean,14,85,100,98,49,87,81,15.1
+Bulgaria,Europe & Central Asia,12,99,100,99,100,100,100,27.0
+Burkina Faso,Sub-Saharan Africa,100,76,97,82,7,50,19,72.7
+Burundi,Sub-Saharan Africa,83,73,92,75,48,43,47,88.8
+Cabo Verde,Sub-Saharan Africa,27,86,91,89,47,75,65,36.6
+Cambodia,East Asia & Pacific,39,66,94,71,25,82,37,79.9
+Cameroon,Sub-Saharan Africa,96,52,94,74,27,62,45,47.3
+Canada,North America,5,99,100,100,99,100,100,18.7
+Central African Republic,Sub-Saharan Africa,141,54,90,68,7,44,22,60.7
+Chad,Sub-Saharan Africa,148,45,72,51,6,31,12,77.9
+Chile,Latin America & Caribbean,8,91,100,99,89,100,99,11.0
+China,East Asia & Pacific,13,85,98,92,56,74,65,48.1
+Colombia,Latin America & Caribbean,17,74,97,91,66,85,80,24.4
+Comoros,Sub-Saharan Africa,79,97,,,,,,72.0
+Congo,Sub-Saharan Africa,51,39,96,75,6,20,15,35.9
+Cook Islands,East Asia & Pacific,8,100,100,100,97,97,97,
+Costa Rica,Latin America & Caribbean,10,91,100,97,92,95,94,26.1
+Cote d'Ivoire,Sub-Saharan Africa,100,68,92,80,10,33,22,48.0
+Croatia,Europe & Central Asia,5,97,100,99,98,99,98,41.9
+Cuba,Latin America & Caribbean,7,87,96,94,88,94,93,23.2
+Cyprus,Europe & Central Asia,4,100,100,100,100,100,100,32.7
+Czech Republic,Europe & Central Asia,4,100,100,100,100,100,100,26.9
+Democratic Republic of the Congo,Sub-Saharan Africa,119,29,79,46,33,29,31,59.1
+Denmark,Europe & Central Asia,4,100,100,100,100,100,100,12.9
+Djibouti,Middle East & North Africa,85,65,100,92,22,73,61,22.9
+Dominica,Latin America & Caribbean,11,,96,,,,,31.3
+Dominican Republic,Latin America & Caribbean,29,77,82,81,74,86,82,24.0
+Ecuador,Latin America & Caribbean,23,75,92,86,76,86,83,36.9
+Egypt,Middle East & North Africa,22,99,100,99,94,98,96,57.0
+El Salvador,Latin America & Caribbean,16,81,95,90,53,80,70,34.7
+Eritrea,Sub-Saharan Africa,53,,,,4,,,78.6
+Estonia,Europe & Central Asia,4,98,100,99,94,96,95,32.2
+Ethiopia,Sub-Saharan Africa,66,42,97,52,23,27,24,81.8
+Fiji,East Asia & Pacific,24,92,100,96,82,92,87,47.4
+Finland,Europe & Central Asia,3,100,100,100,100,100,100,16.2
+France,Europe & Central Asia,4,100,100,100,100,100,100,21.2
+Gabon,Sub-Saharan Africa,57,63,97,92,32,43,41,13.6
+Gambia,Sub-Saharan Africa,74,84,94,90,55,64,60,42.3
+Georgia,Europe & Central Asia,14,97,100,99,91,96,93,46.8
+Germany,Europe & Central Asia,4,100,100,100,100,100,100,25.3
+Ghana,Sub-Saharan Africa,79,81,93,87,8,20,14,47.9
+Greece,Europe & Central Asia,5,99,100,100,97,99,99,23.0
+Grenada,Latin America & Caribbean,12,95,99,97,98,98,98,64.4
+Guatemala,Latin America & Caribbean,32,89,99,94,72,88,80,49.8
+Guinea,Sub-Saharan Africa,103,65,92,75,11,33,19,64.3
+Guinea-Bissau,Sub-Saharan Africa,126,56,96,74,8,34,20,53.1
+Guyana,Latin America & Caribbean,38,98,97,98,82,88,84,71.7
+Haiti,Latin America & Caribbean,75,47,75,62,16,31,24,45.2
+Honduras,Latin America & Caribbean,23,82,97,90,74,85,80,47.1
+Hungary,Europe & Central Asia,6,100,100,100,100,100,100,30.2
+Iceland,Europe & Central Asia,2,100,100,100,100,100,100,6.2
+India,South Asia,54,91,97,93,25,60,36,68.4
+Indonesia,East Asia & Pacific,31,76,93,85,46,71,59,48.5
+Iran,Middle East & North Africa,17,92,98,96,82,93,89,28.2
+Iraq,Middle East & North Africa,35,69,94,85,82,86,85,30.8
+Ireland,Europe & Central Asia,4,100,100,100,98,100,99,37.6
+Israel,Middle East & North Africa,4,100,100,100,100,100,100,8.1
+Italy,Europe & Central Asia,4,100,100,100,,,,31.4
+Jamaica,Latin America & Caribbean,17,89,97,93,82,78,80,45.9
+Japan,East Asia & Pacific,3,100,100,100,100,100,100,8.1
+Jordan,Middle East & North Africa,19,90,97,96,98,98,98,17.0
+Kazakhstan,Europe & Central Asia,18,86,99,93,98,97,97,46.5
+Kenya,Sub-Saharan Africa,72,55,82,62,29,31,30,75.6
+Kiribati,East Asia & Pacific,59,51,87,67,31,51,40,56.1
+Kuwait,Middle East & North Africa,10,99,99,99,100,100,100,1.7
+Kyrgyzstan,Europe & Central Asia,26,82,97,88,92,92,92,64.6
+Laos,East Asia & Pacific,73,65,84,72,50,90,65,64.6
+Latvia,Europe & Central Asia,9,96,100,98,,,,32.5
+Lebanon,Middle East & North Africa,10,100,100,100,,100,,12.6
+Lesotho,Sub-Saharan Africa,98,77,93,81,27,37,30,74.2
+Liberia,Sub-Saharan Africa,74,63,87,75,6,28,17,51.5
+Libya,Middle East & North Africa,15,,,,96,97,97,22.0
+Lithuania,Europe & Central Asia,5,89,99,96,85,99,94,33.4
+Luxembourg,Europe & Central Asia,2,100,100,100,100,100,100,10.8
+Macedonia,Europe & Central Asia,13,99,100,99,83,97,91,43.0
+Madagascar,Sub-Saharan Africa,57,35,78,50,11,19,14,66.8
+Malawi,Sub-Saharan Africa,70,83,95,85,8,22,10,84.2
+Malaysia,East Asia & Pacific,8,99,100,100,95,96,96,27.5
+Maldives,South Asia,11,98,100,99,100,97,99,57.7
+Mali,Sub-Saharan Africa,121,54,91,67,15,35,22,62.4
+Malta,Middle East & North Africa,6,100,100,100,100,100,100,5.0
+Marshall Islands,East Asia & Pacific,39,98,93,95,56,84,76,28.1
+Mauritania,Sub-Saharan Africa,91,48,52,50,9,51,27,42.0
+Mauritius,Sub-Saharan Africa,15,100,100,100,90,92,91,59.8
+Mexico,Latin America & Caribbean,15,91,96,95,79,87,85,21.6
+Micronesia,East Asia & Pacific,38,87,95,89,49,85,57,77.7
+Moldova,Europe & Central Asia,16,94,99,97,84,89,87,55.1
+Monaco,Europe & Central Asia,3,,100,100,,100,100,0.0
+Mongolia,East Asia & Pacific,32,61,95,85,35,65,56,30.5
+Montenegro,Europe & Central Asia,6,95,100,98,87,92,90,36.5
+Morocco,Middle East & North Africa,31,64,98,84,63,85,75,41.3
+Mozambique,Sub-Saharan Africa,90,35,80,49,11,44,21,68.6
+Myanmar,East Asia & Pacific,52,81,95,86,74,84,77,67.5
+Namibia,Sub-Saharan Africa,50,87,98,92,17,56,32,56.3
+Nauru,0.000,40,,96,96,,66,66,
+Nepal,South Asia,46,88,90,88,34,51,37,82.5
+Netherlands,Europe & Central Asia,4,100,100,100,100,100,100,11.4
+New Zealand,East Asia & Pacific,6,100,100,100,,,,13.8
+Nicaragua,Latin America & Caribbean,24,68,98,85,37,63,52,42.2
+Niger,Sub-Saharan Africa,105,42,99,52,4,33,9,82.0
+Nigeria,Sub-Saharan Africa,118,49,79,64,25,31,28,54.8
+Niue,0.000,48,99,99,99,100,100,100,
+North Korea,East Asia & Pacific,29,97,99,98,73,88,82,39.6
+Norway,Europe & Central Asia,3,100,100,100,100,100,100,20.3
+Oman,Middle East & North Africa,11,86,95,93,95,97,97,23.8
+Pakistan,South Asia,86,89,96,91,34,72,48,62.6
+Palau,East Asia & Pacific,20,,97,,100,100,100,15.0
+Panama,Latin America & Caribbean,19,87,97,94,52,80,73,34.3
+Papua New Guinea,East Asia & Pacific,63,33,88,40,13,56,19,87.0
+Paraguay,Latin America & Caribbean,23,83,100,94,53,96,80,41.1
+Peru,Latin America & Caribbean,18,72,91,87,45,81,73,22.4
+Philippines,East Asia & Pacific,30,91,92,92,69,79,74,55.2
+Poland,Europe & Central Asia,5,,100,,,96,,39.3
+Portugal,Europe & Central Asia,4,100,100,100,100,100,100,38.2
+Qatar,Middle East & North Africa,8,100,100,100,100,100,100,1.1
+Romania,Europe & Central Asia,13,,99,,,,,45.9
+Russia,Europe & Central Asia,11,92,99,97,59,74,70,26.2
+Rwanda,Sub-Saharan Africa,53,68,81,71,64,61,64,74.1
+Saint Kitts and Nevis,Latin America & Caribbean,10,98,98,98,,,,68.2
+Saint Lucia,Latin America & Caribbean,15,93,99,94,,,,81.6
+Saint Vincent and the Grenadines,Latin America & Caribbean,19,95,95,95,,,,50.5
+Samoa,East Asia & Pacific,18,99,97,99,91,93,92,80.4
+Sao Tome and Principe,Sub-Saharan Africa,53,94,99,97,23,41,34,36.7
+Saudi Arabia,Middle East & North Africa,16,97,97,97,100,100,100,17.5
+Senegal,Sub-Saharan Africa,57,60,92,74,40,67,52,57.2
+Serbia,Europe & Central Asia,7,99,99,99,96,99,97,44.7
+Seychelles,Sub-Saharan Africa,14,96,96,96,97,97,97,47.1
+Sierra Leone,Sub-Saharan Africa,167,42,87,60,7,22,13,61.1
+Singapore,East Asia & Pacific,3,,100,100,,100,100,
+Slovakia,Europe & Central Asia,9,100,100,100,100,100,100,45.8
+Slovenia,Europe & Central Asia,4,99,100,100,100,100,100,50.1
+Solomon Islands,East Asia & Pacific,35,77,93,81,15,81,29,79.0
+Somalia,Sub-Saharan Africa,170,88,99,95,62,82,74,61.8
+South Africa,Sub-Saharan Africa,76,55,63,57,7,16,9,36.7
+South Korea,East Asia & Pacific,4,88,100,98,100,100,100,17.9
+Spain,Europe & Central Asia,5,100,100,100,100,100,100,21.1
+Sri Lanka,South Asia,13,93,99,94,94,83,92,81.7
+Sudan,Sub-Saharan Africa,88,50,66,55,13,44,24,66.7
+Suriname,Latin America & Caribbean,29,88,98,95,61,88,80,33.8
+Swaziland,Sub-Saharan Africa,123,69,94,74,56,63,57,78.6
+Sweden,Europe & Central Asia,3,100,100,100,100,100,100,14.6
+Switzerland,Europe & Central Asia,5,100,100,100,100,100,100,26.3
+Syria,Middle East & North Africa,18,87,92,90,95,96,96,43.5
+Tajikistan,Europe & Central Asia,61,64,93,72,95,94,94,73.4
+Tanzania,Sub-Saharan Africa,80,44,78,53,7,25,12,70.5
+Thailand,East Asia & Pacific,17,95,97,96,96,89,93,53.3
+Timor-Leste,East Asia & Pacific,76,61,95,70,27,69,39,69.2
+Togo,Sub-Saharan Africa,101,41,92,61,2,25,11,61.5
+Tonga,East Asia & Pacific,15,99,99,99,89,99,91,76.5
+Trinidad and Tobago,Latin America & Caribbean,26,,97,,92,92,92,91.2
+Tunisia,Middle East & North Africa,21,90,100,97,77,97,90,33.7
+Turkey,Europe & Central Asia,29,99,100,100,75,97,91,28.2
+Turkmenistan,Europe & Central Asia,68,54,89,71,98,100,99,51.0
+Tuvalu,East Asia & Pacific,37,97,98,98,80,86,83,43.2
+Uganda,Sub-Saharan Africa,98,71,95,75,34,33,34,84.9
+Ukraine,Europe & Central Asia,14,98,98,98,89,96,94,30.9
+United Arab Emirates,Middle East & North Africa,9,100,100,100,95,98,98,15.3
+United Kingdom,Europe & Central Asia,6,100,100,100,100,100,100,18.2
+United States of America,North America,8,98,99,99,100,100,100,18.9
+Uruguay,Latin America & Caribbean,14,95,100,99,96,96,96,5.2
+Uzbekistan,Europe & Central Asia,55,81,98,87,100,100,100,63.8
+Vanuatu,East Asia & Pacific,21,88,98,91,55,65,58,74.8
+Viet Nam,East Asia & Pacific,28,94,98,95,67,93,75,68.3
+Yemen,Middle East & North Africa,75,47,72,55,34,93,53,67.1
+Zambia,Sub-Saharan Africa,125,49,85,63,34,56,43,60.4
+Zimbabwe,Sub-Saharan Africa,96,69,97,80,32,52,40,67.2

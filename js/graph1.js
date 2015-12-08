@@ -1,244 +1,231 @@
-var margin_graph1 = {top: 20, right: 185, bottom: 130, left: 45};
-var width_graph1 = 800 - margin_graph1.left - margin_graph1.right;
-var height_graph1 = 550 - margin_graph1.top - margin_graph1.bottom;
+  d3.csv("data/africa-data.csv", function(error, rawData) {
+    if (error) {
+      console.log(error);
+    };
 
-var xScale_graph1 = d3.scale.ordinal()
-    .rangeRoundBands([0, width_graph1], .3);
+    var margin = {top: 15, right: 20, bottom: 40, left: 40};
+    var width = 150 - margin.left - margin.right;
+    var height = 150 - margin.top - margin.bottom;
 
-var yScale_graph1 = d3.scale.linear()
-    .rangeRound([height_graph1, 0]);
+    var data = [];
+    var circle = null;
+    var caption = null;
+    var curYear = null;
 
-/*var color = d3.scale.category20();*/
+    var bisect = d3.bisector(function(d) {
+      return d.date;
+    }).left;
 
-var color = d3.scale.ordinal().range(["#8C703A", "#ABACDB", "#B574B5", "#DBABC4", "#DBBFAB", "#ACD7E3", "#E6E687", "#FA9D91", "#D6C789", "#72A886", "#8A5F76", "#92A147", "#E3E2AF", "#A5BBD1"]);
+    var format = d3.time.format("%Y");
+    var xScale = d3.time.scale().range([0, width]);
+    var yScale = d3.scale.linear().range([height, 0]);
+    var xValue = function(d) {
+      return d.date;
+    };
 
-var tooltip_graph1 = d3.select("#graph1")
-    .append("div")
-    .attr("class", "tooltip_graph1");
+   var yValue = function(d) {
+     return d.count;
+   };
 
-var percentClicked = false;
+   var yAxis = d3.svg.axis()
+      .scale(yScale)
+      .orient("left")
+      .ticks(4)
+      .outerTickSize(0)
+      .tickSubdivide(1)
+      .tickSize(-width);
 
-var xAxis_graph1 = d3.svg.axis()
-  .scale(xScale_graph1)
-  .orient("bottom")
-  .innerTickSize([0]);
-
-var yAxis_graph1 = d3.svg.axis()
-  .scale(yScale_graph1)
-  .orient("left");
-  /*.innerTickSize(d3.format(".1"))*/;
-
-var stack = d3.layout
-  .stack();
-
-var svg1 = d3.select("#graph1").append("svg")
-  .attr("width", width_graph1 + margin_graph1.left + margin_graph1.right)
-  .attr("height", height_graph1 + margin_graph1.top + margin_graph1.bottom)
-  .append("g")
-  .attr("transform", "translate(" + margin_graph1.left + "," + margin_graph1.top + ")");
-
-d3.csv("data/diarrhoeal.csv", function(error, data) {
-
-  if (error) {
-    console.log(error);
-  }
-
-  my2013 = [];
-        data.forEach(function (d) {
-            if (d.year === "2013" && d.region === "Sub-Saharan Africa" /*|| d.region === "Middle East & North Africa" || d.region === "East Asia & Pacific"*/) {
-            my2013.push(d);
-              }
-            });
-
-            console.log(my2013);
-
-
-  data.sort(function(a,b) {
-    return b.country - b.country;
-  });
-
-var illnesses = ["Diarrhoeal diseases","HIV","Pertussis","Measles","Meningitis and encephalitis","Malaria","Respiratory infections","Prematurity","Birth asphixia","Sepsis and infections","Perinatal and nutritional", "Congenital anomalies","Injuries","Other"];
-
-
-
-var stacked = stack(makeData(illnesses, my2013));
-
-            console.log(stacked);
-
-xScale_graph1.domain(my2013.map(function(d) {
-  return d.country;
-}));
-
-svg1.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height_graph1 + ")")
-    .call(xAxis_graph1)
-    .selectAll("text")
-      .attr("dy", ".5em")
-      .attr("transform", "rotate(-45)")
-      .style("text-anchor", "end");
-
-svg1.append("g")
-    .attr("class", "y axis")
-    .call(yAxis_graph1)
-    .append("text")
-      .attr("class", "y label")
-      .attr("transform", "rotate(-90)")
-      .attr("y", -40)
-      .attr("dy", ".5em")
-      .attr("dx", 5)
-      .style("text-anchor", "end")
-      .text("Mortality rate under 5");
-
-var country = svg1.selectAll(".country")
-    .data(stacked)
-    .enter().append("g")
-        .attr("class", "country")
-        .style("fill", function(d,i) {
-            return color(i);
-        });
-
- var rectangles = country.selectAll("rect")
-      .data(function(d) {
-        console.log("array for a rectangle", d);
-        return d;
-      })
-      .enter().append("rect")
-        .attr("width", xScale_graph1.rangeBand());
-
-  transitionCount();
-
-  drawLegend();
-
-  d3.selectAll("input").on("change", handleFormClick);
-
-  function handleFormClick() {
-      if (this.value === "bypercent") {
-          percentClicked = true;
-          transitionPercent();
-      } else {
-          percentClicked = false;
-          transitionCount();
-      }
-  }
-
-  function makeData(illnesses, data) {
-    return illnesses.map(function(illness) {
-      return data.map(function(d) {
-        return {
-          x: d["country"],
-          y: +d[illness],
-          illness: illness
-      };
-      })
+    var area = d3.svg.area().x(function(d) {
+      return xScale(xValue(d));
+    }).y0(height).y1(function(d) {
+      return yScale(yValue(d));
     });
-  }
-
-
-
-  function transitionPercent () {
-    yAxis_graph1.tickFormat(d3.format("%"));
-    stack.offset("expand"); // use this to get it to be relative/normalized!
-    var stacked = stack(makeData(illnesses, my2013));
-    transitionRects(stacked);
-  }
-
-  function transitionCount() {
-    yAxis_graph1.tickFormat(d3.format("s")); // for the stacked totals version
-    stack.offset("zero");
-    var stacked = stack(makeData(illnesses, my2013));
-    transitionRects(stacked);
-  }
-
-
-  function transitionRects(stacked) {
-    yScale_graph1.domain([0, d3.max(stacked[stacked.length -1], function(d) {
-      return d.y0 + d.y;
-    })]);
-
-    var country = svg1.selectAll(".country")
-      .data(stacked);
-
-    country.selectAll("rect")
-      .data(function(d) {
-        return d;
-      })
-
-    svg1.selectAll("g.country rect")
-      .transition()
-      .duration(350)
-      .attr("x", function(d) {
-        return xScale_graph1(d.x);
-      })
-      .attr("y", function(d) {
-        return yScale_graph1(d.y0 + d.y);
-      })
-      .attr("height", function(d) {
-        return yScale_graph1(d.y0) - yScale_graph1(d.y0 + d.y); //height is base - tallness
-      });
-    svg1.selectAll(".y.axis")
-      .transition()
-      .call(yAxis_graph1)
-      .selectAll("text")
-        .style("text-anchor", "end");
-  }
-
-  function drawLegend() {
-    var legend = svg1.selectAll(".legend")
-        .data(color.domain().slice())
-        .enter().append("g")
-        .attr("class", "legend")
-        .attr("transform", function(d,i){
-          return "translate(0," + i * 20 + ")";
+    var line = d3.svg.line().x(function(d) {
+      return xScale(xValue(d));
+    }).y(function(d) {
+      return yScale(yValue(d));
+    });
+    function setupScales(data)  {
+      var extentX, maxY;
+      maxY = d3.max(data, function(c) {
+        return d3.max(c.values, function(d) {
+          return yValue(d);
         });
+      });
 
-     legend.append("rect")
-        .attr("x", width_graph1 + 15)
-        .attr("width", 15)
-        .attr("height", 15)
-        .style("fill", color);
+      maxY = maxY + (maxY * 1 / 4);
+      yScale.domain([0, maxY]);
+      extentX = d3.extent(data[0].values, function(d) {
+        return xValue(d);
+      });
+      return xScale.domain(extentX);
+    }
 
-      legend.append("text")
-         .attr("x", width_graph1 + 44)
-         .attr("y", 6)
-         .attr("dy", ".5em")
-         .style("text-anchor", "start")
-         .text(function(d, i) {
-           return illnesses[i];
-         });
-  }
+    function transformData(rawData) {
+      var format, nest;
+      format = d3.time.format("%Y");
+      rawData.forEach(function(d) {
+          d.date = format.parse(d.year);
+          d.count = +d["diarrhoeal_diseases"];
+      });
+      nest = d3.nest().key(function(d) {
+        return d.country;
+      }).sortValues(function(a, b) {
+        return d3.ascending(a.date, b.date);
+      }).entries(rawData);
+      nest = nest.filter(function(d) {
+        return d.values.length == 14;
+      });
+      return nest;
+    }
 
-  //tooltip and interaction
-
-  rectangles
-          .on("mouseover", mouseoverFunc_graph1)
-          .on("mousemove", mousemoveFunc_graph1)
-          .on("mouseout", mouseoutFunc_graph1);
-
-
-      function mouseoverFunc_graph1(d) {
-        console.log("moused over", d.x);
-          if(percentClicked) {
-              tooltip_graph1
-              .style("display", null)
-              .html("<p><span class='tooltipHeader'>" + d.x + "</span><br><strong>"+ d.illness + ": " + d3.format(",%")(d.y) + "</strong></p>");
-          } else {
-                           console.log("illness", d.illness, "percent", d.y);
-          tooltip_graph1
-              .style("display", null)
-              .html("<p><span class='tooltipHeader'>" + d.x + "</span><br><strong>"+ d.illness + ": " + (d.y) + "</strong></p>");
+    function setupIsotope() {
+      $("#graph1").isotope({
+        itemSelector: '.chart',
+        layaoutMode: 'fitRows',
+        getSortData: {
+          count: function(e) {
+            var d, sum;
+            d = d3.select(e).datum();
+            sum = d3.sum(d.values, function(d) {
+              return d.count;
+            });
+            return sum * -1;
+          },
+          country: function(e) {
+            var d;
+            d = d3.select(e).datum();
+            return d.key;
           }
-      }
-
-      function mousemoveFunc_graph1(d) {
-          tooltip_graph1
-              .style("top", (d3.event.pageY - 5) + "px")
-              .style("left", (d3.event.pageX + 10) + "px");
-      }
-
-      function mouseoutFunc_graph1(d) {
-          return tooltip_graph1.style("display", "none"); // this sets it to invisible!
-      }
+        }
+      });
+      return $("#graph1").isotope({
+        sortBy: 'count'
+      });
+    }
 
 
-});
+    var data = transformData(rawData);
+    d3.select("#graph1").datum(data).each(function(myData) {
+      data = myData;
+      setupScales(data);
+      var div = d3.select(this).selectAll(".chart").data(data);
+      div.enter()
+          .append("div")
+          .attr("class", "chart")
+          .append("svg")
+          .append("g");
+      var svg = div.select("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom);
+      var g = svg.select("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        g.append("rect")
+          .attr("class", "background")
+          .style("pointer-events", "all")
+          .attr("width", width + margin.right)
+          .attr("height", height)
+          .on("mouseover", mouseover)
+          .on("mousemove", mousemove)
+          .on("mouseout", mouseout);
+      var lines = g.append("g");
+      lines.append("path")
+          .attr("class", "area")
+          .style("pointer-events", "none")
+          .attr("d", function(c) {
+            return area(c.values);
+          });
+      lines.append("path")
+          .attr("class", "line_graph1")
+          .style("pointer-events", "none")
+          .attr("d", function(c) {
+            return line(c.values);
+          });
+      lines.append("text")
+          .attr("class", "title")
+          .attr("text-anchor", "middle")
+          .attr("y", height)
+          .attr("dy", margin.bottom / 2 + 10)
+          .attr("x", width / 2).text(function(c) {
+            return c.key;
+          });
+        lines.append("text")
+          .attr("class", "static_year")
+          .attr("text-anchor", "start")
+          .style("pointer-events", "none")
+          .attr("dy", 13).attr("y", height)
+          .attr("x", 0).text(function(c) {
+            return xValue(c.values[1]).getFullYear();
+          });
+        lines.append("text")
+          .attr("class", "static_year")
+          .attr("text-anchor", "end")
+          .style("pointer-events", "none").attr("dy", 13)
+          .attr("y", height).attr("x", width).text(function(c) {
+            return xValue(c.values[c.values.length - 1]).getFullYear();
+          });
+        circle = lines.append("circle")
+          .attr("r", 2.5)
+          .attr("opacity", 0)
+          .attr("fill", "#696141")
+          .style("pointer-events", "none");
+        caption = lines.append("text")
+          .attr("class", "caption")
+          .attr("text-anchor", "middle")
+          .style("pointer-events", "none")
+          .attr("dy", -10);
+        curYear = lines.append("text")
+          .attr("class", "caption")
+          .attr("text-anchor", "middle")
+          .style("pointer-events", "none")
+          .attr("dy", 13)
+          .attr("y", height);
+        g.append("g")
+          .attr("class", "y axis")
+          .call(yAxis)
+          .selectAll("text")
+            .attr("dy", ".1em")
+            .attr("x", -11)
+            .style("text-anchor", "end");
+     }); // end of charts for each row
+
+     function mouseover() {
+       circle.attr("opacity", 1.0);
+       d3.selectAll(".static_year").classed("hidden", true);
+       return mousemove.call(this);
+     };
+
+     function mousemove() {
+       var date, index, year;
+       year = xScale.invert(d3.mouse(this)[0]).getFullYear();
+       date = format.parse('' + year);
+       index = 0;
+       circle.attr("cx", xScale(date)).attr("cy", function(c) {
+         index = bisect(c.values, date, 0, c.values.length - 0);
+         return yScale(yValue(c.values[index]));
+       });
+       caption.attr("x", xScale(date)).attr("y", function(c) {
+         return yScale(yValue(c.values[index]));
+       }).text(function(c) {
+         return yValue(c.values[index]);
+       });
+       return curYear.attr("x", xScale(date)).text(year);
+     };
+
+     function mouseout() {
+       d3.selectAll(".static_year").classed("hidden", false);
+       circle.attr("opacity", 0);
+       caption.text("");
+       return curYear.text("");
+     };
+     setupIsotope();
+        d3.select("#button-wrap").selectAll("div").on("click", function() {
+          var id;
+          id = d3.select(this).attr("id");
+          d3.select("#button-wrap").selectAll("div").classed("active", false);
+          d3.select("#" + id).classed("active", true);
+          return $("#graph1").isotope({
+              sortBy: id
+       });
+        });
+  });

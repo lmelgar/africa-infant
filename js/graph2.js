@@ -1,9 +1,9 @@
 //based on Halina Mader's code
 
 var margin_graph2 = {
-    top: 50,
+    top: 0,
     right: 10,
-    bottom: 70,
+    bottom: 30,
     left: 70
 };
 
@@ -58,9 +58,7 @@ var svg_graph2 = d3.select("#graph2")
     .attr("height", height_graph2);
 
 
-/*======================================================================
-   Creating the Multiple Lines from the Data
- ======================================================================*/
+/*Creating the Multiple Lines from the Data */
 
 //Load data - first is INFANT mortality rates, second is UNDER 5 mortality rates. Similar, but many more peaks in the Under 5.
 //d3.csv("median-IMRbyCountry.csv", function (data) {
@@ -153,9 +151,7 @@ d3.csv("data/infantmort.csv", function (data) {
         .classed("focused", false); // gives gray color
 
 
-    /*======================================================================
-      Adding the Axes
-    ======================================================================*/
+    /* Adding the Axes */
     svg_graph2.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + (height_graph2 - margin_graph2.bottom) + ")")
