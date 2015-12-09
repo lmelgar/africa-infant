@@ -47,6 +47,8 @@ d3.csv("data/water.csv", function(data) {
   d3.select("p#p1").style("display", "none");
   d3.select("p#p2").style("display", "none");
   d3.select("p#p3").style("display", "none");
+  d3.select("p#p4").style("display", "none");
+  d3.select("p#p5").style("display", "none");
 
 
   var circles = svg.selectAll("circle")
@@ -106,69 +108,6 @@ var xlabel = svg.append("text")
     .text("Population using improved drinking-water (%)")
     .attr("font-family", "Open Sans");
 
-    d3.select("#ruraldrinking").on("click", function() {
-
-
-    d3.select("p#p1").style("display", "inline");
-    d3.select("p#p2").style("display", "none");
-    d3.select("p#p3").style("display", "none");
-
-
-     yScale
-        .domain(d3.extent(data, function(d){
-        return + d.rate;
-                  }));
-      svg.select(".y.axis")
-          .transition()
-          .duration(2000)
-          .call(yAxis);
-
-      circles
-        .transition()
-        .duration(2000)
-        .attr("cx", function(d) {
-          return xScale(+d.Rural_drinking);
-
-        })
-        .attr("cy", function(d) {
-          return yScale(+d.rate);
-        })
-        .attr("fill", function(d) {
-
-                    if (d.region === "Sub-Saharan Africa") {
-                      return "RGB(222,102,0)";
-                    }
-
-                    else {
-                      return "#BFBFBF";
-                    }
-
-                });
-
-  circles
-        .on("mouseover", mouseoverFunc)
-
-        function mouseoverFunc(d) {
-          d3.select(this)
-            .transition()
-            .attr("r", 6)
-          tooltip
-          .style("display", null)
-          .html("<p>" + "<strong>" + d.country + "</strong>" +
-                "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.rate) + "</strong>" +
-                "<br>Population using improved drinking-water: <strong>" + d.Rural_drinking + "%</strong>" + "</p>");
-          d3.selectAll("circle").classed("unfocused", true);
-                d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
-          };
-
-      xlabel
-           .text("Population using improved drinking-water (%)")
-           .transition()
-           .duration(2000)
-           .call(xlabel);
-
-
-    });
 
     d3.select("#urbanrural").on("click", function() {
 
@@ -176,6 +115,8 @@ var xlabel = svg.append("text")
     d3.select("p#p1").style("display", "inline");
     d3.select("p#p2").style("display", "none");
     d3.select("p#p3").style("display", "none");
+    d3.select("p#p4").style("display", "none");
+    d3.select("p#p5").style("display", "none");
 
 
      yScale
@@ -234,11 +175,80 @@ var xlabel = svg.append("text")
 
     });
 
-    d3.select("#urbandrinking").on("click", function() {
+    d3.select("#ruraldrinking").on("click", function() {
+
 
     d3.select("p#p2").style("display", "inline");
     d3.select("p#p1").style("display", "none");
     d3.select("p#p3").style("display", "none");
+    d3.select("p#p4").style("display", "none");
+    d3.select("p#p5").style("display", "none");
+
+
+     yScale
+        .domain(d3.extent(data, function(d){
+        return + d.rate;
+                  }));
+      svg.select(".y.axis")
+          .transition()
+          .duration(2000)
+          .call(yAxis);
+
+      circles
+        .transition()
+        .duration(2000)
+        .attr("cx", function(d) {
+          return xScale(+d.Rural_drinking);
+
+        })
+        .attr("cy", function(d) {
+          return yScale(+d.rate);
+        })
+        .attr("fill", function(d) {
+
+                    if (d.region === "Sub-Saharan Africa") {
+                      return "RGB(222,102,0)";
+                    }
+
+                    else {
+                      return "#BFBFBF";
+                    }
+
+                });
+
+  circles
+        .on("mouseover", mouseoverFunc)
+
+        function mouseoverFunc(d) {
+          d3.select(this)
+            .transition()
+            .attr("r", 6)
+          tooltip
+          .style("display", null)
+          .html("<p>" + "<strong>" + d.country + "</strong>" +
+                "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.rate) + "</strong>" +
+                "<br>Population using improved drinking-water: <strong>" + d.Rural_drinking + "%</strong>" + "</p>");
+          d3.selectAll("circle").classed("unfocused", true);
+                d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
+          };
+
+      xlabel
+           .text("Population using improved drinking-water (%)")
+           .transition()
+           .duration(2000)
+           .call(xlabel);
+
+
+    });
+
+
+    d3.select("#urbandrinking").on("click", function() {
+
+    d3.select("p#p3").style("display", "inline");
+    d3.select("p#p1").style("display", "none");
+    d3.select("p#p2").style("display", "none");
+    d3.select("p#p4").style("display", "none");
+    d3.select("p#p5").style("display", "none");
 
 
       yScale
@@ -284,7 +294,7 @@ var xlabel = svg.append("text")
     .style("display", null)
     .html("<p>" + "<strong>" + d.country + "</strong>" +
           "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.rate) + "</strong>" +
-          "<br>Population using improved sanitation-water: <strong>" + d.Urban_drinking + "%</strong>" + "</p>");
+          "<br>Population using improved drinking-water: <strong>" + d.Urban_drinking + "%</strong>" + "</p>");
     d3.selectAll("circle").classed("unfocused", true);
           d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
     };
@@ -299,9 +309,11 @@ var xlabel = svg.append("text")
 
     d3.select("#ruralsanitation").on("click", function() {
 
-    d3.select("p#p2").style("display", "inline");
+    d3.select("p#p5").style("display", "inline");
     d3.select("p#p1").style("display", "none");
-    d3.select("p#p3").style("display", "none");
+    d3.select("p#p2").style("display", "none");
+    d3.select("p#p2").style("display", "none");
+    d3.select("p#p4").style("display", "none");
 
 
       yScale
@@ -364,9 +376,11 @@ var xlabel = svg.append("text")
 
     d3.select("#urbansanitation").on("click", function() {
 
-    d3.select("p#p3").style("display", "inline");
+    d3.select("p#p4").style("display", "inline");
     d3.select("p#p1").style("display", "none");
     d3.select("p#p2").style("display", "none");
+    d3.select("p#p3").style("display", "none");
+    d3.select("p#p5").style("display", "none");
 
 
       yScale

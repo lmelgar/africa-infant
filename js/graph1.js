@@ -61,6 +61,8 @@
       return xScale.domain(extentX);
     }
 
+d3.select("#respiratory").on("click", function() {
+
     function transformData(rawData) {
       var format, nest;
       format = d3.time.format("%Y");
@@ -161,7 +163,119 @@
             .attr("dy", ".1em")
             .attr("x", -11)
             .style("text-anchor", "end");
-     }); // end of charts for each row
+     });
+
+   }); // end of charts for each row
+
+
+     d3.select("#diarrhoea").on("click", function() {
+
+
+       function transformData(rawData) {
+         var format, nest;
+         format = d3.time.format("%Y");
+         rawData.forEach(function(d) {
+             d.date = format.parse(d.year);
+             d.count = +d["respiratory_infections"];
+         });
+         nest = d3.nest().key(function(d) {
+           return d.country;
+         }).sortValues(function(a, b) {
+           return d3.ascending(a.date, b.date);
+         }).entries(rawData);
+         nest = nest.filter(function(d) {
+           return d.values.length == 14;
+         });
+         return nest;
+       }
+
+       var data = transformData(rawData);
+       d3.select("#graph1").datum(data).each(function(myData) {
+         data = myData;
+         setupScales(data);
+         var div = d3.select(this).selectAll(".chart").data(data);
+         div.enter()
+             .append("div")
+             .attr("class", "chart")
+             .append("svg")
+             .append("g");
+         var svg = div.select("svg")
+           .attr("width", width + margin.left + margin.right)
+           .attr("height", height + margin.top + margin.bottom);
+         var g = svg.select("g")
+           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+           g.append("rect")
+             .attr("class", "background")
+             .style("pointer-events", "all")
+             .attr("width", width + margin.right)
+             .attr("height", height)
+             .on("mouseover", mouseover)
+             .on("mousemove", mousemove)
+             .on("mouseout", mouseout);
+         var lines = g.append("g");
+         lines.append("path")
+             .attr("class", "area")
+             .style("pointer-events", "none")
+             .attr("d", function(c) {
+               return area(c.values);
+             });
+         lines.append("path")
+             .attr("class", "line_graph1")
+             .style("pointer-events", "none")
+             .attr("d", function(c) {
+               return line(c.values);
+             });
+         lines.append("text")
+             .attr("class", "title")
+             .attr("text-anchor", "middle")
+             .attr("y", height)
+             .attr("dy", margin.bottom / 2 + 10)
+             .attr("x", width / 2).text(function(c) {
+               return c.key;
+             });
+           lines.append("text")
+             .attr("class", "static_year")
+             .attr("text-anchor", "start")
+             .style("pointer-events", "none")
+             .attr("dy", 13).attr("y", height)
+             .attr("x", 0).text(function(c) {
+               return xValue(c.values[1]).getFullYear();
+             });
+           lines.append("text")
+             .attr("class", "static_year")
+             .attr("text-anchor", "end")
+             .style("pointer-events", "none").attr("dy", 13)
+             .attr("y", height).attr("x", width).text(function(c) {
+               return xValue(c.values[c.values.length - 1]).getFullYear();
+             });
+           circle = lines.append("circle")
+             .attr("r", 2.5)
+             .attr("opacity", 0)
+             .attr("fill", "#696141")
+             .style("pointer-events", "none");
+           caption = lines.append("text")
+             .attr("class", "caption")
+             .attr("text-anchor", "middle")
+             .style("pointer-events", "none")
+             .attr("dy", -10);
+           curYear = lines.append("text")
+             .attr("class", "caption")
+             .attr("text-anchor", "middle")
+             .style("pointer-events", "none")
+             .attr("dy", 13)
+             .attr("y", height);
+           g.append("g")
+             .attr("class", "y axis")
+             .call(yAxis)
+             .selectAll("text")
+               .attr("dy", ".1em")
+               .attr("x", -11)
+               .style("text-anchor", "end");
+        });
+
+
+
+     });
 
      function mouseover() {
        circle.attr("opacity", 1.0);
