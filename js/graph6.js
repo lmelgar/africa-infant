@@ -1,6 +1,6 @@
-
-var width = 100;
-var height = 300;
+(function(){
+var width = 250;
+var height = 200;
 var vis = d3.select("#graph6").append("svg");
 var svg = vis
     .attr("width", width+10)
@@ -54,17 +54,16 @@ d3.csv("data/africa-data.csv", function(error, data) {
            .range([0, width]);
        yScale = d3.scale.ordinal()
            .domain(d3.range(my2013.length))
-           .rangeBands([0, height], .2);
+           .rangeBands([0, height], .3);
        var bars = vis.selectAll("rect.bar")
            .data(my2013, function (d) { return d.country; });//TODO: what is your key value?}); // key function!
        //update -- existing bars get blue when we "redraw". We don't change labels.
-       bars
-           .attr("fill", "steelblue");
+
        //enter - new bars get set to darkorange when we "redraw."
        bars.enter()
            .append("rect")
            .attr("class", "bar")
-           .attr("fill", "darkorange");
+           .attr("fill", "#BFBFBF");
        //exit -- remove ones that aren't in the index set
        bars.exit()
            .transition()
@@ -106,3 +105,4 @@ d3.csv("data/africa-data.csv", function(error, data) {
            .attr("dx", "-3px")
            .attr("text-anchor", "end");
        } // end of draw function
+})();

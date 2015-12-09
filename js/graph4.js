@@ -1,32 +1,34 @@
-var width_graph4 = 650;
-var height_graph4 = 450;
+(function(){
 
-var margin_graph4 = { top: 20, right: 10, bottom: 60, left: 80 };
+var width = 650;
+var height = 450;
+
+var margin = { top: 20, right: 10, bottom: 60, left: 80 };
 var dotRadius = 5;
 
-var xScale_graph4 = d3.scale.linear()
-          .range([ margin_graph4.left, width_graph4 - margin_graph4.right - margin_graph4.left])
+var xScale = d3.scale.linear()
+          .range([ margin.left, width - margin.right - margin.left])
 
-var yScale_graph4 = d3.scale.linear()
-          .range([ height_graph4 - margin_graph4.bottom, margin_graph4.top ])
+var yScale = d3.scale.linear()
+          .range([ height - margin.bottom, margin.top ])
 
-var xAxis_graph4 = d3.svg.axis()
-        .scale(xScale_graph4)
+var xAxis = d3.svg.axis()
+        .scale(xScale)
         .orient("bottom")
         .ticks(6);
 
-var yAxis_graph4 = d3.svg.axis()
-        .scale(yScale_graph4)
+var yAxis = d3.svg.axis()
+        .scale(yScale)
         .orient("left")
         .ticks(6);
 
-var svg_graph4 = d3.select("#graph4")
+var svg = d3.select("#graph4")
       .append("svg")
-      .attr("width", width_graph4)
-      .attr("height", height_graph4);
+      .attr("width", width)
+      .attr("height", height);
 
 
-var tooltip_graph4 = d3.select("body")
+var tooltip = d3.select("body")
        .append("div")
        .attr("class", "tooltip_graph4");
 
@@ -35,10 +37,10 @@ var tooltip_graph4 = d3.select("body")
 d3.csv("data/water.csv", function(data) {
   console.log(data);
 
-        xScale_graph4.domain(d3.extent(data, function(d){
+        xScale.domain(d3.extent(data, function(d){
             return + d.Total_drinking;
           }));
-        yScale_graph4.domain(d3.extent(data, function(d){
+        yScale.domain(d3.extent(data, function(d){
             return + d.rate;
           }));
 
@@ -47,17 +49,17 @@ d3.csv("data/water.csv", function(data) {
   d3.select("p#p3").style("display", "none");
 
 
-  var circles = svg_graph4.selectAll("circle")
+  var circles = svg.selectAll("circle")
              .data(data)
              .enter()
              .append("circle")
              .attr("class", "dots");
 
   circles.attr("cx", function(d) {
-      return + xScale_graph4(+d.rural_pop);
+      return + xScale(+d.rural_pop);
     })
     .attr("cy", function(d) {
-      return + yScale_graph4(+d.rate);
+      return + yScale(+d.rate);
     })
     .attr("r", dotRadius)
     .attr("fill", "#BFBFBF")
@@ -73,32 +75,32 @@ d3.csv("data/water.csv", function(data) {
       .duration(500);
 
     circles
-        .on("mousemove", mousemoveFunc_graph4)
-        .on("mouseout", mouseoutFunc_graph4);
+        .on("mousemove", mousemoveFunc)
+        .on("mouseout", mouseoutFunc);
 
-  svg_graph4.append("g")
+  svg.append("g")
     .attr("class", "x axis")
-    .attr("transform", "translate(0," + (height_graph4 - margin_graph4.bottom + 10) + ")")
-    .call(xAxis_graph4);
+    .attr("transform", "translate(0," + (height - margin.bottom + 10) + ")")
+    .call(xAxis);
 
-  svg_graph4.append("g")
+  svg.append("g")
     .attr("class", "y axis")
-    .attr("transform", "translate(" + (margin_graph4.left - 10) + ",0)")
-    .call(yAxis_graph4);
+    .attr("transform", "translate(" + (margin.left - 10) + ",0)")
+    .call(yAxis);
 
-  svg_graph4.append("text")
+  svg.append("text")
     .attr("class", "ylabel")
-    .attr("y", margin_graph4.left/8 + 5)
-              .attr("x", 0 - height_graph4 /3.4)
+    .attr("y", margin.left/8 + 5)
+              .attr("x", 0 - height /3.4)
     .style("text-anchor", "middle")
     .attr("transform", "rotate(-90)")
     .text("Under 5 Mortality Rate (per thousand births)")
     .attr("font-family", "Open Sans");
 
-var xlabel = svg_graph4.append("text")
+var xlabel = svg.append("text")
     .attr("class", "xlabel")
-    .attr("transform", "translate(" + (width_graph4 / 1.32) + " ," +
-          (height_graph4 - 15) + ")")
+    .attr("transform", "translate(" + (width / 1.32) + " ," +
+          (height - 15) + ")")
     .style("text-anchor", "middle")
     .attr("dy", "12")
     .text("Population using improved drinking-water (%)")
@@ -112,24 +114,24 @@ var xlabel = svg_graph4.append("text")
     d3.select("p#p3").style("display", "none");
 
 
-     yScale_graph4
+     yScale
         .domain(d3.extent(data, function(d){
         return + d.rate;
                   }));
-      svg_graph4.select(".y.axis")
+      svg.select(".y.axis")
           .transition()
           .duration(2000)
-          .call(yAxis_graph4);
+          .call(yAxis);
 
       circles
         .transition()
         .duration(2000)
         .attr("cx", function(d) {
-          return xScale_graph4(+d.Rural_drinking);
+          return xScale(+d.Rural_drinking);
 
         })
         .attr("cy", function(d) {
-          return yScale_graph4(+d.rate);
+          return yScale(+d.rate);
         })
         .attr("fill", function(d) {
 
@@ -144,13 +146,13 @@ var xlabel = svg_graph4.append("text")
                 });
 
   circles
-        .on("mouseover", mouseoverFunc_graph4)
+        .on("mouseover", mouseoverFunc)
 
-        function mouseoverFunc_graph4(d) {
+        function mouseoverFunc(d) {
           d3.select(this)
             .transition()
             .attr("r", 6)
-          tooltip_graph4
+          tooltip
           .style("display", null)
           .html("<p>" + "<strong>" + d.country + "</strong>" +
                 "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.rate) + "</strong>" +
@@ -176,24 +178,24 @@ var xlabel = svg_graph4.append("text")
     d3.select("p#p3").style("display", "none");
 
 
-     yScale_graph4
+     yScale
         .domain(d3.extent(data, function(d){
         return + d.rate;
                   }));
-      svg_graph4.select(".y.axis")
+      svg.select(".y.axis")
           .transition()
           .duration(2000)
-          .call(yAxis_graph4);
+          .call(yAxis);
 
       circles
         .transition()
         .duration(2000)
         .attr("cx", function(d) {
-          return xScale_graph4(+d.rural_pop);
+          return xScale(+d.rural_pop);
 
         })
         .attr("cy", function(d) {
-          return yScale_graph4(+d.rate);
+          return yScale(+d.rate);
         })
         .attr("fill", function(d) {
 
@@ -208,13 +210,13 @@ var xlabel = svg_graph4.append("text")
                 });
 
   circles
-        .on("mouseover", mouseoverFunc_graph4)
+        .on("mouseover", mouseoverFunc)
 
-        function mouseoverFunc_graph4(d) {
+        function mouseoverFunc(d) {
           d3.select(this)
             .transition()
             .attr("r", 6)
-          tooltip_graph4
+          tooltip
           .style("display", null)
           .html("<p>" + "<strong>" + d.country + "</strong>" +
                 "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.rate) + "</strong>" +
@@ -239,24 +241,24 @@ var xlabel = svg_graph4.append("text")
     d3.select("p#p3").style("display", "none");
 
 
-      yScale_graph4
+      yScale
         .domain(d3.extent(data, function(d){
         return + d.rate;
                   }));
-      svg_graph4.select(".y.axis")
+      svg.select(".y.axis")
           .transition()
           .duration(2000)
-          .call(yAxis_graph4);
+          .call(yAxis);
 
       circles
         .transition()
         .duration(2000)
         .attr("cx", function(d) {
-          return xScale_graph4(+d.Urban_drinking);
+          return xScale(+d.Urban_drinking);
 
         })
         .attr("cy", function(d) {
-          return yScale_graph4(+d.rate);
+          return yScale(+d.rate);
         })
         .attr("fill", function(d) {
 
@@ -271,14 +273,14 @@ var xlabel = svg_graph4.append("text")
                 });
 
       circles
-             .on("mouseover", mouseoverFunc_graph4)
+             .on("mouseover", mouseoverFunc)
 
-  function mouseoverFunc_graph4(d) {
+  function mouseoverFunc(d) {
     d3.select(this)
       .transition()
       .attr("r", 6)
       .attr("fill-opacity", 1)
-    tooltip_graph4
+    tooltip
     .style("display", null)
     .html("<p>" + "<strong>" + d.country + "</strong>" +
           "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.rate) + "</strong>" +
@@ -302,24 +304,24 @@ var xlabel = svg_graph4.append("text")
     d3.select("p#p3").style("display", "none");
 
 
-      yScale_graph4
+      yScale
         .domain(d3.extent(data, function(d){
         return + d.rate;
                   }));
-      svg_graph4.select(".y.axis")
+      svg.select(".y.axis")
           .transition()
           .duration(2000)
-          .call(yAxis_graph4);
+          .call(yAxis);
 
       circles
         .transition()
         .duration(2000)
         .attr("cx", function(d) {
-          return xScale_graph4(+d.Rural_sanitation);
+          return xScale(+d.Rural_sanitation);
 
         })
         .attr("cy", function(d) {
-          return yScale_graph4(+d.rate);
+          return yScale(+d.rate);
         })
         .attr("fill", function(d) {
 
@@ -334,14 +336,14 @@ var xlabel = svg_graph4.append("text")
                 });
 
       circles
-             .on("mouseover", mouseoverFunc_graph4)
+             .on("mouseover", mouseoverFunc)
 
-  function mouseoverFunc_graph4(d) {
+  function mouseoverFunc(d) {
     d3.select(this)
       .transition()
       .attr("r", 6)
       .attr("fill-opacity", 1)
-    tooltip_graph4
+    tooltip
     .style("display", null)
     .html("<p>" + "<strong>" + d.country + "</strong>" +
           "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.rate) + "</strong>" +
@@ -367,24 +369,24 @@ var xlabel = svg_graph4.append("text")
     d3.select("p#p2").style("display", "none");
 
 
-      yScale_graph4
+      yScale
         .domain(d3.extent(data, function(d){
         return + d.rate;
                   }));
-      svg_graph4.select(".y.axis")
+      svg.select(".y.axis")
           .transition()
           .duration(2000)
-          .call(yAxis_graph4);
+          .call(yAxis);
 
       circles
         .transition()
         .duration(2000)
         .attr("cx", function(d) {
-          return xScale_graph4(+d.Urban_sanitation);
+          return xScale(+d.Urban_sanitation);
 
         })
         .attr("cy", function(d) {
-          return yScale_graph4(+d.rate);
+          return yScale(+d.rate);
         })
         .attr("fill", function(d) {
 
@@ -399,14 +401,14 @@ var xlabel = svg_graph4.append("text")
                 });
 
       circles
-             .on("mouseover", mouseoverFunc_graph4)
+             .on("mouseover", mouseoverFunc)
 
-  function mouseoverFunc_graph4(d) {
+  function mouseoverFunc(d) {
     d3.select(this)
       .transition()
       .attr("r", 6)
       .attr("fill-opacity", 1)
-    tooltip_graph4
+    tooltip
     .style("display", null)
     .html("<p>" + "<strong>" + d.country + "</strong>" +
           "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.rate) + "</strong>" +
@@ -426,15 +428,18 @@ var xlabel = svg_graph4.append("text")
 
 });
 
-function mousemoveFunc_graph4(d) {
+function mousemoveFunc(d) {
 
-  return tooltip_graph4
+  return tooltip
     .style("top", (d3.event.pageY - 10) + "px" )
     .style("left", (d3.event.pageX + 10) + "px");
 }
-function mouseoutFunc_graph4(d) {
+function mouseoutFunc(d) {
   d3.select(this)
          .transition()
          .attr("r", 5);
-  return tooltip_graph4.style("display", "none");
+  return tooltip.style("display", "none");
 }
+
+
+})();

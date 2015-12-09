@@ -21,7 +21,7 @@ var countryById = d3.map();
 // we use queue because we have 2 data files to load.
 queue()
     .defer(d3.json, "data/africa.topojson")
-    .defer(d3.csv, "data/my2013.csv", typeAndSet) // process
+    .defer(d3.csv, "data/my2015.csv", typeAndSet) // process
     .await(loaded);
 
 function typeAndSet(d) {
@@ -45,7 +45,7 @@ function getText(d) {
  var dataRow = countryById.get(d.properties.iso_a3);
     if (dataRow) {
         console.log(dataRow);
-        return "<strong>" + dataRow.country + "</strong><br> The infant mortality rate in 2013 was <strong>" + dataRow.total + "</strong>";
+        return "<strong>" + dataRow.country + "</strong><br> The infant mortality rate in 2015 was <strong>" + dataRow.total + "</strong>";
     } else {
         console.log("no dataRow", d);
         return "<strong>" + d.properties.name + "</strong><br> No data";

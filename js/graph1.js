@@ -79,32 +79,6 @@
       return nest;
     }
 
-    function setupIsotope() {
-      $("#graph1").isotope({
-        itemSelector: '.chart',
-        layaoutMode: 'fitRows',
-        getSortData: {
-          count: function(e) {
-            var d, sum;
-            d = d3.select(e).datum();
-            sum = d3.sum(d.values, function(d) {
-              return d.count;
-            });
-            return sum * -1;
-          },
-          country: function(e) {
-            var d;
-            d = d3.select(e).datum();
-            return d.key;
-          }
-        }
-      });
-      return $("#graph1").isotope({
-        sortBy: 'count'
-      });
-    }
-
-
     var data = transformData(rawData);
     d3.select("#graph1").datum(data).each(function(myData) {
       data = myData;
@@ -218,14 +192,5 @@
        caption.text("");
        return curYear.text("");
      };
-     setupIsotope();
-        d3.select("#button-wrap").selectAll("div").on("click", function() {
-          var id;
-          id = d3.select(this).attr("id");
-          d3.select("#button-wrap").selectAll("div").classed("active", false);
-          d3.select("#" + id).classed("active", true);
-          return $("#graph1").isotope({
-              sortBy: id
-       });
-        });
+
   });

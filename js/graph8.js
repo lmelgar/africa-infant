@@ -1,11 +1,11 @@
-
-var width_graph8 = 170;
-var height_graph8 = 200;
-var vis_graph8 = d3.select("#graph8").append("svg");
-var svg_graph8 = vis_graph8
-    .attr("width", width_graph8+10)
-    .attr("height", height_graph8+10); // adding some random padding
-svg_graph8.append("rect")
+(function(){
+var width = 250;
+var height = 200;
+var vis = d3.select("#graph8").append("svg");
+var svg = vis
+    .attr("width", width+10)
+    .attr("height", height+10); // adding some random padding
+svg.append("rect")
     .attr("width", "100%")
     .attr("height", "100%")
     .attr("fill", "none");
@@ -51,20 +51,18 @@ d3.csv("data/africa-data.csv", function(error, data) {
        var max = d3.max(my2013, function(d) {return +d[column];});
        xScale = d3.scale.linear()
            .domain([0, max])
-           .range([0, width_graph8]);
+           .range([0, width]);
        yScale = d3.scale.ordinal()
            .domain(d3.range(my2013.length))
-           .rangeBands([0, height_graph8], .2);
-       var bars = vis_graph8.selectAll("rect.bar")
+           .rangeBands([0, height], .3);
+       var bars = vis.selectAll("rect.bar")
            .data(my2013, function (d) { return d.country; });//TODO: what is your key value?}); // key function!
        //update -- existing bars get blue when we "redraw". We don't change labels.
-       bars
-           .attr("fill", "steelblue");
        //enter - new bars get set to darkorange when we "redraw."
        bars.enter()
            .append("rect")
            .attr("class", "bar")
-           .attr("fill", "darkorange");
+           .attr("fill", "#BFBFBF");
        //exit -- remove ones that aren't in the index set
        bars.exit()
            .transition()
@@ -86,7 +84,7 @@ d3.csv("data/africa-data.csv", function(error, data) {
                return "translate(" + [0, yScale(i)] + ")"
            });
        //  We are attaching the labels separately, not in a group with the bars...
-       var labels = svg_graph8.selectAll("text.labels")
+       var labels = svg.selectAll("text.labels")
            .data(my2013, function (d) { return d.country });//TODO: what is your key here? same as above.}); // key function!
        // everything gets a class and a text field.  But we assign attributes in the transition.
        labels.enter()
@@ -106,3 +104,4 @@ d3.csv("data/africa-data.csv", function(error, data) {
            .attr("dx", "-3px")
            .attr("text-anchor", "end");
        } // end of draw function
+})();

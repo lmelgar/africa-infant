@@ -1,0 +1,192 @@
+country,ISO3,region,total
+Afghanistan,AFG,South Asia,91
+Albania,ALB,Europe & Central Asia,14
+Algeria,DZA,Middle East & North Africa,26
+Andorra,AND,Europe & Central Asia,3
+Angola,AGO,Sub-Saharan Africa,157
+Antigua and Barbuda,ATG,Latin America & Caribbean,8
+Argentina,ARG,Latin America & Caribbean,13
+Armenia,ARM,Europe & Central Asia,14
+Australia,AUS,East Asia & Pacific,4
+Austria,AUT,Europe & Central Asia,4
+Azerbaijan,AZE,Europe & Central Asia,32
+Bahamas,BHS,Latin America & Caribbean,12
+Bahrain,BHR,Middle East & North Africa,6
+Bangladesh,BGD,South Asia,38
+Barbados,BRB,Latin America & Caribbean,13
+Belarus,BLR,Europe & Central Asia,5
+Belgium,BEL,Europe & Central Asia,4
+Belize,BLZ,Latin America & Caribbean,17
+Benin,BEN,Sub-Saharan Africa,100
+Bhutan,BTN,South Asia,33
+Bolivia,BOL,Latin America & Caribbean,38
+Bosnia and Herzegovina,BIH,Europe & Central Asia,5
+Botswana,BWA,Sub-Saharan Africa,44
+Brazil,BRA,Latin America & Caribbean,16
+Brunei Darussalam,BRN,East Asia & Pacific,10
+Bulgaria,BGR,Europe & Central Asia,10
+Burkina Faso,BFA,Sub-Saharan Africa,89
+Burundi,BDI,Sub-Saharan Africa,82
+Cabo Verde,CPV,Sub-Saharan Africa,25
+Cambodia,KHM,East Asia & Pacific,29
+Cameroon,CMR,Sub-Saharan Africa,88
+Canada,CAN,North America,5
+Central African Republic,CAF,Sub-Saharan Africa,130
+Chad,TCD,Sub-Saharan Africa,139
+Chile,CHL,Latin America & Caribbean,8
+China,CHN,East Asia & Pacific,11
+Colombia,COL,Latin America & Caribbean,16
+Comoros,COM,Sub-Saharan Africa,74
+"Congo, Rep.",COG,Sub-Saharan Africa,45
+Costa Rica,CRI,Latin America & Caribbean,10
+Côte d'Ivoire,CIV,Sub-Saharan Africa,93
+Croatia,HRV,Europe & Central Asia,4
+Cuba,CUB,Latin America & Caribbean,6
+Cyprus,CYP,Europe & Central Asia,3
+Czech Republic,CZE,Europe & Central Asia,3
+Dem Rep Congo,COD,Sub-Saharan Africa,98
+Denmark,DNK,Europe & Central Asia,4
+Djibouti,DJI,Middle East & North Africa,65
+Dominica,DMA,Latin America & Caribbean,21
+Dominican Republic,DOM,Latin America & Caribbean,31
+Ecuador,ECU,Latin America & Caribbean,22
+Egypt,EGY,Middle East & North Africa,24
+El Salvador,SLV,Latin America & Caribbean,17
+Equatorial Guinea,GNQ,Sub-Saharan Africa,94
+Eritrea,ERI,Sub-Saharan Africa,47
+Estonia,EST,Europe & Central Asia,3
+Ethiopia,ETH,Sub-Saharan Africa,59
+Fiji,FJI,East Asia & Pacific,22
+Finland,FIN,Europe & Central Asia,2
+France,FRA,Europe & Central Asia,4
+Gabon,GAB,Sub-Saharan Africa,51
+Gambia,GMB,Sub-Saharan Africa,69
+Georgia,GEO,Europe & Central Asia,12
+Germany,DEU,Europe & Central Asia,4
+Ghana,GHA,Sub-Saharan Africa,62
+Greece,GRC,Europe & Central Asia,5
+Grenada,GRD,Latin America & Caribbean,12
+Guatemala,GTM,Latin America & Caribbean,29
+Guinea,GIN,Sub-Saharan Africa,94
+Guinea-Bissau,GNB,Sub-Saharan Africa,93
+Guyana,GUY,Latin America & Caribbean,39
+Haiti,HTI,Latin America & Caribbean,69
+Honduras,HND,Latin America & Caribbean,20
+Hungary,HUN,Europe & Central Asia,6
+Iceland,ISL,Europe & Central Asia,2
+India,IND,South Asia,48
+Indonesia,IDN,East Asia & Pacific,27
+Iran,IRN,Middle East & North Africa,16
+Iraq,IRQ,Middle East & North Africa,32
+Ireland,IRL,Europe & Central Asia,4
+Israel,ISR,Middle East & North Africa,4
+Italy,ITA,Europe & Central Asia,4
+Jamaica,JAM,Latin America & Caribbean,16
+Japan,JPN,East Asia & Pacific,3
+Jordan,JOR,Middle East & North Africa,18
+Kazakhstan,KAZ,Europe & Central Asia,14
+Kenya,KEN,Sub-Saharan Africa,49
+Kiribati,KIR,East Asia & Pacific,56
+Kuwait,KWT,Middle East & North Africa,9
+Kyrgyzstan,KGZ,Europe & Central Asia,21
+Laos,LAO,East Asia & Pacific,67
+Latvia,LVA,Europe & Central Asia,8
+Lebanon,LBN,Middle East & North Africa,8
+Lesotho,LSO,Sub-Saharan Africa,90
+Liberia,LBR,Sub-Saharan Africa,70
+Libya,LBY,Middle East & North Africa,13
+Lithuania,LTU,Europe & Central Asia,5
+Luxembourg,LUX,Europe & Central Asia,2
+Macedonia,MKD,Europe & Central Asia,6
+Madagascar,MDG,Sub-Saharan Africa,50
+Malawi,MWI,Sub-Saharan Africa,64
+Malaysia,MYS,East Asia & Pacific,7
+Maldives,MDV,South Asia,9
+Mali,MLI,Sub-Saharan Africa,115
+Malta,MLT,Middle East & North Africa,6
+Marshall Islands,MHL,East Asia & Pacific,36
+Mauritania,MRT,Sub-Saharan Africa,85
+Mauritius,MUS,Sub-Saharan Africa,14
+Mexico,MEX,Latin America & Caribbean,13
+Micronesia,FSM,East Asia & Pacific,35
+Moldova,MDA,Europe & Central Asia,16
+Monaco,MCO,Europe & Central Asia,4
+Mongolia,MNG,East Asia & Pacific,22
+Montenegro,MNE,Europe & Central Asia,5
+Morocco,MAR,Middle East & North Africa,28
+Mozambique,MOZ,Sub-Saharan Africa,79
+Myanmar,MMR,East Asia & Pacific,50
+Namibia,NAM,Sub-Saharan Africa,45
+Nepal,NPL,South Asia,36
+Netherlands,NLD,Europe & Central Asia,4
+New Zealand,NZL,East Asia & Pacific,6
+Nicaragua,NIC,Latin America & Caribbean,22
+Niger,NER,Sub-Saharan Africa,96
+Nigeria,NGA,Sub-Saharan Africa,109
+North Korea,PRK,East Asia & Pacific,25
+Norway,NOR,Europe & Central Asia,3
+Oman,OMN,Middle East & North Africa,12
+Pakistan,PAK,South Asia,81
+Palau,PLW,East Asia & Pacific,16
+Panama,PAN,Latin America & Caribbean,17
+Papua New Guinea,PNG,East Asia & Pacific,57
+Paraguay,PRY,Latin America & Caribbean,21
+Peru,PER,Latin America & Caribbean,17
+Philippines,PHL,East Asia & Pacific,28
+Poland,POL,Europe & Central Asia,5
+Portugal,PRT,Europe & Central Asia,4
+Qatar,QAT,Middle East & North Africa,8
+Romania,ROU,Europe & Central Asia,11
+Russia,RUS,Europe & Central Asia,10
+Rwanda,RWA,Sub-Saharan Africa,42
+Samoa,WSM,East Asia & Pacific,18
+San Marino,SMR,Europe & Central Asia,3
+Sao Tome and Principe,STP,Sub-Saharan Africa,47
+Saudi Arabia,SAU,Middle East & North Africa,15
+Senegal,SEN,Sub-Saharan Africa,47
+Serbia,SRB,Europe & Central Asia,7
+Seychelles,SYC,Sub-Saharan Africa,14
+Sierra Leone,SLE,Sub-Saharan Africa,120
+Singapore,SGP,East Asia & Pacific,3
+Slovak Republic,SVK,Europe & Central Asia,7
+Slovenia,SVN,Europe & Central Asia,3
+Solomon Islands,SLB,East Asia & Pacific,28
+Somalia,SOM,Sub-Saharan Africa,137
+South Africa,ZAF,Sub-Saharan Africa,41
+South Korea,KOR,East Asia & Pacific,3
+South Sudan,SSD,Sub-Saharan Africa,93
+Spain,ESP,Europe & Central Asia,4
+Sri Lanka,LKA,South Asia,10
+St Kitts and Nevis,KNA,Latin America & Caribbean,11
+St Lucia,LCA,Latin America & Caribbean,14
+St Vincent and the Grenadines,VCT,Latin America & Caribbean,18
+Sudan,SDN,Sub-Saharan Africa,70
+Suriname,SUR,Latin America & Caribbean,21
+Swaziland,SWZ,Sub-Saharan Africa,61
+Sweden,SWE,Europe & Central Asia,3
+Switzerland,CHE,Europe & Central Asia,4
+Syria,SYR,Middle East & North Africa,13
+Tajikistan,TJK,Europe & Central Asia,45
+Tanzania,TZA,Sub-Saharan Africa,49
+Thailand,THA,East Asia & Pacific,12
+Timor-Leste,TLS,East Asia & Pacific,53
+Togo,TGO,Sub-Saharan Africa,78
+Tonga,TON,East Asia & Pacific,17
+Trinidad and Tobago,TTO,Latin America & Caribbean,20
+Tunisia,TUN,Middle East & North Africa,14
+Turkey,TUR,Europe & Central Asia,14
+Turkmenistan,TKM,Europe & Central Asia,51
+Tuvalu,TUV,East Asia & Pacific,27
+Uganda,UGA,Sub-Saharan Africa,55
+Ukraine,UKR,Europe & Central Asia,9
+United Arab Emirates,ARE,Middle East & North Africa,7
+United Kingdom,GBR,Europe & Central Asia,4
+United States,USA,North America,7
+Uruguay,URY,Latin America & Caribbean,10
+Uzbekistan,UZB,Europe & Central Asia,39
+Vanuatu,VUT,East Asia & Pacific,28
+Venezuela,VEN,Latin America & Caribbean,15
+Vietnam,VNM,East Asia & Pacific,22
+Yemen,YEM,Middle East & North Africa,42
+Zambia,ZMB,Sub-Saharan Africa,64
+Zimbabwe,ZWE,Sub-Saharan Africa,71

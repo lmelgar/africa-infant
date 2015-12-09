@@ -67,12 +67,12 @@ text {
   opacity: 0.6;
 }
 
-.tooltip_graph1, .tooltip_graph2, .tooltip_graph4 {
+.tooltip_graph1, .tooltip_graph2, .tooltip_graph4, .tooltip_graph7 {
   position: absolute;
   z-index: 10;
   opacity:1;
 }
-.tooltip, .tooltip_graph1, .tooltip_graph2, .tooltip_graph3, .tooltip_graph4 p {
+.tooltip, .tooltip_graph1, .tooltip_graph2, .tooltip_graph3, .tooltip_graph4, .tooltip_graph7 p {
   font-family: "Open Sans", sans-serif;
   line-height: 1.4;
   color: black;
@@ -155,6 +155,10 @@ path.line_graph2 {
   padding-bottom: 5px;
   padding-top:0;
   padding-left:0;
+}
+
+.bar {
+  opacity: 0.6;
 }
 
 /* end css javascript */

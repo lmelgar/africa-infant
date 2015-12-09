@@ -1,61 +1,63 @@
 //based on Halina Mader's code
 
-var margin_graph2 = {
+(function(){
+
+var margin = {
     top: 0,
     right: 10,
     bottom: 30,
     left: 70
 };
 
-var width_graph2 = 450;
-var height_graph2 = 350;
+var width = 450;
+var height = 350;
 
 
 //Set up date formatting and years
-var dateFormat_graph2 = d3.time.format("%Y");
+var dateFormat = d3.time.format("%Y");
 
 //Set up scales
-var xScale_graph2 = d3.time.scale()
-    .range([margin_graph2.left, width_graph2 - margin_graph2.right - margin_graph2.left]);
+var xScale = d3.time.scale()
+    .range([margin.left, width - margin.right - margin.left]);
 
-var yScale_graph2 = d3.scale.linear()
-    .range([margin_graph2.top, height_graph2 - margin_graph2.bottom]);
+var yScale = d3.scale.linear()
+    .range([margin.top, height - margin.bottom]);
 
 //Configure axis generators
-var xAxis_graph2 = d3.svg.axis()
-    .scale(xScale_graph2)
+var xAxis = d3.svg.axis()
+    .scale(xScale)
     .orient("bottom")
     .ticks(6)
     .tickFormat(function (d) {
-        return dateFormat_graph2(d);
+        return dateFormat(d);
     })
     .innerTickSize([6]);
 
-var yAxis_graph2 = d3.svg.axis()
-    .scale(yScale_graph2)
+var yAxis = d3.svg.axis()
+    .scale(yScale)
     .orient("left")
-    .ticks(6)
-    .innerTickSize([6]);
+    .ticks(5)
+    .innerTickSize([5]);
 
 // add a tooltip to the page - not to the svg itself!
 
 //Configure line generator
 // each line dataset must have a d.year and a d.rate for this to work.
-var line_graph2 = d3.svg.line()
+var line = d3.svg.line()
     .x(function (d) {
-        return xScale_graph2(dateFormat_graph2.parse(d.year));
+        return xScale(dateFormat.parse(d.year));
     })
     .y(function (d) {
-        return yScale_graph2(+d.rate);
+        return yScale(+d.rate);
     });
 
 
 
 //Create the empty SVG image
-var svg_graph2 = d3.select("#graph2")
+var svg = d3.select("#graph2")
     .append("svg")
-    .attr("width", width_graph2)
-    .attr("height", height_graph2);
+    .attr("width", width)
+    .attr("height", height);
 
 
 /*Creating the Multiple Lines from the Data */
@@ -65,7 +67,7 @@ var svg_graph2 = d3.select("#graph2")
 d3.csv("data/infantmort.csv", function (data) {
 
 
-    var years = d3.keys(data[0]).slice(2, 14); //
+    var years = d3.keys(data[0]).slice(0, 16); //
     console.log(years);
 
     //Create a new, empty array to hold our restructured dataset
@@ -91,27 +93,28 @@ d3.csv("data/infantmort.csv", function (data) {
         });
 
         dataset.push({ // At this point we are accessing one index of data from our original csv "data", above and we have created an array of year and rate data from this index. We then create a new object with the Country value from this index and the array that we have made from this index.
-            country: d.Country,
+            country: d.country,
             rates: infantMort // we just built this from the current index.
         });
 
     });
 
     //Uncomment to log the original data to the console
-    console.log(data);
+
+    /*console.log("data", data);*/
 
     //Uncomment to log the newly restructured dataset to the console
-    console.log(dataset);
+    console.log("dataset", dataset);
 
 
     //Set scale domains - max and min of the years
-    xScale_graph2.domain(
+    xScale.domain(
         d3.extent(years, function (d) {
-            return dateFormat_graph2.parse(d);
+            return dateFormat.parse(d);
         }));
 
     // max of rates to 0 (reversed, remember)
-    yScale_graph2.domain([
+    yScale.domain([
     	d3.max(dataset, function (d) {
             return d3.max(d.rates, function (d) {
                 return +d.rate;
@@ -122,7 +125,7 @@ d3.csv("data/infantmort.csv", function (data) {
 
 
     //Make a group for each country
-    var groups = svg_graph2.selectAll("g.lines")
+    var groups = svg.selectAll("g.lines")
         .data(dataset, function(d) {return d.country;}); // key value!
 
     groups
@@ -146,29 +149,29 @@ d3.csv("data/infantmort.csv", function (data) {
         .enter()
         .append("path")
         .attr("class", "line_graph2")
-        .attr("d", line_graph2)
+        .attr("d", line)
         .classed("normal", true)
         .classed("focused", false); // gives gray color
 
 
     /* Adding the Axes */
-    svg_graph2.append("g")
+    svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0," + (height_graph2 - margin_graph2.bottom) + ")")
-        .call(xAxis_graph2)
+        .attr("transform", "translate(0," + (height - margin.bottom) + ")")
+        .call(xAxis)
           .selectAll("text")
           .attr("y", 10);
 
-    svg_graph2.append("g")
+    svg.append("g")
         .attr("class", "y axis")
-        .attr("transform", "translate(" + margin_graph2.left + ",0)")
-        .call(yAxis_graph2)
+        .attr("transform", "translate(" + margin.left + ",0)")
+        .call(yAxis)
             .selectAll("text")
             .attr("x", -10)
         .append("text")
         .attr("transform", "rotate(-90)")
-        .attr("x", -margin_graph2.top)
-        .attr("y", -2*margin_graph2.left / 3)
+        .attr("x", -margin.top)
+        .attr("y", -2*margin.left / 3)
         .attr("dy", "1em")
         .style("text-anchor", "end")
         .attr("class", "label")
@@ -179,3 +182,5 @@ d3.csv("data/infantmort.csv", function (data) {
 
 
 }); // end of data csv
+
+})();
