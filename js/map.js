@@ -3,7 +3,7 @@ var illness = "total"; // illness to map / plot
 var country = "NGA";  // starter country
 
 // Map global variables
-var map_margin = {top: 20, right: 120, bottom: 120, left: 70};
+var map_margin = {top: 20, right: 100, bottom: 40, left: 70};
 
 var map_width = 600 - map_margin.left - map_margin.right;
 var map_height = 450 - map_margin.top - map_margin.bottom;
@@ -22,8 +22,8 @@ var map = d3.select('#graph3').append('svg')
     .attr("y", map_height / 2);*/
 
 var projection = d3.geo.mercator()
-    .scale(230) // mess with this if you want
-    .translate([map_width / 2.4, map_height / 1.9]);
+    .scale(260) // mess with this if you want
+    .translate([map_width / 2.4, map_height / 2.1]);
 
 var mapPath = d3.geo.path()
     .projection(projection);
@@ -35,8 +35,8 @@ var countryById = d3.map();
 // Line Chart globals
 
 var width = 500;
-var height = 400;
-var margin = {top: 50, right: 10, bottom: 40, left: 50};
+var height = 450;
+var margin = {top: 20, right: 60, bottom: 120, left: 70};
 
 //Set up date formatting and years
 var dateFormat = d3.time.format("Year %Y");
