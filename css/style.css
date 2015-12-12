@@ -98,11 +98,14 @@ button {
   border: 1px solid grey;
 }
 
-button.active {
-  box-shadow: inset 0px 0px 7px rgba(0,0,0,0.18);
+/*button.active {
   pointer-events: none;
-  background-color: rgba(230,222,182,0.5);
+  background-color: pink;
 }*/
+
+.selected {
+  background-color: rgba(0, 153, 255, 0.7);
+}
 
 #count {
   border-radius: 5px 0px 0px 5px;
