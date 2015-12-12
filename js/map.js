@@ -35,8 +35,8 @@ var countryById = d3.map();
 // Line Chart globals
 
 var width = 500;
-var height = 450;
-var margin = {top: 20, right: 60, bottom: 120, left: 70};
+var height = 380;
+var margin = {top: 20, right: 60, bottom: 40, left: 70};
 
 //Set up date formatting and years
 var dateFormat = d3.time.format("Year %Y");
