@@ -121,6 +121,7 @@ button {
 
 path.line_graph2 {
   fill: none;
+  stroke: gray;
   stroke-width: 0.7px;
   stroke-opacity: 70%;
 }
@@ -129,15 +130,6 @@ path.line_graph2 {
   stroke: gray;
 }
 
-.line_graph2.unfocused{
-  stroke-opacity: 40%;
-}
-
-.line_graph2.focused {
-  stroke-width: 2px;
-  stroke-opacity: 100%;
-  stroke: orange;
-}
 
 .background {
   fill: none;
