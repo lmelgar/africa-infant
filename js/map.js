@@ -79,7 +79,7 @@ var yAxis = d3.svg.axis()
 //Configure line generator
 // each line dataset must have an x and y for this to work.
 var line = d3.svg.line()
-	.interpolate("cardinal")
+	/*.interpolate("cardinal")*/
 	.x(function(d) {
 		return xScale(d.year);
 	})
@@ -210,7 +210,7 @@ function draw_lines(country, data) {
 	console.log("linedata", linedata);
 
 	linechart.selectAll("path")
-		.data([linedata])
+		.data(linedata)
 		.enter()
 		.append("path")
 		.attr("class", "line_graph2")
@@ -242,7 +242,7 @@ function update_lines(country, data) {
 	]);
 
   // bind the new data
-	var lines = linechart.select("path.line").data([data]);
+	var lines = linechart.select("path.line_graph2").data([data]);
 
   // transition.  there is no need for enter and exit in this case. we entered when we drew the first one in draw_lines.
 	lines

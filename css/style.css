@@ -94,16 +94,16 @@ button {
   border-radius: 5px 5px 5px 5px;
 }
 
-.btn {
+.btn-sm {
   border: 1px solid grey;
 }
 
-/*button.active {
+/*.btn-sm.active {
   pointer-events: none;
   background-color: pink;
 }*/
 
-.selected {
+btn-sm.selected {
   background-color: rgba(0, 153, 255, 0.7);
 }
 
@@ -156,8 +156,42 @@ path.line_graph2 {
   opacity: 0.6;
 }
 
+div.y2013 {
+				color: rgba(218,165,105,1);
+				display: inline;
+			}
+			div.y2002 {
+				color: rgba(117,160,189,1);
+				display: inline;
+			}
+			svg {
+				background-color: white;
+			}
+			circle {
+				stroke-width: 1;
+			}
+			circle.y2013 {
+				fill: rgba(218,165,105,1);
+			}
+			circle.y2002 {
+				fill: rgba(117,160,189,1);
+			}
+			circle:hover {
+				opacity: 0.6;
+			}
+			line.grid {
+				stroke: #eee;
+			}
+			line.between {
+				stroke: black;
+			}
+
 /* end css javascript */
 
 h1 {
   font-weight: 700;
+}
+
+.col-md-8 {
+  max-width: 850px;
 }
