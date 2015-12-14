@@ -136,6 +136,22 @@ button {
   border: 1px solid grey;
 }
 
+#smallmult button {
+  cursor: pointer;
+  /*float: left;
+  height: 30px;
+  text-align: center;*/
+  background: none;
+  display: inline;
+  padding-top: 5px;
+  margin-top: 10px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+#smallmult .btn-sm {
+  border: 1px solid grey;
+}
+
 /*.btn-sm.active {
   pointer-events: none;
   background-color: pink;

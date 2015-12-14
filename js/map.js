@@ -42,6 +42,7 @@ var margin = {top: 20, right: 60, bottom: 40, left: 70};
 var dateFormat = d3.time.format("Year %Y");
 var outputFormat = d3.time.format("%Y");
 
+
 // My shortcut for the scale is to list the first and last only - will set the extents.
 // Also, I set the earlier year to 1999 to get a little spacing on the X axis.
 var years = ["Year 1999", "Year 2015"];
@@ -103,10 +104,13 @@ queue()
 
 function typeAndSet(d) {
     d.total = +d.total;
-    countryById.set(d.ISO3, d);   // lookup key is d.ISO3, value returned is all of row d
+    countryById.set(d.ISO3, d);
+		d.originalyear = d.year;   // lookup key is d.ISO3, value returned is all of row d
     d.year = dateFormat.parse(d.year);
     return d;
 }
+
+var data2015 = [];
 
 function loaded(error, africa, data) {
 
@@ -114,7 +118,7 @@ function loaded(error, africa, data) {
 			console.log("error loading files", error);
 		}
 
-		/*data = data.filter(function(d) { return d.region == "Sub-Saharan Africa" || d.region == "Middle East & North Africa";});*/
+		data2015 = data.filter(function(d) { return d.originalyear === "Year 2015";});
 
 						// Notice what happens if you don't sort by year :)
 		var dataset =  d3.nest()
@@ -146,11 +150,9 @@ function draw_map(africa, data) {
 
   // they are nested, so the scale has to get into the values of the objects
   mapColorScale.domain([0,
-  	d3.max(data, function(d) {
-  			return d3.max(d.values, function (c) {
-  				return c.total;
-  			}
-  		)})
+  	d3.max(data2015, function(d) {
+  				return d.total;
+  		})
   	]);
 
   var countries = topojson.feature(africa, africa.objects.collection).features;

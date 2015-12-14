@@ -63,6 +63,7 @@
       rawData.forEach(function(d) {
           d.date = format.parse(d.year);
           d.count = +d["diarrhoeal_diseases"];
+          d.count2 = +d["respiratory_infections"];
       });
       nest = d3.nest().key(function(d) {
         return d.country;
@@ -89,9 +90,12 @@
             return sum * -1;
           },
           country: function(e) {
-            var d;
+            var d, sum;
             d = d3.select(e).datum();
-            return d.key;
+            sum = d3.sum(d.values, function(d) {
+              return d.count2;
+            });
+            return sum * -1;
           }
         }
       });
@@ -223,10 +227,10 @@
          return curYear.text("");
        };
        setupIsotope();
-          d3.select("#button-wrap").selectAll("button").on("click", function() {
+          d3.select("#smallmult").selectAll("button").on("click", function() {
             var id;
             id = d3.select(this).attr("id");
-            d3.select("#button-wrap button").selectAll("button").classed("active", false);
+            d3.select("#smallmult button").selectAll("button").classed("active", false);
             d3.select("#" + id).classed("active", true);
             return $("#graph1").isotope({
                 sortBy: id
