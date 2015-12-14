@@ -31,8 +31,7 @@
     .orient("left")
     .ticks(4)
     .outerTickSize(0)
-    .tickSubdivide(1)
-    .tickSize(-width);
+    .innerTickSize(0);
 
   var area = d3.svg.area().x(function(d) {
     return xScale(xValue(d));
@@ -150,7 +149,7 @@ d3.csv("data/africa-data.csv", function(error, rawData) {
       circle = lines.append("circle")
         .attr("r", 2.5)
         .attr("opacity", 0)
-        .attr("fill", "#696141")
+        .attr("fill", "rgb(222,102,0)")
         .style("pointer-events", "none");
       caption = lines.append("text")
         .attr("class", "caption")
@@ -164,7 +163,7 @@ d3.csv("data/africa-data.csv", function(error, rawData) {
         .attr("dy", 13)
         .attr("y", height);
       g.append("g")
-        .attr("class", "y axis")
+        .attr("class", "yaxis")
         .call(yAxis)
         .selectAll("text")
           .attr("dy", ".1em")
@@ -196,6 +195,35 @@ d3.select("#respiratory").on("click", function() {
     return nest;
 
 }
+
+function setupIsotope() {
+  $("#graph1").isotope({
+    itemSelector: '.chart',
+    layaoutMode: 'fitRows',
+    getSortData: {
+      count: function(e) {
+        var d, sum;
+        d = d3.select(e).datum();
+        sum = d3.sum(d.values, function(d) {
+          return d.count;
+        });
+        return sum * -1;
+      },
+      count2: function(e) {
+        var d, sum;
+        d = d3.select(e).datum();
+        sum = d3.sum(d.values, function(d) {
+          return d.count;
+        });
+        return sum * -1;
+      }
+    }
+  });
+  return $("#graph1").isotope({
+    sortBy: 'count'
+  });
+}
+
 
   var data = transformData(rawData);
   d3.select("#graph1").datum(data).each(function(myData) {
@@ -259,7 +287,7 @@ d3.select("#respiratory").on("click", function() {
       circle = lines.append("circle")
         .attr("r", 2.5)
         .attr("opacity", 0)
-        .attr("fill", "#696141")
+        .attr("fill", "rgb(222,102,0)")
         .style("pointer-events", "none");
       caption = lines.append("text")
         .attr("class", "caption")
@@ -273,13 +301,20 @@ d3.select("#respiratory").on("click", function() {
         .attr("dy", 13)
         .attr("y", height);
       g.append("g")
-        .attr("class", "y axis")
+        .attr("class", "yaxis")
         .call(yAxis)
         .selectAll("text")
           .attr("dy", ".1em")
           .attr("x", -11)
           .style("text-anchor", "end");
    });
+
+   setupIsotope();
+      d3.select("#button-wrap").selectAll("button").on("click", function() {
+        return $("#graph1").isotope({
+            sortBy: 'count2'
+      });
+    });
 
  }); // end of charts for each row
 
@@ -306,6 +341,35 @@ d3.select("#respiratory").on("click", function() {
        });
        return nest;
      }
+
+     function setupIsotope() {
+       $("#graph1").isotope({
+         itemSelector: '.chart',
+         layaoutMode: 'fitRows',
+         getSortData: {
+           count: function(e) {
+             var d, sum;
+             d = d3.select(e).datum();
+             sum = d3.sum(d.values, function(d) {
+               return d.count;
+             });
+             return sum * -1;
+           },
+           count2: function(e) {
+             var d, sum;
+             d = d3.select(e).datum();
+             sum = d3.sum(d.values, function(d) {
+               return d.count;
+             });
+             return sum * -1;
+           }
+         }
+       });
+       return $("#graph1").isotope({
+         sortBy: 'count'
+       });
+     }
+
 
      var data = transformData(rawData);
      d3.select("#graph1").datum(data).each(function(myData) {
@@ -369,7 +433,7 @@ d3.select("#respiratory").on("click", function() {
          circle = lines.append("circle")
            .attr("r", 2.5)
            .attr("opacity", 0)
-           .attr("fill", "#696141")
+           .attr("fill", "rgb(222,102,0)")
            .style("pointer-events", "none");
          caption = lines.append("text")
            .attr("class", "caption")
@@ -383,7 +447,7 @@ d3.select("#respiratory").on("click", function() {
            .attr("dy", 13)
            .attr("y", height);
          g.append("g")
-           .attr("class", "y axis")
+           .attr("class", "yaxis")
            .call(yAxis)
            .selectAll("text")
              .attr("dy", ".1em")
@@ -392,6 +456,13 @@ d3.select("#respiratory").on("click", function() {
       });
 
 
+
+      setupIsotope();
+         d3.select("#button-wrap").selectAll("button").on("click", function() {
+           return $("#graph1").isotope({
+               sortBy: 'count'
+         });
+       });
 
    });
 
