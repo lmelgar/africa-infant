@@ -6,11 +6,20 @@
 }
 
 body {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 300;
   color: rgb(30,31,29); /* dark grey */
   padding: 0 0;
   margin: 0 auto;
+}
+
+body p, h1, h2, h4 {
+  text-align: center;
+  line-height: 2;
+}
+
+body h1, h2 {
+  color: rgb(222,102,0);
 }
 
 #container-fluid {
@@ -25,7 +34,13 @@ body {
   max-width: 500px;
 }
 
+h1 {
+  font-weight: 700;
+}
+
 .related_text {
+  font-size: 13px;
+  line-height: 1.5;
   padding-top: 100px;
   padding-left: 50px;
 }
@@ -43,13 +58,35 @@ body {
 .axis path,
 .axis line {
   fill: none;
-  display: none;
+  stroke: gray;
+  stroke-width: 0.7px;
+  stroke-opacity: 70%;
   shape-rendering: crispEdges;
 }
 
 
+.yaxis line {
+    fill: none;
+    stroke-width: 0.7px;
+    stroke-opacity: 70%;
+    shape-rendering: crispEdges;
+
+}
+
 text {
+  font-family: "Open Sans", Helvetica, sans-serif;
+  font-weight: 300;
   font-size: 11px;
+  fill: rgba(136,136,136,1);
+
+}
+
+.legendLinear text {
+  font-family: "Open Sans", Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  fill: rgba(136,136,136,1);
+
 }
 
 /*.x.axis path {
@@ -57,23 +94,24 @@ text {
 }*/
 
 .axis text {
+  font-family: "Open Sans", Helvetica, sans-serif;
   font-size: 11px;
   fill: rgba(136,136,136,1);
   margin-right: 10px;
 }
 
-
 .dots {
   opacity: 0.6;
 }
 
-.tooltip_graph1, .tooltip_graph2, .tooltip_graph4, .tooltip_graph7 {
+body .tooltip_scatter {
   position: absolute;
   z-index: 10;
   opacity:1;
 }
-.tooltip, .tooltip_graph1, .tooltip_graph2, .tooltip_graph3, .tooltip_graph4, .tooltip_graph7 p {
+.tooltip_scatter p {
   font-family: "Open Sans", sans-serif;
+  text-align: left;
   line-height: 1.4;
   color: black;
   font-size: 13px;
@@ -114,21 +152,28 @@ btn-sm.selected {
   border-radius: 0px 5px 5px 0px;
 }
 
+/*map*/
 .countries {
     stroke: #fff;
     stroke-width: 1px;
 }
 
+.legendLinear {
+
+}
+
 path.line_graph2 {
   fill: none;
-  stroke: gray;
-  stroke-width: 0.7px;
+  stroke: rgb(222,102,0);
+  stroke-width: 2px;
   stroke-opacity: 70%;
 }
 
 .line_graph2.normal {
-  stroke: gray;
+  fill: none;
+  stroke: rgb(222,102,0);
 }
+
 
 
 .background {
@@ -138,9 +183,9 @@ path.line_graph2 {
   fill: #BFBFBF;
   opacity: 0.5;
 }
-.line_graph1 {
+.line_small {
   fill: none;
-  stroke: RGB(222,102,0);
+  stroke: rgb(222,102,0);
   stroke-width: 0.7px;
 }
 
@@ -156,42 +201,9 @@ path.line_graph2 {
   opacity: 0.6;
 }
 
-div.y2013 {
-				color: rgba(218,165,105,1);
-				display: inline;
-			}
-			div.y2002 {
-				color: rgba(117,160,189,1);
-				display: inline;
-			}
-			svg {
-				background-color: white;
-			}
-			circle {
-				stroke-width: 1;
-			}
-			circle.y2013 {
-				fill: rgba(218,165,105,1);
-			}
-			circle.y2002 {
-				fill: rgba(117,160,189,1);
-			}
-			circle:hover {
-				opacity: 0.6;
-			}
-			line.grid {
-				stroke: #eee;
-			}
-			line.between {
-				stroke: black;
-			}
+span {
+  color: rgb(222,102,0);
+  font-weight: 600;
+}
 
 /* end css javascript */
-
-h1 {
-  font-weight: 700;
-}
-
-.col-md-8 {
-  max-width: 850px;
-}

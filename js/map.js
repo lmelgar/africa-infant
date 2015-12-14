@@ -62,7 +62,7 @@ var yScale = d3.scale.linear()
 var xAxis = d3.svg.axis()
 				.scale(xScale)
 				.orient("bottom")
-				.ticks(10)
+				.ticks(12)
 				.tickFormat(function(d) {
 					return outputFormat(d);
 				})
@@ -72,6 +72,7 @@ var xAxis = d3.svg.axis()
 var yAxis = d3.svg.axis()
 				.scale(yScale)
 				.orient("left")
+				.ticks(8)
 				.innerTickSize([0])
 				.outerTickSize([0]);
 
@@ -254,7 +255,7 @@ function update_lines(country, data) {
 	console.log(data);
 
 	if (data.length && data[0][illness] > 0) {
-		d3.select(".subhead").html("Historical Rate for " + countryById.get(country).country);
+		d3.select(".subhead").html("Historical Rate for <span>" + countryById.get(country).country) + "</span>";
 	} else if (!data.length || data[0][illness] == 0) {
 		d3.select(".subhead").html("No data for this country");
 	}

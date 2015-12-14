@@ -27,10 +27,9 @@
    var yAxis = d3.svg.axis()
       .scale(yScale)
       .orient("left")
-      .ticks(5)
+      .ticks(3)
       .outerTickSize(0)
-      .tickSubdivide(1)
-      .tickSize(-width);
+      .innerTickSize(0);
 
     var area = d3.svg.area().x(function(d) {
       return xScale(xValue(d));
@@ -140,7 +139,7 @@
               return area(c.values);
             });
         lines.append("path")
-            .attr("class", "line_graph1")
+            .attr("class", "line_small")
             .style("pointer-events", "none")
             .attr("d", function(c) {
               return line(c.values);
@@ -171,12 +170,13 @@
           circle = lines.append("circle")
             .attr("r", 2.5)
             .attr("opacity", 0)
-            .attr("fill", "#696141")
+            .attr("fill", "rgb(222,102,0)")
             .style("pointer-events", "none");
           caption = lines.append("text")
             .attr("class", "caption")
             .attr("text-anchor", "middle")
             .style("pointer-events", "none")
+            .style("fill", "rgb(222,102,0")
             .attr("dy", -10);
           curYear = lines.append("text")
             .attr("class", "caption")
@@ -185,7 +185,7 @@
             .attr("dy", 13)
             .attr("y", height);
           g.append("g")
-            .attr("class", "y axis")
+            .attr("class", "y_axis")
             .call(yAxis)
             .selectAll("text")
               .attr("dy", ".1em")
