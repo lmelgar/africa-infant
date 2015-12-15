@@ -257,6 +257,10 @@ svg.append("text")
           return "rgb(222,102,0)";
         }
 
+        else if (d.country === "Angola") {
+          return "rgb(111,102,0)";
+        }
+
         else {
           return "#BFBFBF";
         }
@@ -1100,7 +1104,6 @@ svg.append("text")
         if (d.region === "Sub-Saharan Africa") {
           return "RGB(222,102,0)";
         }
-
         else {
           return "#BFBFBF";
         }
