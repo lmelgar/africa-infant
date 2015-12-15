@@ -52,7 +52,7 @@ h1, h2 {
 a, a:visited {
   color: black;
   text-decoration: none;
-  box-shadow: inset 0px -3px 0px 0px rgba(222,102,0,0.6); /*orange*/
+  box-shadow: inset 0px -4px 0px 0px rgba(222,102,0,0.6); /*orange*/
 }
 
 a:hover {
@@ -68,6 +68,21 @@ a:hover {
   padding-left: 50px;
 }
 
+.intro {
+  position: absolute;
+  z-index: 10;
+  display: block;
+  width: 400px;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 70px;
+  margin-left: 130px;
+  background-color: rgba(255,255,255,0.8);
+}
+
+.intro p {
+  text-align: center;
+}
 
 /* code javascript */
 

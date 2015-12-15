@@ -151,6 +151,7 @@ svg.append("text")
     }));
 
 
+    d3.select("div#p0").style("display", "inline");
     d3.select("p#p1").style("display", "none");
     d3.select("p#p2").style("display", "none");
     d3.select("p#p3").style("display", "none");
@@ -207,8 +208,8 @@ svg.append("text")
     d3.select("#urbanrural").on("click", function() {
     d3.selectAll("text.dotlabel").remove();
 
-
       d3.select("p#p1").style("display", "inline");
+      d3.select("div#p0").style("display", "none");
       d3.select("p#p2").style("display", "none");
       d3.select("p#p3").style("display", "none");
       d3.select("p#p4").style("display", "none");
@@ -296,6 +297,7 @@ svg.append("text")
     d3.select("#ruraldrinking").on("click", function() {
 
       d3.select("p#p2").style("display", "inline");
+      d3.select("div#p0").style("display", "none");
       d3.select("p#p1").style("display", "none");
       d3.select("p#p3").style("display", "none");
       d3.select("p#p4").style("display", "none");
@@ -385,6 +387,7 @@ svg.append("text")
     d3.select("#urbandrinking").on("click", function() {
 
       d3.select("p#p3").style("display", "inline");
+      d3.select("div#p0").style("display", "none");
       d3.select("p#p1").style("display", "none");
       d3.select("p#p2").style("display", "none");
       d3.select("p#p4").style("display", "none");
@@ -503,6 +506,7 @@ svg.append("text")
     d3.select("#ruralsanitation").on("click", function() {
 
       d3.select("p#p5").style("display", "inline");
+      d3.select("div#p0").style("display", "none");
       d3.select("p#p1").style("display", "none");
       d3.select("p#p2").style("display", "none");
       d3.select("p#p3").style("display", "none");
@@ -590,6 +594,7 @@ svg.append("text")
     d3.select("#urbansanitation").on("click", function() {
 
       d3.select("p#p4").style("display", "inline");
+      d3.select("div#p0").style("display", "none");
       d3.select("p#p1").style("display", "none");
       d3.select("p#p2").style("display", "none");
       d3.select("p#p3").style("display", "none");
@@ -678,6 +683,7 @@ svg.append("text")
     d3.select("#ors1").on("click", function() {
 
       d3.select("p#p6").style("display", "inline");
+      d3.select("div#p0").style("display", "none");
       d3.select("p#p1").style("display", "none");
       d3.select("p#p2").style("display", "none");
       d3.select("p#p3").style("display", "none");
@@ -794,6 +800,7 @@ svg.append("text")
     d3.select("#ors2").on("click", function() {
 
       d3.select("p#p7").style("display", "inline");
+      d3.select("div#p0").style("display", "none");
       d3.select("p#p1").style("display", "none");
       d3.select("p#p2").style("display", "none");
       d3.select("p#p3").style("display", "none");
@@ -907,6 +914,7 @@ svg.append("text")
     d3.select("#ors3").on("click", function() {
 
       d3.select("p#p8").style("display", "inline");
+      d3.select("div#p0").style("display", "none");
       d3.select("p#p1").style("display", "none");
       d3.select("p#p2").style("display", "none");
       d3.select("p#p3").style("display", "none");
@@ -1021,6 +1029,7 @@ svg.append("text")
     d3.select("#ors4").on("click", function() {
 
       d3.select("p#p9").style("display", "inline");
+      d3.select("div#p0").style("display", "none");
       d3.select("p#p1").style("display", "none");
       d3.select("p#p2").style("display", "none");
       d3.select("p#p3").style("display", "none");
@@ -1135,6 +1144,7 @@ svg.append("text")
     d3.select("#ors5").on("click", function() {
 
       d3.select("p#p10").style("display", "inline");
+      d3.select("div#p0").style("display", "none");
       d3.select("p#p1").style("display", "none");
       d3.select("p#p2").style("display", "none");
       d3.select("p#p3").style("display", "none");
@@ -1253,6 +1263,7 @@ svg.append("text")
     d3.select("#ors6").on("click", function() {
 
       d3.select("p#p11").style("display", "inline");
+      d3.select("div#p0").style("display", "none");
       d3.select("p#p1").style("display", "none");
       d3.select("p#p2").style("display", "none");
       d3.select("p#p3").style("display", "none");
