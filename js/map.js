@@ -193,36 +193,34 @@ function draw_map(africa, data) {
 		d3.select(this).moveToFront();
   }
 
-	var tooltip = d3.select("body")
+	var tooltip_map = d3.select("body")
 	.append("div")
 	.attr("class", "tooltip_map");
 
-
-	function mouseoverFunc(d) {
-		d3.select(this)
-		.transition()
-		.attr("r", 6)
-		tooltip
-		.style("display", null)
-		.html("<p>" + "<span>" + d.country + "</span>" +
-		"<br>Infant mortality rate: " + "<span>" + d3.format("s")(d.total) + "</span>");
-		d3.selectAll("path").classed("unfocused", true);
-		d3.select(this).select("path").classed("unfocused", false).classed("focused", true);
-	};
+	map.selectAll("path.countries")
+	    	.on("mouseover", mouseoverFunc)
+	        .on("mousemove", mousemoveFunc)
+	        .on("mouseout", mouseoutFunc);
 
 
-	function mousemoveFunc(d) {
+		function mouseoverFunc(d){
+			//console.log("moused over",getText(d));
+			tooltip_map
+				.style("display",null)
+				.html("<p>" + getText(d) + "</p>");
+		}
 
-		return tooltip
-		.style("top", (d3.event.pageY - 10) + "px" )
-		.style("left", (d3.event.pageX + 10) + "px");
-	}
-	function mouseoutFunc(d) {
-		d3.select(this)
-		.transition()
-		.attr("r", 5);
-		return tooltip.style("display", "none");
-	}
+		function mousemoveFunc(d) {
+	        tooltip_map
+	            .style("top", (d3.event.pageY - 5) + "px")
+	            .style("left", (d3.event.pageX + 10) + "px");
+	    }
+
+	    function mouseoutFunc(d) {
+	        return tooltip_map.style("display", "none");
+	    }
+
+
 
 
 } // end draw_map
@@ -300,6 +298,17 @@ function getColor(d) {
     } else {
         console.log("no dataRow",d, d.properties.adm0_a3, d.properties.name);
         return "#ccc";
+    }
+}
+
+function getText(d) {
+ var dataRow = countryById.get(d.properties.iso_a3);
+    if (dataRow) {
+        console.log(dataRow);
+        return "<span>" + dataRow.country + "</span><br>In 2015, the infant mortality rate is: <span>" + dataRow[illness] + "</span>";
+    } else {
+        console.log("no dataRow", d);
+        return "<span>" + d.properties.name + "</span><br> No data";
     }
 }
 
