@@ -58,7 +58,8 @@ d3.csv("data/africa-data.csv", function(error, data) {
        var bars = vis.selectAll("rect.bar")
            .data(my2013, function (d) { return d.country; });//TODO: what is your key value?}); // key function!
        //update -- existing bars get blue when we "redraw". We don't change labels.
-
+       bars
+            .attr("fill", "rgba(222,102,0,1)");
        //enter - new bars get set to darkorange when we "redraw."
        bars.enter()
            .append("rect")
@@ -96,7 +97,7 @@ d3.csv("data/africa-data.csv", function(error, data) {
        labels.transition()
            .duration(1000) //TODO: How long do you want this to last?)
            .text(function(d) {
-               return d.country + " " +d[column]; //TODO: what goes here?);
+               return d.country + ": " +d[column]; //TODO: what goes here?);
            })
            .attr("transform", function(d,i) {
                    return "translate(" + xScale(+d[column]) + "," + yScale(i) + ")"
