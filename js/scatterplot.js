@@ -59,6 +59,81 @@ svg.append("text")
 .attr("font-family", "Open Sans");
 }
 
+function labelx3(label) {
+d3.selectAll(".xlabel").remove();
+svg.append("text")
+.attr("class", "xlabel")
+.attr("transform", "translate(" + (width / 1.6) + " ," +
+(height - 15) + ")")
+.style("text-anchor", "middle")
+.attr("dy", "12")
+.text(label)
+.attr("font-family", "Open Sans");
+}
+
+function labelx4(label) {
+d3.selectAll(".xlabel").remove();
+svg.append("text")
+.attr("class", "xlabel")
+.attr("transform", "translate(" + (width / 1.42) + " ," +
+(height - 15) + ")")
+.style("text-anchor", "middle")
+.attr("dy", "12")
+.text(label)
+.attr("font-family", "Open Sans");
+}
+
+
+function labely(label) {
+d3.selectAll(".ylabel").remove();
+svg.append("text")
+.attr("class", "ylabel")
+.attr("y", margin.left/8 + 5)
+.attr("x", 0 - height /3.4)
+.style("text-anchor", "middle")
+.attr("transform", "rotate(-90)")
+.text(label)
+.attr("font-family", "Open Sans");
+}
+
+function labely2(label) {
+d3.selectAll(".ylabel").remove();
+svg.append("text")
+.attr("class", "ylabel")
+.attr("y", margin.left/8 + 5)
+.attr("x", 0 - height /2.6)
+.style("text-anchor", "middle")
+.attr("transform", "rotate(-90)")
+.text(label)
+.attr("font-family", "Open Sans");
+}
+
+function labely3(label) {
+d3.selectAll(".ylabel").remove();
+svg.append("text")
+.attr("class", "ylabel")
+.attr("y", margin.left/8 + 5)
+.attr("x", 0 - height /3)
+.style("text-anchor", "middle")
+.attr("transform", "rotate(-90)")
+.text(label)
+.attr("font-family", "Open Sans");
+}
+
+function labely4(label) {
+d3.selectAll(".ylabel").remove();
+svg.append("text")
+.attr("class", "ylabel")
+.attr("y", margin.left/8 + 5)
+.attr("x", 0 - height /4.5)
+.style("text-anchor", "middle")
+.attr("transform", "rotate(-90)")
+.text(label)
+.attr("font-family", "Open Sans");
+}
+
+
+
 
   d3.csv("data/water.csv", function(data) {
     console.log(data);
@@ -128,16 +203,6 @@ svg.append("text")
     .attr("class", "y axis")
     .attr("transform", "translate(" + (margin.left - 10) + ",0)")
     .call(yAxis);
-
-    svg.append("text")
-    .attr("class", "ylabel")
-    .attr("y", margin.left/8 + 5)
-    .attr("x", 0 - height /3.4)
-    .style("text-anchor", "middle")
-    .attr("transform", "rotate(-90)")
-    .text("Under 5 Mortality Rate (per thousand births)")
-    .attr("font-family", "Open Sans");
-
 
 
     d3.select("#urbanrural").on("click", function() {
@@ -215,6 +280,7 @@ svg.append("text")
       };
 
       labelx2("Population living in rural areas (%)");
+      labely("Under 5 Mortality Rate (per thousand births)");
 
 
 
@@ -297,7 +363,8 @@ svg.append("text")
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      labelx("Rural population with access to improved drinking-water (%)");
+      labelx3("Rural population with access to improved drinking-water (%)");
+      labely("Under 5 Mortality Rate (per thousand births)");
 
 
     });
@@ -380,7 +447,8 @@ svg.append("text")
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      labelx("Urban population with access to improved drinking-water (%)");
+      labelx3("Urban population with access to improved drinking-water (%)");
+      labely("Under 5 Mortality Rate (per thousand births)");
 
     });
 
@@ -458,6 +526,7 @@ svg.append("text")
       };
 
       labelx("Rural population with access to improved sanitation (%)");
+      labely("Under 5 Mortality Rate (per thousand births)");
 
     });
 
@@ -536,7 +605,8 @@ svg.append("text")
       };
 
 
-      labelx("Urban population with access to improved sanitation (%)")
+      labelx("Urban population with access to improved sanitation (%)");
+      labely("Under 5 Mortality Rate (per thousand births)");
 
     });
 
@@ -612,7 +682,8 @@ svg.append("text")
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      labelx2("Boys receiving ORS treatment (%)")
+      labelx2("Boys receiving ORS treatment (%)");
+      labely4("Girls receiving ORS treatment (%)");
 
     });
 
@@ -689,6 +760,7 @@ svg.append("text")
       };
 
       labelx("Children receiving ORS treatment in urban areas (%)");
+      labely3("Children receiving ORS treatment in rural areas (%)");
 
     });
 
@@ -763,7 +835,8 @@ svg.append("text")
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      labelx2("Rich children receiving ORS treatment (%)");
+      labelx4("Rich children receiving ORS treatment (%)");
+      labely("Poor children receiving ORS treatment (%)");
 
     });
 
@@ -840,7 +913,8 @@ svg.append("text")
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      labelx2("Boys, with suspected pneumonia, treated (%)");
+      labelx4("Boys, with suspected pneumonia, treated (%)");
+      labely("Girls, with suspected pneumonia, treated (%)");
 
     });
 
@@ -915,7 +989,8 @@ svg.append("text")
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      labelx("Children, with suspected pneumonia, treated in urban areas (%)");
+      labelx3("Children, with suspected pneumonia, treated in urban areas (%)");
+      labely2("Children, with suspected pneumonia, treated in rural areas (%)");
 
     });
 
@@ -993,6 +1068,7 @@ svg.append("text")
       };
 
       labelx("Rich children, with suspected pneumonia, treated (%)");
+      labely3("Poor children, with suspected pneumonia, treated (%)");
 
     });
 
