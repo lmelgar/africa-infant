@@ -32,10 +32,42 @@
   .append("div")
   .attr("class", "tooltip_scatter");
 
+  var data = [];
+
+
+  function labelx(label) {
+  d3.selectAll(".xlabel").remove();
+  svg.append("text")
+  .attr("class", "xlabel")
+  .attr("transform", "translate(" + (width / 1.5) + " ," +
+  (height - 15) + ")")
+  .style("text-anchor", "middle")
+  .attr("dy", "12")
+  .text(label)
+  .attr("font-family", "Open Sans");
+}
+
+function labelx2(label) {
+d3.selectAll(".xlabel").remove();
+svg.append("text")
+.attr("class", "xlabel")
+.attr("transform", "translate(" + (width / 1.35) + " ," +
+(height - 15) + ")")
+.style("text-anchor", "middle")
+.attr("dy", "12")
+.text(label)
+.attr("font-family", "Open Sans");
+}
 
 
   d3.csv("data/water.csv", function(data) {
     console.log(data);
+
+    function remove_nulls(data) {
+      data.filter(function(d) {
+        return d == null; }).remove();
+    };
+
 
     xScale.domain(d3.extent(data, function(d){
       return + d.Total_drinking;
@@ -43,6 +75,7 @@
     yScale.domain(d3.extent(data, function(d){
       return + d.rate;
     }));
+
 
     d3.select("p#p1").style("display", "none");
     d3.select("p#p2").style("display", "none");
@@ -82,11 +115,6 @@
     })
     .duration(500);
 
-    circles.filter(function(d){
-    					return "d.cy" == null;
-    					console.log(d);
-    				}).remove();
-
     circles
     .on("mousemove", mousemoveFunc)
     .on("mouseout", mouseoutFunc);
@@ -110,14 +138,6 @@
     .text("Under 5 Mortality Rate (per thousand births)")
     .attr("font-family", "Open Sans");
 
-    var xlabel = svg.append("text")
-    .attr("class", "xlabel")
-    .attr("transform", "translate(" + (width / 1.32) + " ," +
-    (height - 15) + ")")
-    .style("text-anchor", "middle")
-    .attr("dy", "12")
-    .text("Population using improved drinking-water (%)")
-    .attr("font-family", "Open Sans");
 
 
     d3.select("#urbanrural").on("click", function() {
@@ -134,6 +154,7 @@
       d3.select("p#p9").style("display", "none");
       d3.select("p#p10").style("display", "none");
       d3.select("p#p11").style("display", "none");
+
 
       xScale
       .domain(d3.extent(data, function(d){
@@ -167,7 +188,7 @@
       .attr("fill", function(d) {
 
         if (d.region === "Sub-Saharan Africa") {
-          return "RGB(222,102,0)";
+          return "rgb(222,102,0)";
         }
 
         else {
@@ -176,10 +197,6 @@
 
       });
 
-      circles.filter(function(d){
-                return "d.cy" == null;
-                console.log(d);
-              }).remove();
 
       circles
       .on("mouseover", mouseoverFunc)
@@ -190,18 +207,15 @@
         .attr("r", 6)
         tooltip
         .style("display", null)
-        .html("<p>" + "<strong>" + d.country + "</strong>" +
-        "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.rate) + "</strong>" +
-        "<br>Population using improved drinking-water: <strong>" + d.rural_pop + "%</strong>" + "</p>");
+        .html("<p>" + "<span>" + d.country + "</span>" +
+        "<br>Infant mortality rate: " + "<span>" + d3.format("s")(d.rate) + "</span>" +
+        "<br>Population living in rural areas: <span>" + d.rural_pop + "%</span>" + "</p>");
         d3.selectAll("circle").classed("unfocused", true);
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      xlabel
-      .text("Population using improved drinking-water (%)")
-      .transition()
-      .duration(2000)
-      .call(xlabel);
+      labelx2("Population living in rural areas (%)");
+
 
 
     });
@@ -267,11 +281,6 @@
 
       });
 
-      circles.filter(function(d){
-                return "d.cy" == null;
-                console.log("que es esto", d);
-              }).remove();
-
       circles
       .on("mouseover", mouseoverFunc)
 
@@ -281,18 +290,14 @@
         .attr("r", 6)
         tooltip
         .style("display", null)
-        .html("<p>" + "<strong>" + d.country + "</strong>" +
-        "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.rate) + "</strong>" +
-        "<br>Population using improved drinking-water: <strong>" + d.Rural_drinking + "%</strong>" + "</p>");
+        .html("<p>" + "<span>" + d.country + "</span>" +
+        "<br>Infant mortality rate: " + "<span>" + d3.format("s")(d.rate) + "</span>" +
+        "<br>Population with access to improved drinking-water: <span>" + d.Rural_drinking + "%</span>" + "</p>");
         d3.selectAll("circle").classed("unfocused", true);
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      xlabel
-      .text("Population using improved drinking-water (%)")
-      .transition()
-      .duration(2000)
-      .call(xlabel);
+      labelx("Rural population with access to improved drinking-water (%)");
 
 
     });
@@ -368,18 +373,14 @@
         .attr("fill-opacity", 1)
         tooltip
         .style("display", null)
-        .html("<p>" + "<strong>" + d.country + "</strong>" +
-        "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.rate) + "</strong>" +
-        "<br>Population using improved drinking-water: <strong>" + d.Urban_drinking + "%</strong>" + "</p>");
+        .html("<p>" + "<span>" + d.country + "</span>" +
+        "<br>Infant mortality rate: " + "<span>" + d3.format("s")(d.rate) + "</span>" +
+        "<br>Population with access to improved drinking-water: <span>" + d.Urban_drinking + "%</span>" + "</p>");
         d3.selectAll("circle").classed("unfocused", true);
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      xlabel
-      .text("Population using improved sanitation-water (%)")
-      .transition()
-      .duration(2000)
-      .call(xlabel);
+      labelx("Urban population with access to improved drinking-water (%)");
 
     });
 
@@ -449,21 +450,16 @@
         .attr("fill-opacity", 1)
         tooltip
         .style("display", null)
-        .html("<p>" + "<strong>" + d.country + "</strong>" +
-        "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.rate) + "</strong>" +
-        "<br>Population in rural areas <br>with access to improved sanitation: <strong>" + d.Rural_sanitation + "%</strong>" + "</p>");
+        .html("<p>" + "<span>" + d.country + "</span>" +
+        "<br>Infant mortality rate: " + "<span>" + d3.format("s")(d.rate) + "</span>" +
+        "<br>Population access to improved sanitation: <span>" + d.Rural_sanitation + "%</span>" + "</p>");
         d3.selectAll("circle").classed("unfocused", true);
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      xlabel
-      .text("Population using improved sanitation-water (%)")
-      .transition()
-      .duration(2000)
-      .call(xlabel);
+      labelx("Rural population with access to improved sanitation (%)");
 
     });
-
 
 
     d3.select("#urbansanitation").on("click", function() {
@@ -532,18 +528,15 @@
         .attr("fill-opacity", 1)
         tooltip
         .style("display", null)
-        .html("<p>" + "<strong>" + d.country + "</strong>" +
-        "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.rate) + "</strong>" +
-        "<br>Population living in rural areas: <strong>" + d.Urban_sanitation + "%</strong>" + "</p>");
+        .html("<p>" + "<span>" + d.country + "</span>" +
+        "<br>Infant mortality rate: " + "<span>" + d3.format("s")(d.rate) + "</span>" +
+        "<br>Population access to improved sanitation: <span>" + d.Urban_sanitation + "%</span>" + "</p>");
         d3.selectAll("circle").classed("unfocused", true);
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      xlabel
-      .text("Population living in rural areas (%)")
-      .transition()
-      .duration(2000)
-      .call(xlabel);
+
+      labelx("Urban population with access to improved sanitation (%)")
 
     });
 
@@ -612,18 +605,14 @@
         .attr("fill-opacity", 1)
         tooltip
         .style("display", null)
-        .html("<p>" + "<strong>" + d.country + "</strong>" +
-        "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.ors_female) + "</strong>" +
-        "<br>Population living in rural areas: <strong>" + d.ors_male + "%</strong>" + "</p>");
+        .html("<p>" + "<span>" + d.country + "</span>" +
+        "<br>Girls receiving ORS treatment: " + "<span>" + d.ors_female + "%</span>" +
+        "<br>Boys receiving ORS treatment: <span>" + d.ors_male + "%</span>" + "</p>");
         d3.selectAll("circle").classed("unfocused", true);
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      xlabel
-      .text("Population living in rural areas (%)")
-      .transition()
-      .duration(2000)
-      .call(xlabel);
+      labelx2("Boys receiving ORS treatment (%)")
 
     });
 
@@ -692,18 +681,14 @@
         .attr("fill-opacity", 1)
         tooltip
         .style("display", null)
-        .html("<p>" + "<strong>" + d.country + "</strong>" +
-        "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.ors_rural) + "</strong>" +
-        "<br>Population living in rural areas: <strong>" + d.ors_urban + "%</strong>" + "</p>");
+        .html("<p>" + "<span>" + d.country + "</span>" +
+        "<br>Children receiving ORS treatment in rural areas: " + "<span>" + d.ors_rural + "%</span>" +
+        "<br>Children receiving ORS treatment in urban areas: <span>" + d.ors_urban + "%</span>" + "</p>");
         d3.selectAll("circle").classed("unfocused", true);
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      xlabel
-      .text("Population living in rural areas (%)")
-      .transition()
-      .duration(2000)
-      .call(xlabel);
+      labelx("Children receiving ORS treatment in urban areas (%)");
 
     });
 
@@ -771,18 +756,14 @@
         .attr("fill-opacity", 1)
         tooltip
         .style("display", null)
-        .html("<p>" + "<strong>" + d.country + "</strong>" +
-        "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.ors_poor) + "</strong>" +
-        "<br>Population living in rural areas: <strong>" + d.ors_rich + "%</strong>" + "</p>");
+        .html("<p>" + "<span>" + d.country + "</span>" +
+        "<br>Poor children receiving ORS treatment: " + "<span>" + d.ors_poor + "%</span>" +
+        "<br>Rich children receiving ORS treatment: <span>" + d.ors_rich + "%</span>" + "</p>");
         d3.selectAll("circle").classed("unfocused", true);
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      xlabel
-      .text("Population living in rural areas (%)")
-      .transition()
-      .duration(2000)
-      .call(xlabel);
+      labelx2("Rich children receiving ORS treatment (%)");
 
     });
 
@@ -852,18 +833,14 @@
         .attr("fill-opacity", 1)
         tooltip
         .style("display", null)
-        .html("<p>" + "<strong>" + d.country + "</strong>" +
-        "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.pneu_female) + "</strong>" +
-        "<br>Population living in rural areas: <strong>" + d.pneu_male + "%</strong>" + "</p>");
+        .html("<p>" + "<span>" + d.country + "</span>" +
+        "<br>Girls, with suspected pneumonia, treated: " + "<span>" + d.pneu_female + "%</span>" +
+        "<br>Boys, with suspected pneumonia, treated: <span>" + d.pneu_male + "%</span>" + "</p>");
         d3.selectAll("circle").classed("unfocused", true);
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      xlabel
-      .text("Population living in rural areas (%)")
-      .transition()
-      .duration(2000)
-      .call(xlabel);
+      labelx2("Boys, with suspected pneumonia, treated (%)");
 
     });
 
@@ -931,18 +908,14 @@
         .attr("fill-opacity", 1)
         tooltip
         .style("display", null)
-        .html("<p>" + "<strong>" + d.country + "</strong>" +
-        "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.pneu_rural) + "</strong>" +
-        "<br>Population living in rural areas: <strong>" + d.pneu_urban + "%</strong>" + "</p>");
+        .html("<p>" + "<span>" + d.country + "</span>" +
+        "<br>Children, with suspected pneumonia, treated in rural areas: " + "<span>" + d.pneu_rural + "%</span>" +
+        "<br>Children, with suspected pneumonia, treated in urban areas: <span>" + d.pneu_urban + "%</span>" + "</p>");
         d3.selectAll("circle").classed("unfocused", true);
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      xlabel
-      .text("Population living in rural areas (%)")
-      .transition()
-      .duration(2000)
-      .call(xlabel);
+      labelx("Children, with suspected pneumonia, treated in urban areas (%)");
 
     });
 
@@ -1012,18 +985,14 @@
         .attr("fill-opacity", 1)
         tooltip
         .style("display", null)
-        .html("<p>" + "<strong>" + d.country + "</strong>" +
-        "<br>Infant mortality rate: " + "<strong>" + d3.format("s")(d.pneu_poor) + "</strong>" +
-        "<br>Population living in rural areas: <strong>" + d.pneu_rich + "%</strong>" + "</p>");
+        .html("<p>" + "<span>" + d.country + "</span>" +
+        "<br>Poor children, with suspected pneumonia, treated: " + "<span>" + d.pneu_poor + "%</span>" +
+        "<br>Rich children, with suspected pneumonia, treated: <span>" + d.pneu_rich + "%</span>" + "</p>");
         d3.selectAll("circle").classed("unfocused", true);
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
       };
 
-      xlabel
-      .text("Population living in rural areas (%)")
-      .transition()
-      .duration(2000)
-      .call(xlabel);
+      labelx("Rich children, with suspected pneumonia, treated (%)");
 
     });
 

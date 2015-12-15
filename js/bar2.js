@@ -1,5 +1,5 @@
 (function(){
-var width = 250;
+var width = 350;
 var height = 200;
 var vis = d3.select("#graph7").append("svg");
 var svg = vis

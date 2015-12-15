@@ -1,6 +1,6 @@
 (function(){
 var illness = "total"; // illness to map / plot
-var country = "NGA";  // starter country
+var country = "TZA";  // starter country
 
 // Map global variables
 var map_margin = {top: 20, right: 100, bottom: 40, left: 70};
@@ -66,16 +66,12 @@ var xAxis = d3.svg.axis()
 				.ticks(12)
 				.tickFormat(function(d) {
 					return outputFormat(d);
-				})
-				.innerTickSize([0])
-				.outerTickSize([0]);
+				});
 
 var yAxis = d3.svg.axis()
 				.scale(yScale)
 				.orient("left")
-				.ticks(8)
-				.innerTickSize([0])
-				.outerTickSize([0]);
+				.ticks(8);
 
 
 //Configure line generator
@@ -140,7 +136,7 @@ function loaded(error, africa, data) {
 	// set up the first country shown using global country variable:
 	d3.select("path.countries#" + country).style("stroke", "gray");
 	d3.select("path.country#" + country).moveToFront();
-	d3.select(".subhead").html("Historical Rate for " + countryById.get(country).country);
+	d3.select(".subhead").html("Historical Rate for " + "<span>" + countryById.get(country).country + "</span>");
 
 	/*map.select("#progress-image").remove();*/ // remove animation for loading
 }

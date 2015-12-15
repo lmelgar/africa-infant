@@ -30,8 +30,18 @@ body h1, h2 {
   margin: 0 auto;
 }
 
+#space {
+  margin-top: 30px;
+}
+
 #intro-text {
   max-width: 500px;
+}
+
+h1 {
+  font-size: 60px;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 h1, h2 {
@@ -136,35 +146,12 @@ button {
   padding-top: 5px;
   margin-top: 10px;
   border-radius: 5px 5px 5px 5px;
+  outline: 0 !important;
 }
 
 .btn-sm {
   border: 1px solid grey;
-}
-
-#smallmult button {
-  cursor: pointer;
-  /*float: left;
-  height: 30px;
-  text-align: center;*/
-  background: none;
-  display: inline;
-  padding-top: 5px;
-  margin-top: 10px;
-  border-radius: 5px 5px 5px 5px;
-}
-
-#smallmult .btn-sm {
-  border: 1px solid grey;
-}
-
-/*.btn-sm.active {
-  pointer-events: none;
-  background-color: pink;
-}*/
-
-btn-sm.selected {
-  background-color: rgba(0, 153, 255, 0.7);
+  outline: 0 !important;
 }
 
 #count {
@@ -220,6 +207,12 @@ path.line_graph2 {
 span {
   color: rgb(222,102,0);
   font-weight: 600;
+}
+
+.selected {
+  background-color: rgba(222,102,0,0.5);
+  border: 1px solid white;
+  outline: 0 !important;
 }
 
 /* end css javascript */
