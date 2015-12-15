@@ -1,9 +1,9 @@
 (function(){
-var width = 350;
+var width = 650;
 var height = 200;
 var vis = d3.select("#graph6").append("svg");
 var svg = vis
-    .attr("width", width+10)
+    .attr("width", width+135)
     .attr("height", height+10); // adding some random padding
 svg.append("rect")
     .attr("width", "100%")
@@ -101,8 +101,8 @@ d3.csv("data/africa-data.csv", function(error, data) {
            .attr("transform", function(d,i) {
                    return "translate(" + xScale(+d[column]) + "," + yScale(i) + ")"
            })
-           .attr("dy", "1.2em")
-           .attr("dx", "-3px")
-           .attr("text-anchor", "end");
+           .attr("dy", "1em")
+           .attr("dx", "5px")
+           .attr("text-anchor", "start");
        } // end of draw function
 })();
