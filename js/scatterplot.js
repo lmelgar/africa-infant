@@ -34,6 +34,7 @@
 
   var data = [];
 
+  var button = d3.select("#graph4").selectAll("button");
 
   function labelx(label) {
   d3.selectAll(".xlabel").remove();
@@ -132,16 +133,15 @@ svg.append("text")
 .attr("font-family", "Open Sans");
 }
 
+/*function remove_nulls(data, illness) {
+  data.filter(function(d,illness) {
+    return d.illness == " "; }).remove();
+};*/
 
 
 
   d3.csv("data/water.csv", function(data) {
     console.log(data);
-
-    function remove_nulls(data) {
-      data.filter(function(d) {
-        return d == null; }).remove();
-    };
 
 
     xScale.domain(d3.extent(data, function(d){
@@ -220,6 +220,7 @@ svg.append("text")
       d3.select("p#p10").style("display", "none");
       d3.select("p#p11").style("display", "none");
 
+      /*remove_nulls(data, "rate");*/
 
       xScale
       .domain(d3.extent(data, function(d){
@@ -281,6 +282,12 @@ svg.append("text")
 
       labelx2("Population living in rural areas (%)");
       labely("Under 5 Mortality Rate (per thousand births)");
+
+
+      button
+           var thisButton = d3.select(this);
+               d3.selectAll("button").classed("selected", false);
+               thisButton.classed("selected", true);
 
 
 
@@ -366,6 +373,11 @@ svg.append("text")
       labelx3("Rural population with access to improved drinking-water (%)");
       labely("Under 5 Mortality Rate (per thousand births)");
 
+      button
+      			var thisButton = d3.select(this);
+      					d3.selectAll("button").classed("selected", false);
+      					thisButton.classed("selected", true);
+
 
     });
 
@@ -450,6 +462,12 @@ svg.append("text")
       labelx3("Urban population with access to improved drinking-water (%)");
       labely("Under 5 Mortality Rate (per thousand births)");
 
+
+      button
+           var thisButton = d3.select(this);
+               d3.selectAll("button").classed("selected", false);
+               thisButton.classed("selected", true);
+
     });
 
     d3.select("#ruralsanitation").on("click", function() {
@@ -527,6 +545,11 @@ svg.append("text")
 
       labelx("Rural population with access to improved sanitation (%)");
       labely("Under 5 Mortality Rate (per thousand births)");
+
+      button
+           var thisButton = d3.select(this);
+               d3.selectAll("button").classed("selected", false);
+               thisButton.classed("selected", true);
 
     });
 
@@ -608,6 +631,12 @@ svg.append("text")
       labelx("Urban population with access to improved sanitation (%)");
       labely("Under 5 Mortality Rate (per thousand births)");
 
+
+      button
+           var thisButton = d3.select(this);
+               d3.selectAll("button").classed("selected", false);
+               thisButton.classed("selected", true);
+
     });
 
 
@@ -684,6 +713,12 @@ svg.append("text")
 
       labelx2("Boys receiving ORS treatment (%)");
       labely4("Girls receiving ORS treatment (%)");
+
+
+      button
+           var thisButton = d3.select(this);
+               d3.selectAll("button").classed("selected", false);
+               thisButton.classed("selected", true);
 
     });
 
@@ -762,6 +797,12 @@ svg.append("text")
       labelx("Children receiving ORS treatment in urban areas (%)");
       labely3("Children receiving ORS treatment in rural areas (%)");
 
+
+      button
+           var thisButton = d3.select(this);
+               d3.selectAll("button").classed("selected", false);
+               thisButton.classed("selected", true);
+
     });
 
     d3.select("#ors3").on("click", function() {
@@ -837,6 +878,12 @@ svg.append("text")
 
       labelx4("Rich children receiving ORS treatment (%)");
       labely("Poor children receiving ORS treatment (%)");
+
+
+      button
+           var thisButton = d3.select(this);
+               d3.selectAll("button").classed("selected", false);
+               thisButton.classed("selected", true);
 
     });
 
@@ -916,6 +963,11 @@ svg.append("text")
       labelx4("Boys, with suspected pneumonia, treated (%)");
       labely("Girls, with suspected pneumonia, treated (%)");
 
+      button
+           var thisButton = d3.select(this);
+               d3.selectAll("button").classed("selected", false);
+               thisButton.classed("selected", true);
+
     });
 
     d3.select("#ors5").on("click", function() {
@@ -991,6 +1043,11 @@ svg.append("text")
 
       labelx3("Children, with suspected pneumonia, treated in urban areas (%)");
       labely2("Children, with suspected pneumonia, treated in rural areas (%)");
+
+      button
+           var thisButton = d3.select(this);
+               d3.selectAll("button").classed("selected", false);
+               thisButton.classed("selected", true);
 
     });
 
@@ -1069,6 +1126,12 @@ svg.append("text")
 
       labelx("Rich children, with suspected pneumonia, treated (%)");
       labely3("Poor children, with suspected pneumonia, treated (%)");
+
+
+      button
+           var thisButton = d3.select(this);
+               d3.selectAll("button").classed("selected", false);
+               thisButton.classed("selected", true);
 
     });
 
