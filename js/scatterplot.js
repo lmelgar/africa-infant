@@ -139,7 +139,6 @@ svg.append("text")
 };*/
 
 
-
   d3.csv("data/water.csv", function(data) {
     console.log(data);
 
@@ -206,6 +205,7 @@ svg.append("text")
 
 
     d3.select("#urbanrural").on("click", function() {
+    d3.selectAll("text.dotlabel").remove();
 
 
       d3.select("p#p1").style("display", "inline");
@@ -221,6 +221,7 @@ svg.append("text")
       d3.select("p#p11").style("display", "none");
 
       /*remove_nulls(data, "rate");*/
+
 
       xScale
       .domain(d3.extent(data, function(d){
@@ -257,16 +258,11 @@ svg.append("text")
           return "rgb(222,102,0)";
         }
 
-        else if (d.country === "Angola") {
-          return "rgb(111,102,0)";
-        }
-
         else {
           return "#BFBFBF";
         }
 
       });
-
 
       circles
       .on("mouseover", mouseoverFunc)
@@ -298,7 +294,6 @@ svg.append("text")
     });
 
     d3.select("#ruraldrinking").on("click", function() {
-
 
       d3.select("p#p2").style("display", "inline");
       d3.select("p#p1").style("display", "none");
@@ -357,6 +352,7 @@ svg.append("text")
         }
 
       });
+
 
       circles
       .on("mouseover", mouseoverFunc)
@@ -446,6 +442,7 @@ svg.append("text")
 
       });
 
+
       circles
       .on("mouseover", mouseoverFunc)
 
@@ -472,6 +469,35 @@ svg.append("text")
                d3.selectAll("button").classed("selected", false);
                thisButton.classed("selected", true);
 
+               d3.selectAll("text.dotlabel").remove();
+               var dotlabel = svg.selectAll("text.dotlabel")
+                                   .data(data, function(d) {
+                                     if(d.country === "Mauritania") {
+                                     return d.country;
+                                     }
+                                     })
+                                     .enter()
+                                     .append("text")
+                                     .attr("transform", function(d) {
+                                      return "translate(" + xScale(+d.Rural_drinking) + "," + yScale(+d.rate) + ")";
+                                     })
+                                     .attr({
+                                       "dx": "10px",
+                                       "dy": "4px"
+                                     })
+                                     .attr("class", "dotlabel")
+                                     .style("opacity", 0)
+                                     .text(function(d) {
+                                     if(d.country === "Mauritania") {
+                                     return d.country;
+                                     }
+                                     });
+                                     // transition them.
+                                 dotlabel.transition()
+                                   .duration(2000)
+                                   .style("opacity", 1);
+                                 dotlabel.exit().remove();
+
     });
 
     d3.select("#ruralsanitation").on("click", function() {
@@ -487,6 +513,9 @@ svg.append("text")
       d3.select("p#p9").style("display", "none");
       d3.select("p#p10").style("display", "none");
       d3.select("p#p11").style("display", "none");
+
+
+      d3.selectAll("text.dotlabel").remove();
 
       xScale
       .domain(d3.extent(data, function(d){
@@ -571,6 +600,8 @@ svg.append("text")
       d3.select("p#p9").style("display", "none");
       d3.select("p#p10").style("display", "none");
       d3.select("p#p11").style("display", "none");
+
+      d3.selectAll("text.dotlabel").remove();
 
       xScale
       .domain(d3.extent(data, function(d){
@@ -658,6 +689,8 @@ svg.append("text")
       d3.select("p#p10").style("display", "none");
       d3.select("p#p11").style("display", "none");
 
+
+
       xScale.domain(d3.extent(data, function(d){
         return + d.ors_male;
       }));
@@ -698,6 +731,8 @@ svg.append("text")
 
       });
 
+
+
       circles
       .on("mouseover", mouseoverFunc)
 
@@ -723,6 +758,36 @@ svg.append("text")
            var thisButton = d3.select(this);
                d3.selectAll("button").classed("selected", false);
                thisButton.classed("selected", true);
+
+               d3.selectAll("text.dotlabel").remove();
+               var dotlabel = svg.selectAll("text.dotlabel")
+                                   .data(data, function(d) {
+                                     if(d.country === "Somalia") {
+                                     return d.country;
+                                     }
+                                     })
+                                     .enter()
+                                     .append("text")
+                                     .attr("transform", function(d) {
+                                      return "translate(" + xScale(+d.ors_male) + "," + yScale(+d.ors_female) + ")";
+                                     })
+                                     .attr({
+                                       "dx": "10px",
+                                       "dy": "6px"
+                                     })
+                                     .attr("class", "dotlabel")
+                                     .style("opacity", 0)
+                                     .text(function(d) {
+                                     if(d.country === "Somalia") {
+                                     return d.country;
+                                     }
+                                     });
+                                     // transition them.
+                                 dotlabel.transition()
+                                   .duration(2000)
+                                   .style("opacity", 1);
+                                 dotlabel.exit().remove();
+
 
     });
 
@@ -807,6 +872,36 @@ svg.append("text")
                d3.selectAll("button").classed("selected", false);
                thisButton.classed("selected", true);
 
+               d3.selectAll("text.dotlabel").remove();
+               var dotlabel = svg.selectAll("text.dotlabel")
+                                   .data(data, function(d) {
+                                     if(d.country === "Djibouti") {
+                                     return d.country;
+                                     }
+                                     })
+                                     .enter()
+                                     .append("text")
+                                     .attr("transform", function(d) {
+                                      return "translate(" + xScale(+d.ors_urban) + "," + yScale(+d.ors_rural) + ")";
+                                     })
+                                     .attr({
+                                       "dx": "10px",
+                                       "dy": "4px"
+                                     })
+                                     .attr("class", "dotlabel")
+                                     .style("opacity", 0)
+                                     .text(function(d) {
+                                     if(d.country === "Djibouti") {
+                                     return d.country;
+                                     }
+                                     });
+                                     // transition them.
+                                 dotlabel.transition()
+                                   .duration(2000)
+                                   .style("opacity", 1);
+                                 dotlabel.exit().remove();
+
+
     });
 
     d3.select("#ors3").on("click", function() {
@@ -888,6 +983,37 @@ svg.append("text")
            var thisButton = d3.select(this);
                d3.selectAll("button").classed("selected", false);
                thisButton.classed("selected", true);
+
+
+               d3.selectAll("text.dotlabel").remove();
+               var dotlabel = svg.selectAll("text.dotlabel")
+                                   .data(data, function(d) {
+                                     if(d.country === "Chad" || d.country === "Nigeria" || d.country === "Burkina Faso") {
+                                     return d.country;
+                                     }
+                                     })
+                                     .enter()
+                                     .append("text")
+                                     .attr("transform", function(d) {
+                                      return "translate(" + xScale(+d.ors_rich) + "," + yScale(+d.ors_poor) + ")";
+                                     })
+                                     .attr({
+                                       "dx": "10px",
+                                       "dy": "5px"
+                                     })
+                                     .attr("class", "dotlabel")
+                                     .style("opacity", 0)
+                                     .text(function(d) {
+                                     if(d.country === "Chad" || d.country === "Nigeria" || d.country === "Burkina Faso") {
+                                     return d.country;
+                                     }
+                                     });
+                                     // transition them.
+                                 dotlabel.transition()
+                                   .duration(2000)
+                                   .style("opacity", 1);
+                                 dotlabel.exit().remove();
+
 
     });
 
@@ -972,6 +1098,38 @@ svg.append("text")
                d3.selectAll("button").classed("selected", false);
                thisButton.classed("selected", true);
 
+
+               d3.selectAll("text.dotlabel").remove();
+               var dotlabel = svg.selectAll("text.dotlabel")
+                                   .data(data, function(d) {
+                                     if(d.country === "Somalia" || d.country === "Uganda") {
+                                     return d.country;
+                                     }
+                                     })
+                                     .enter()
+                                     .append("text")
+                                     .attr("transform", function(d) {
+                                      return "translate(" + xScale(+d.pneu_male) + "," + yScale(+d.pneu_female) + ")";
+                                     })
+                                     .attr({
+                                       "dx": "10px",
+                                       "dy": "5px"
+                                     })
+                                     .attr("class", "dotlabel")
+                                     .style("opacity", 0)
+                                     .text(function(d) {
+                                     if(d.country === "Somalia" || d.country === "Uganda") {
+                                     return d.country;
+                                     }
+                                     });
+                                     // transition them.
+                                 dotlabel.transition()
+                                   .duration(2000)
+                                   .style("opacity", 1);
+                                 dotlabel.exit().remove();
+
+
+
     });
 
     d3.select("#ors5").on("click", function() {
@@ -1052,6 +1210,42 @@ svg.append("text")
            var thisButton = d3.select(this);
                d3.selectAll("button").classed("selected", false);
                thisButton.classed("selected", true);
+
+               button
+                    var thisButton = d3.select(this);
+                        d3.selectAll("button").classed("selected", false);
+                        thisButton.classed("selected", true);
+
+
+                        d3.selectAll("text.dotlabel").remove();
+                        var dotlabel = svg.selectAll("text.dotlabel")
+                                            .data(data, function(d) {
+                                              if(d.country === "Malawi" || d.country === "Ghana" || d.country === "Guinea" || d.country === "Chad") {
+                                              return d.country;
+                                              }
+                                              })
+                                              .enter()
+                                              .append("text")
+                                              .attr("transform", function(d) {
+                                               return "translate(" + xScale(+d.pneu_urban) + "," + yScale(+d.pneu_rural) + ")";
+                                              })
+                                              .attr({
+                                                "dx": "10px",
+                                                "dy": "4px"
+                                              })
+                                              .attr("class", "dotlabel")
+                                              .style("opacity", 0)
+                                              .text(function(d) {
+                                              if(d.country === "Malawi" || d.country === "Ghana" || d.country === "Guinea" || d.country === "Chad") {
+                                              return d.country;
+                                              }
+                                              });
+                                              // transition them.
+                                          dotlabel.transition()
+                                            .duration(2000)
+                                            .style("opacity", 1);
+                                          dotlabel.exit().remove();
+
 
     });
 
@@ -1135,6 +1329,35 @@ svg.append("text")
            var thisButton = d3.select(this);
                d3.selectAll("button").classed("selected", false);
                thisButton.classed("selected", true);
+
+               d3.selectAll("text.dotlabel").remove();
+               var dotlabel = svg.selectAll("text.dotlabel")
+                                   .data(data, function(d) {
+                                     if(d.country === "Gambia" || d.country === "Ghana" || d.country === "Senegal") {
+                                     return d.country;
+                                     }
+                                     })
+                                     .enter()
+                                     .append("text")
+                                     .attr("transform", function(d) {
+                                      return "translate(" + xScale(+d.pneu_rich) + "," + yScale(+d.pneu_poor) + ")";
+                                     })
+                                     .attr({
+                                       "dx": "-46px",
+                                       "dy": "3px"
+                                     })
+                                     .attr("class", "dotlabel")
+                                     .style("opacity", 0)
+                                     .text(function(d) {
+                                     if(d.country === "Gambia" || d.country === "Ghana" || d.country === "Senegal") {
+                                     return d.country;
+                                     }
+                                     });
+                                     // transition them.
+                                 dotlabel.transition()
+                                   .duration(2000)
+                                   .style("opacity", 1);
+                                 dotlabel.exit().remove();
 
     });
 

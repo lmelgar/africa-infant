@@ -151,6 +151,7 @@ function draw_map(africa, data) {
   		})
   	]);
 
+
   var countries = topojson.feature(africa, africa.objects.collection).features;
 
   map.selectAll("path.countries")
@@ -191,6 +192,38 @@ function draw_map(africa, data) {
   	d3.select(this).style("stroke", "gray");
 		d3.select(this).moveToFront();
   }
+
+	var tooltip = d3.select("body")
+	.append("div")
+	.attr("class", "tooltip_map");
+
+
+	function mouseoverFunc(d) {
+		d3.select(this)
+		.transition()
+		.attr("r", 6)
+		tooltip
+		.style("display", null)
+		.html("<p>" + "<span>" + d.country + "</span>" +
+		"<br>Infant mortality rate: " + "<span>" + d3.format("s")(d.total) + "</span>");
+		d3.selectAll("path").classed("unfocused", true);
+		d3.select(this).select("path").classed("unfocused", false).classed("focused", true);
+	};
+
+
+	function mousemoveFunc(d) {
+
+		return tooltip
+		.style("top", (d3.event.pageY - 10) + "px" )
+		.style("left", (d3.event.pageX + 10) + "px");
+	}
+	function mouseoutFunc(d) {
+		d3.select(this)
+		.transition()
+		.attr("r", 5);
+		return tooltip.style("display", "none");
+	}
+
 
 } // end draw_map
 

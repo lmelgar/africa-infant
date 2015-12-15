@@ -120,11 +120,30 @@ text {
   opacity: 0.6;
 }
 
-body .tooltip_scatter {
+body .tooltip_scatter, .tooltip_map {
   position: absolute;
   z-index: 10;
   opacity:1;
 }
+
+body ..tooltip_map {
+  position: absolute;
+  z-index: 10;
+  opacity:1;
+}
+
+.tooltip_map p {
+  font-family: "Open Sans", sans-serif;
+  text-align: left;
+  line-height: 1.4;
+  color: black;
+  font-size: 13px;
+  background-color: rgba(255,255,255,0.9);
+  border: rgba(230,230,230,1) 1px solid;
+  padding: 5px 5px 5px 5px;
+}
+
+
 .tooltip_scatter p {
   font-family: "Open Sans", sans-serif;
   text-align: left;
