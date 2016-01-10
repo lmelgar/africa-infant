@@ -23,7 +23,7 @@
     		<div class="col-md-8">
     			<h1>The Saddest Record</h1>
     			<p>
-          About 5.9 million children under the age of five will die this year, according to <a href="http://www.unicef.org" target="_blank">UNICEF</a>. This means that every minute, 11 children will die. Although most developing countries have decreased their child mortality rate in the last decade, sub-Saharan Africa still faces a major challenge: the area's infant mortality rate is 15 times higher than the average for developed regions. Diarrhea and pneumonia are two of the main causes of child mortality.
+          About 5.9 million children under the age of five died in 2015, according to <a href="http://www.data.unicef.org/child-mortality/under-five.html" target="_blank">UNICEF</a>. This means that last year, every minute, 11 children died. Although most developing countries have decreased their child mortality rate in the last decade, sub-Saharan Africa still faces a major challenge: the area's infant mortality rate is 15 times higher than the average for developed regions. Diarrhoea and pneumonia are two of the main causes of child mortality.
     			</p>
     		</div>
 				<div class="col-md-2">
@@ -34,7 +34,7 @@
         </div>
         <div class="col-md-8">
             <p>Hover over each country in the map to see the rate of infant mortality* in 2015 for children under five. Click on each country to see how the rate has changed in the last 15 years.</p>
-            <h6>*UNICEF defines infant mortality rate as the "probability of dying between birth and exactly 5 years of age, expressed per 1,000 live births."</h6>
+            <h6>*UNICEF defines <a href="http://hdr.undp.org/en/content/under-five-mortality-rate-1000-live-births" target="_blank">infant mortality rate</a> as the "probability of dying between birth and exactly 5 years of age, expressed per 1,000 live births."</h6>
         </div>
         <div class="col-md-2">
         </div>
@@ -59,7 +59,7 @@
         </div>
         <div class="col-md-8">
             <h2>Who ranks the worst</h2>
-            <p>Click on the button below to see which ten African countries have the highest infant mortality rate according to specific diseases or injuries.</p>
+            <p>Click on the button below to see which ten sub-Saharan African countries have the highest infant mortality rate according to specific diseases or injuries.</p>
         </div>
         <div class="col-md-2">
         </div>
@@ -71,20 +71,19 @@
         <div class="col-md-8">
           <div id="menu">
             <select>
-              <option value="birth_asphixia">Birth asphyxia &amp; trauma</option>
               <option value="diarrhoeal_diseases">Diarrhoea</option>
+              <option value="respiratory_infections">Respiratory infections</option>
+              <option value="birth_asphixia">Birth asphyxia &amp; trauma</option>
               <option value="hiv">HIV/AIDS</option>
               <option value="measles">Measles</option>
               <option value="meningitis_encephalitis">Meningitis &amp; encephalitis</option>
               <option value="congenital_anomalies">Congenital anomalies</option>
-              <option value="respiratory_infections">Respiratory infections</option>
               <option value="malaria">Malaria</option>
               <option value="sepsis_infectious_newborn">Sepsis &amp; other infections</option>
               <option value="prematurity">Prematurity</option>
               <option value="injuries">Injures</option>
               <option value="other">Other</option>
 
-       //TODO: fill in the others here. What do you use for the values?
           </select>
         </div>
 
@@ -98,8 +97,8 @@
         </div>
         <div class="col-md-8">
             <h2>A declining process</h2>
-            <p>Only in 2013, 1,5 million children died because of diarrhea and pneumonia. 71% of the deaths were in 15 countries, according to the International Vaccine Access Center. Despite its deadly impact, infant mortality due to diarrhea and pneumonia has decreased in the last decade.</p>
-            <p>This graphic shows the 15 countries with the highest infant mortality rate and its evolution since 2000.</p>
+            <p>Only in 2013, 1,5 million children under five years old died because of diarrhea and pneumonia. 71% of the deaths were in 15 countries, according to the <a href="http://www.jhsph.edu/research/centers-and-institutes/ivac/resources/IVAC-2014-Pneumonia-Diarrhea-Progress-Report.pdf" target="_blank">International Vaccine Access Center</a>. Despite its deadly impact, infant mortality due to diarrhoea and pneumonia has decreased in the last decade.</p>
+            <p>This graphic shows 15 countries with the highest infant mortality rate and the evolution since 2000. Pneumonia is included in all respiratory infections.</p>
         </div>
         <div class="col-md-2">
         </div>
@@ -121,7 +120,8 @@
         </div>
         <div class="col-md-8">
             <h2>Water and treatment</h2>
-            <p>According to UNICEF, factors as the use of improved water or some kind of treatments can help to reduce the infant mortality rate provoked by diarrhoea and pneumonia. Who has access to the water? Who is receiving those treatments?</p>
+            <p>According to UNICEF, factors as the use of improved water or some kind of treatments* can help to reduce the infant mortality rate provoked by diarrhoea and pneumonia. Who has access to the water? Who is receiving those treatments?</p>
+            <h6>*In the case of diarrhoeal diseases, the ORS is the most common treatment. It reduces the effects and helps children to absorb water and protects them from future episodes.</h6>
         </div>
         <div class="col-md-2">
         </div>
@@ -131,12 +131,12 @@
         </div>
         <div class="col-md-8">
 
-          <button type="button" class="btn btn-sm" id="urbanrural"><span>1.</span>Rural population</button>
-          <button type="button" class="btn btn-sm" id="ruraldrinking"><span>2.</span>Rural: water</button>
-          <button type="button" class="btn btn-sm" id="urbandrinking"><span>3.</span>Urban: water</button>
-          <button type="button" class="btn btn-sm" id="urbansanitation"><span>4.</span>Urban: sanitation</button>
-          <button type="button" class="btn btn-sm" id="ruralsanitation"><span>5.</span>Rural: sanitation</button>
-          <button type="button" class="btn btn-sm" id="ors1"><span>6.</span>Girls | Boys (ORS)</button>
+          <button type="button" class="btn btn-sm" id="urbanrural"><span>1.</span> Rural population</button>
+          <button type="button" class="btn btn-sm" id="ruraldrinking"><span>2.</span> Rural: water</button>
+          <button type="button" class="btn btn-sm" id="urbandrinking"><span>3.</span> Urban: water</button>
+          <button type="button" class="btn btn-sm" id="urbansanitation"><span>4.</span> Urban: sanitation</button>
+          <button type="button" class="btn btn-sm" id="ruralsanitation"><span>5.</span> Rural: sanitation</button>
+          <button type="button" class="btn btn-sm" id="ors1"><span>6.</span> Girls | Boys (ORS)</button>
 
         </div>
 
@@ -149,11 +149,11 @@
         </div>
         <div class="col-md-8">
 
-          <button type="button" class="btn btn-sm" id="ors2"><span>7.</span>Rural | Urban (ORS)</button>
-          <button type="button" class="btn btn-sm" id="ors3"><span>8.</span>Poor | Rich (ORS)</button>
-          <button type="button" class="btn btn-sm" id="ors4"><span>9.</span>Girls | Boys (Pneumonia)</button>
-          <button type="button" class="btn btn-sm" id="ors5"><span>10.</span>Rural | Urban (Pneumonia)</button>
-          <button type="button" class="btn btn-sm" id="ors6"><span>11.</span>Poor | Rich (Pneumonia)</button>
+          <button type="button" class="btn btn-sm" id="ors2"><span>7.</span> Rural | Urban (ORS)</button>
+          <button type="button" class="btn btn-sm" id="ors3"><span>8.</span> Poor | Rich (ORS)</button>
+          <button type="button" class="btn btn-sm" id="ors4"><span>9.</span> Girls | Boys (Pneumonia)</button>
+          <button type="button" class="btn btn-sm" id="ors5"><span>10.</span> Rural | Urban (Pneumonia)</button>
+          <button type="button" class="btn btn-sm" id="ors6"><span>11.</span> Poor | Rich (Pneumonia)</button>
 
         </div>
 
@@ -180,13 +180,13 @@
         <div class="related_text">
              <p id="p1">In African countries, a high percentage of people live in rural areas</p>
              <p id="p2">People in these areas have limited access to improved drinking water. In Angola, for instance, the access in rural zones is only 28%. This country has the largest infant mortality rate worldwide.</p>
-             <p id="p3">In urban areas, the picture is completely different. However, in Mauritania, only 58% of the population has access to improved drinking-water.</p>
-             <p id="p4">But not always urban means progress. Sub-Sahara African urban areas lack access to improved sanitation-water, which means that they are not "protected from outside contamination, particularly faecal matter."</p>
-             <p id="p5">And this gets worse in the rural areas.</p>
-             <p id="p6">In Somalia, the country with the highest rate of children killed by diarrhoea, only 6% of girls and 7% of boys get treatment.</p>
-             <p id="p7">Treatment is more prevalent in urban zones. Djibouti is an exception: 63% of children in rural areas were treated with ORS, versus 32% in the urban ones.</p>
+             <p id="p3">In urban areas, the picture is completely different. However, in Mauritania, only 58% of the population have access to improved drinking-water.</p>
+             <p id="p4">But not always urban means progress. Sub-Saharan Africa urban areas lack access to improved sanitation-water, which means that they are not "protected from outside contamination, particularly faecal matter," as it's defined by <a href="http://www.unicef.org/wcaro/overview_2570.html" target="_blank">UNICEF</a></p>
+             <p id="p5">This gets worse in rural areas.</p>
+             <p id="p6">In Somalia, the country with the highest rate of children killed by diarrhoea, only 6% of girls and 7% of boys were treated.</p>
+             <p id="p7">Treatment is more prevalent in urban zones. Djibouti is an exception: 63% of children in rural areas were treated with ORS, versus 32% in urban ones.</p>
              <p id="p8">In Chad, Nigeria and Burkina Faso, the gap between children from rich families receiving ORS and the poor ones are the highest in Africa.</p>
-             <p id="p9">In regards to the treatment of penumonia, Somalia also ranks as the worst. On the other hand, in Uganda, 83% of girls and 75% of boys are treated for this disease.</p>
+             <p id="p9">In regards to the treatment of pneumonia, Somalia also ranks as the worst. On the other hand, in Uganda, 83% of girls and 75% of boys are treated for this disease.</p>
              <p id="p10">In most countries, the percentage of children treated for pneumonia is almost the same, no matter whether it's in rural or urban areas. But not in Malawi or Ghana, where more children are treated in rural zones. In Guinea or Chad, it's the other way around.</p>
              <p id="p11">In most sub-Saharan countries, being rich means having access to pneumonia treatment. But in Gambia, Ghana or Senegal, more poor children than rich ones were treated.</p>
 

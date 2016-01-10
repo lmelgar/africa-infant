@@ -381,6 +381,37 @@ svg.append("text")
       					thisButton.classed("selected", true);
 
 
+                d3.selectAll("text.dotlabel").remove();
+                var dotlabel = svg.selectAll("text.dotlabel")
+                                    .data(data, function(d) {
+                                      if(d.country === "Angola") {
+                                      return d.country;
+                                      }
+                                      })
+                                      .enter()
+                                      .append("text")
+                                      .attr("transform", function(d) {
+                                       return "translate(" + xScale(+d.Rural_drinking) + "," + yScale(+d.Urban_drinking) + ")";
+                                      })
+                                      .attr({
+                                        "dx": "2px",
+                                        "dy": "-6px"
+                                      })
+                                      .attr("class", "dotlabel")
+                                      .style("opacity", 0)
+                                      .text(function(d) {
+                                      if(d.country === "Angola") {
+                                      return d.country;
+                                      }
+                                      });
+                                      // transition them.
+                                  dotlabel.transition()
+                                    .duration(2000)
+                                    .style("opacity", 1);
+                                  dotlabel.exit().remove();
+
+
+
     });
 
 
