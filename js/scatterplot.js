@@ -133,10 +133,13 @@ svg.append("text")
 .attr("font-family", "Open Sans");
 }
 
-/*function remove_nulls(data, illness) {
-  data.filter(function(d,illness) {
-    return d.illness == " "; }).remove();
-};*/
+function remove_nulls(data, illness) {
+    return data.filter(function(d) {
+        if (d.illness !== 0) {
+            return d;
+        }
+    });
+}
 
 
   d3.csv("data/water.csv", function(data) {
@@ -221,8 +224,6 @@ svg.append("text")
       d3.select("p#p10").style("display", "none");
       d3.select("p#p11").style("display", "none");
 
-      /*remove_nulls(data, "rate");*/
-
 
       xScale
       .domain(d3.extent(data, function(d){
@@ -238,6 +239,9 @@ svg.append("text")
       .domain(d3.extent(data, function(d){
         return +d.rate;
       }));
+
+
+
       svg.select(".y.axis")
       .transition()
       .duration(2000)
@@ -264,6 +268,9 @@ svg.append("text")
         }
 
       });
+
+      remove_nulls(data, "rate");
+      remove_nulls(data, "rural_pop");
 
       circles
       .on("mouseover", mouseoverFunc)

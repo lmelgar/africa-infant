@@ -3,7 +3,7 @@ var illness = "total"; // illness to map / plot
 var country = "TZA";  // starter country
 
 // Map global variables
-var map_margin = {top: 20, right: 100, bottom: 40, left: 70};
+var map_margin = {top: 20, right: 130, bottom: 40, left: 70};
 
 var map_width = 600 - map_margin.left - map_margin.right;
 var map_height = 450 - map_margin.top - map_margin.bottom;
@@ -175,7 +175,7 @@ function draw_map(africa, data) {
     .attr("transform", "translate(5,5)");
 
   var legendLinear = d3.legend.color()
-    .shapeWidth(30)
+    .shapeWidth(20)
     .labelFormat(d3.format("f"))
     .orient("vertical")
     .scale(linear);
@@ -284,7 +284,7 @@ function update_lines(country, data) {
 	console.log(data);
 
 	if (data.length && data[0][illness] > 0) {
-		d3.select(".subhead").html("Historical Rate for <span>" + countryById.get(country).country) + "</span>";
+		d3.select(".subhead").html("Rate from 2000 to 2005 for <span>" + countryById.get(country).country) + "</span>";
 	} else if (!data.length || data[0][illness] == 0) {
 		d3.select(".subhead").html("No data for this country");
 	}
