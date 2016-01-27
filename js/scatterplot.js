@@ -3,6 +3,9 @@
   var width = 650;
   var height = 450;
 
+  var data = [];
+  var circles;
+
   var margin = { top: 20, right: 10, bottom: 60, left: 80 };
   var dotRadius = 5;
 
@@ -133,18 +136,95 @@ svg.append("text")
 .attr("font-family", "Open Sans");
 }
 
+function update_circles(data, x, y) {
+
+ xScale
+    .domain(d3.extent(data, function(d){
+      return +d[x];
+    }));
+
+    svg.select(".x.axis")
+    .transition()
+    .duration(2000)
+    .call(xAxis);
+
+  yScale
+    .domain(d3.extent(data, function(d){
+      return +d[y];
+    }));
+
+    svg.select(".y.axis")
+    .transition()
+    .duration(2000)
+    .call(yAxis);
+
+    svg.select(".x.axis")
+    .transition()
+    .duration(2000)
+    .call(xAxis);
+
+    circles = svg.selectAll("circle.dots").data(data, function(d) {
+      return d.country;
+    });
+
+  circles
+    .enter()
+    .append("circle")
+    .attr("class", "dots")
+    .attr("r", dotRadius)
+    .attr("fill", function(d) {
+      if (d.region === "Sub-Saharan Africa") {
+        return "RGB(222,102,0)";
+      }
+      else {
+        return "#BFBFBF";
+      }
+    })
+    .style('cursor','pointer')
+    .on('mousemove', mousemoveFunc)
+    .on('mouseout', mouseoutFunc);
+
+  circles
+    .transition()
+    .duration(2000)
+    .attr("cx", function(d) {
+      return xScale(+d[x]);
+    })
+    .attr("cy", function(d) {
+      return yScale(+d[y]);
+    })
+    .attr("fill", function(d) {
+        if (d.region === "Sub-Saharan Africa") {
+          return "rgb(222,102,0)";
+        }
+        else {
+          return "#BFBFBF";
+        }
+    });  // this is redundant for the first button case.
+
+
+  circles.exit().remove();
+
+  return circles;
+
+}
+
 function remove_nulls(data, illness) {
+  // we are assuming empty strings and 0's are not graphable
     return data.filter(function(d) {
-        if (d.illness !== 0) {
-            return d;
+      if (d[illness] !== "undefined" && d[illness] !== "" && d[illness] !== "0" && +d[illness] !==0 ) {
+          return d;
         }
     });
 }
 
+// initial state is the rural pop chart.
 
-  d3.csv("data/water.csv", function(data) {
-    console.log(data);
+  d3.csv("data/water.csv", function(error, inputdata) {
+    console.log(error, inputdata);
 
+    data = remove_nulls(inputdata, "rate");
+    data = remove_nulls(data, "rural_pop");
 
     xScale.domain(d3.extent(data, function(d){
       return + d.Total_drinking;
@@ -152,7 +232,6 @@ function remove_nulls(data, illness) {
     yScale.domain(d3.extent(data, function(d){
       return + d.rate;
     }));
-
 
     d3.select("div#p0").style("display", "inline");
     d3.select("p#p1").style("display", "none");
@@ -168,13 +247,16 @@ function remove_nulls(data, illness) {
     d3.select("p#p11").style("display", "none");
 
 
-    var circles = svg.selectAll("circle")
-    .data(data)
+    circles = svg.selectAll("circle.dots")
+      .data(data, function(d) {
+        return d.country;
+      })
+
+    circles
     .enter()
     .append("circle")
-    .attr("class", "dots");
-
-    circles.attr("cx", function(d) {
+    .attr("class", "dots")
+    .attr("cx", function(d) {
       return + xScale(+d.rural_pop);
     })
     .attr("cy", function(d) {
@@ -182,7 +264,9 @@ function remove_nulls(data, illness) {
     })
     .attr("r", dotRadius)
     .attr("fill", "#BFBFBF")
-    .style('cursor','pointer');
+    .style('cursor','pointer')
+    .on("mousemove", mousemoveFunc)
+    .on("mouseout", mouseoutFunc);
 
     circles.sort(function(a, b) {
       return d3.ascending(+a.rate, +b.rate);
@@ -193,9 +277,7 @@ function remove_nulls(data, illness) {
     })
     .duration(500);
 
-    circles
-    .on("mousemove", mousemoveFunc)
-    .on("mouseout", mouseoutFunc);
+    circles.exit().remove();
 
     svg.append("g")
     .attr("class", "x axis")
@@ -207,8 +289,13 @@ function remove_nulls(data, illness) {
     .attr("transform", "translate(" + (margin.left - 10) + ",0)")
     .call(yAxis);
 
+    //  NOW THE BUTTONS  --------------------------------------
 
     d3.select("#urbanrural").on("click", function() {
+
+      data = remove_nulls(inputdata, "rate");
+      data = remove_nulls(data, "rural_pop");
+
     d3.selectAll("text.dotlabel").remove();
 
       d3.select("p#p1").style("display", "inline");
@@ -225,55 +312,8 @@ function remove_nulls(data, illness) {
       d3.select("p#p11").style("display", "none");
 
 
-      xScale
-      .domain(d3.extent(data, function(d){
-        return +d.rural_pop;
-      }));
-
-      svg.select(".x.axis")
-      .transition()
-      .duration(2000)
-      .call(xAxis);
-
-      yScale
-      .domain(d3.extent(data, function(d){
-        return +d.rate;
-      }));
-
-
-
-      svg.select(".y.axis")
-      .transition()
-      .duration(2000)
-      .call(yAxis);
-
-      circles
-      .transition()
-      .duration(2000)
-      .attr("cx", function(d) {
-        return xScale(+d.rural_pop);
-
-      })
-      .attr("cy", function(d) {
-        return yScale(+d.rate);
-      })
-      .attr("fill", function(d) {
-
-        if (d.region === "Sub-Saharan Africa") {
-          return "rgb(222,102,0)";
-        }
-
-        else {
-          return "#BFBFBF";
-        }
-
-      });
-
-      remove_nulls(data, "rate");
-      remove_nulls(data, "rural_pop");
-
-      circles
-      .on("mouseover", mouseoverFunc)
+      circles = update_circles(data, 'rural_pop', 'rate');
+      circles.on("mouseover", mouseoverFunc);
 
       function mouseoverFunc(d) {
         d3.select(this)
@@ -291,17 +331,17 @@ function remove_nulls(data, illness) {
       labelx2("Population living in rural areas (%)");
       labely("Under 5 Mortality Rate (per thousand births)");
 
-
-      button
-           var thisButton = d3.select(this);
-               d3.selectAll("button").classed("selected", false);
-               thisButton.classed("selected", true);
-
-
+     var thisButton = d3.select(this);
+     d3.selectAll("button").classed("selected", false);
+     thisButton.classed("selected", true);
 
     });
 
     d3.select("#ruraldrinking").on("click", function() {
+
+
+      data = remove_nulls(inputdata, "rate");
+      data = remove_nulls(data, "Rural_drinking");
 
       d3.select("p#p2").style("display", "inline");
       d3.select("div#p0").style("display", "none");
@@ -316,55 +356,8 @@ function remove_nulls(data, illness) {
       d3.select("p#p10").style("display", "none");
       d3.select("p#p11").style("display", "none");
 
-      xScale
-      .domain(d3.extent(data, function(d){
-        return +d.Rural_drinking;
-      }));
-
-      svg.select(".x.axis")
-      .transition()
-      .duration(2000)
-      .call(xAxis);
-
-      yScale
-      .domain(d3.extent(data, function(d){
-        return + d.rate;
-      }));
-      svg.select(".y.axis")
-      .transition()
-      .duration(2000)
-      .call(yAxis);
-
-      svg.select(".x.axis")
-      .transition()
-      .duration(2000)
-      .call(xAxis);
-
-      circles
-      .transition()
-      .duration(2000)
-      .attr("cx", function(d) {
-        return xScale(+d.Rural_drinking);
-
-      })
-      .attr("cy", function(d) {
-        return yScale(+d.rate);
-      })
-      .attr("fill", function(d) {
-
-        if (d.region === "Sub-Saharan Africa") {
-          return "RGB(222,102,0)";
-        }
-
-        else {
-          return "#BFBFBF";
-        }
-
-      });
-
-
-      circles
-      .on("mouseover", mouseoverFunc)
+     circles = update_circles(data, "Rural_drinking", "rate");
+     circles.on("mouseover", mouseoverFunc);
 
       function mouseoverFunc(d) {
         d3.select(this)
@@ -382,40 +375,41 @@ function remove_nulls(data, illness) {
       labelx3("Rural population with access to improved drinking-water (%)");
       labely("Under 5 Mortality Rate (per thousand births)");
 
-      button
-      			var thisButton = d3.select(this);
-      					d3.selectAll("button").classed("selected", false);
-      					thisButton.classed("selected", true);
+    var thisButton = d3.select(this);
+    d3.selectAll("button").classed("selected", false);
+    thisButton.classed("selected", true);
 
 
-                d3.selectAll("text.dotlabel").remove();
-                var dotlabel = svg.selectAll("text.dotlabel")
-                                    .data(data, function(d) {
-                                      if(d.country === "Angola") {
-                                      return d.country;
-                                      }
-                                      })
-                                      .enter()
-                                      .append("text")
-                                      .attr("transform", function(d) {
-                                       return "translate(" + xScale(+d.Rural_drinking) + "," + yScale(+d.Urban_drinking) + ")";
-                                      })
-                                      .attr({
-                                        "dx": "2px",
-                                        "dy": "-6px"
-                                      })
-                                      .attr("class", "dotlabel")
-                                      .style("opacity", 0)
-                                      .text(function(d) {
-                                      if(d.country === "Angola") {
-                                      return d.country;
-                                      }
-                                      });
-                                      // transition them.
-                                  dotlabel.transition()
-                                    .duration(2000)
-                                    .style("opacity", 1);
-                                  dotlabel.exit().remove();
+    d3.selectAll("text.dotlabel").remove();
+    var dotlabel = svg.selectAll("text.dotlabel")
+      .data(data, function(d) {
+          return d.country;
+        });
+
+    dotlabel
+          .enter()
+          .append("text")
+          .attr("transform", function(d) {
+           return "translate(" + xScale(+d.Rural_drinking) + "," + yScale(+d.rate) + ")";
+          })
+          .attr({
+            "dx": "8px",
+            "dy": "3px"
+          })
+          .attr("class", "dotlabel")
+          .style("opacity", 0)
+          .text(function(d) {
+          if(d.country === "Angola") {
+          return d.country;
+          } else {
+            return "";
+          }
+          });
+          // transition them.
+      dotlabel.transition()
+        .duration(2000)
+        .style("opacity", 1);
+      dotlabel.exit().remove();
 
 
 
@@ -423,6 +417,9 @@ function remove_nulls(data, illness) {
 
 
     d3.select("#urbandrinking").on("click", function() {
+
+      data = remove_nulls(inputdata, "rate");
+      data = remove_nulls(data, "Urban_drinking");
 
       d3.select("p#p3").style("display", "inline");
       d3.select("div#p0").style("display", "none");
@@ -437,55 +434,8 @@ function remove_nulls(data, illness) {
       d3.select("p#p10").style("display", "none");
       d3.select("p#p11").style("display", "none");
 
-      xScale
-      .domain(d3.extent(data, function(d){
-        return +d.Urban_drinking;
-      }));
-
-      svg.select(".x.axis")
-      .transition()
-      .duration(2000)
-      .call(xAxis);
-
-      yScale
-      .domain(d3.extent(data, function(d){
-        return + d.rate;
-      }));
-      svg.select(".y.axis")
-      .transition()
-      .duration(2000)
-      .call(yAxis);
-
-      svg.select(".x.axis")
-      .transition()
-      .duration(2000)
-      .call(xAxis);
-
-      circles
-      .transition()
-      .duration(2000)
-      .attr("cx", function(d) {
-        return xScale(+d.Urban_drinking);
-
-      })
-      .attr("cy", function(d) {
-        return yScale(+d.rate);
-      })
-      .attr("fill", function(d) {
-
-        if (d.region === "Sub-Saharan Africa") {
-          return "RGB(222,102,0)";
-        }
-
-        else {
-          return "#BFBFBF";
-        }
-
-      });
-
-
-      circles
-      .on("mouseover", mouseoverFunc)
+      circles = update_circles(data, 'Urban_drinking', 'rate');
+      circles.on("mouseover", mouseoverFunc);
 
       function mouseoverFunc(d) {
         d3.select(this)
@@ -504,44 +454,46 @@ function remove_nulls(data, illness) {
       labelx3("Urban population with access to improved drinking-water (%)");
       labely("Under 5 Mortality Rate (per thousand births)");
 
+       var thisButton = d3.select(this);
+           d3.selectAll("button").classed("selected", false);
+           thisButton.classed("selected", true);
 
-      button
-           var thisButton = d3.select(this);
-               d3.selectAll("button").classed("selected", false);
-               thisButton.classed("selected", true);
-
-               d3.selectAll("text.dotlabel").remove();
-               var dotlabel = svg.selectAll("text.dotlabel")
-                                   .data(data, function(d) {
-                                     if(d.country === "Mauritania") {
-                                     return d.country;
-                                     }
-                                     })
-                                     .enter()
-                                     .append("text")
-                                     .attr("transform", function(d) {
-                                      return "translate(" + xScale(+d.Rural_drinking) + "," + yScale(+d.rate) + ")";
-                                     })
-                                     .attr({
-                                       "dx": "10px",
-                                       "dy": "4px"
-                                     })
-                                     .attr("class", "dotlabel")
-                                     .style("opacity", 0)
-                                     .text(function(d) {
-                                     if(d.country === "Mauritania") {
-                                     return d.country;
-                                     }
-                                     });
-                                     // transition them.
-                                 dotlabel.transition()
-                                   .duration(2000)
-                                   .style("opacity", 1);
-                                 dotlabel.exit().remove();
+        d3.selectAll("text.dotlabel").remove();
+        var dotlabel = svg.selectAll("text.dotlabel")
+           .data(data, function(d) {
+             return d.country;
+             });
+       dotlabel
+         .enter()
+         .append("text")
+         .attr("transform", function(d) {
+          return "translate(" + xScale(+d.Urban_drinking) + "," + yScale(+d.rate) + ")";
+         })
+         .attr({
+           "dx": "10px",
+           "dy": "4px"
+         })
+         .attr("class", "dotlabel")
+         .style("opacity", 0)
+         .text(function(d) {
+         if(d.country === "Mauritania") {
+         return d.country;
+         } else {
+          return "";
+         }
+         });
+         // transition them.
+     dotlabel.transition()
+       .duration(2000)
+       .style("opacity", 1);
+     dotlabel.exit().remove();
 
     });
 
     d3.select("#ruralsanitation").on("click", function() {
+
+      data = remove_nulls(inputdata, "rate");
+      data = remove_nulls(data, "Rural_sanitation");
 
       d3.select("p#p5").style("display", "inline");
       d3.select("div#p0").style("display", "none");
@@ -559,50 +511,9 @@ function remove_nulls(data, illness) {
 
       d3.selectAll("text.dotlabel").remove();
 
-      xScale
-      .domain(d3.extent(data, function(d){
-        return +d.Urban_drinking;
-      }));
+      circles = update_circles(data, 'Rural_sanitation', 'rate');
+      circles.on("mouseover", mouseoverFunc);
 
-      svg.select(".x.axis")
-      .transition()
-      .duration(2000)
-      .call(xAxis);
-
-      yScale
-      .domain(d3.extent(data, function(d){
-        return + d.rate;
-      }));
-      svg.select(".y.axis")
-      .transition()
-      .duration(2000)
-      .call(yAxis);
-
-
-      circles
-      .transition()
-      .duration(2000)
-      .attr("cx", function(d) {
-        return xScale(+d.Rural_sanitation);
-
-      })
-      .attr("cy", function(d) {
-        return yScale(+d.rate);
-      })
-      .attr("fill", function(d) {
-
-        if (d.region === "Sub-Saharan Africa") {
-          return "RGB(222,102,0)";
-        }
-
-        else {
-          return "#BFBFBF";
-        }
-
-      });
-
-      circles
-      .on("mouseover", mouseoverFunc)
 
       function mouseoverFunc(d) {
         d3.select(this)
@@ -612,7 +523,7 @@ function remove_nulls(data, illness) {
         tooltip
         .style("display", null)
         .html("<p>" + "<span>" + d.country + "</span>" +
-        "<br>Infant mortality rate: " + "<span>" + d3.format("s")(d.rate) + "</span>" +
+        "<br>Infant mortality rate: " + "<span>" + d3.format("s")(+d.rate) + "</span>" +
         "<br>Population access to improved sanitation: <span>" + d.Rural_sanitation + "%</span>" + "</p>");
         d3.selectAll("circle").classed("unfocused", true);
         d3.select(this).select("circle").classed("unfocused", false).classed("focused", true);
@@ -621,15 +532,17 @@ function remove_nulls(data, illness) {
       labelx("Rural population with access to improved sanitation (%)");
       labely("Under 5 Mortality Rate (per thousand births)");
 
-      button
-           var thisButton = d3.select(this);
-               d3.selectAll("button").classed("selected", false);
-               thisButton.classed("selected", true);
+     var thisButton = d3.select(this);
+         d3.selectAll("button").classed("selected", false);
+         thisButton.classed("selected", true);
 
     });
 
 
     d3.select("#urbansanitation").on("click", function() {
+
+      data = remove_nulls(inputdata, "rate");
+      data = remove_nulls(data, "Urban_sanitation");
 
       d3.select("p#p4").style("display", "inline");
       d3.select("div#p0").style("display", "none");
@@ -646,50 +559,8 @@ function remove_nulls(data, illness) {
 
       d3.selectAll("text.dotlabel").remove();
 
-      xScale
-      .domain(d3.extent(data, function(d){
-        return +d.Urban_sanitation;
-      }));
-
-      svg.select(".x.axis")
-      .transition()
-      .duration(2000)
-      .call(xAxis);
-
-      yScale
-      .domain(d3.extent(data, function(d){
-        return + d.rate;
-      }));
-      svg.select(".y.axis")
-      .transition()
-      .duration(2000)
-      .call(yAxis);
-
-
-      circles
-      .transition()
-      .duration(2000)
-      .attr("cx", function(d) {
-        return xScale(+d.Urban_sanitation);
-
-      })
-      .attr("cy", function(d) {
-        return yScale(+d.rate);
-      })
-      .attr("fill", function(d) {
-
-        if (d.region === "Sub-Saharan Africa") {
-          return "RGB(222,102,0)";
-        }
-
-        else {
-          return "#BFBFBF";
-        }
-
-      });
-
-      circles
-      .on("mouseover", mouseoverFunc)
+      circles = update_circles(data, 'Urban_sanitation', 'rate');
+      circles.on("mouseover", mouseoverFunc);
 
       function mouseoverFunc(d) {
         d3.select(this)
@@ -710,15 +581,17 @@ function remove_nulls(data, illness) {
       labely("Under 5 Mortality Rate (per thousand births)");
 
 
-      button
-           var thisButton = d3.select(this);
-               d3.selectAll("button").classed("selected", false);
-               thisButton.classed("selected", true);
+    var thisButton = d3.select(this);
+         d3.selectAll("button").classed("selected", false);
+         thisButton.classed("selected", true);
 
     });
 
 
     d3.select("#ors1").on("click", function() {
+
+      data = remove_nulls(inputdata, "ors_male");
+      data = remove_nulls(data, "ors_female");
 
       d3.select("p#p6").style("display", "inline");
       d3.select("div#p0").style("display", "none");
@@ -734,51 +607,8 @@ function remove_nulls(data, illness) {
       d3.select("p#p11").style("display", "none");
 
 
-
-      xScale.domain(d3.extent(data, function(d){
-        return + d.ors_male;
-      }));
-
-      svg.select(".x.axis")
-      .transition()
-      .duration(2000)
-      .call(xAxis);
-
-      yScale.domain(d3.extent(data, function(d){
-        return + d.ors_female;
-      }));
-
-      svg.select(".y.axis")
-      .transition()
-      .duration(2000)
-      .call(yAxis);
-
-      circles
-      .transition()
-      .duration(2000)
-      .attr("cx", function(d) {
-        return xScale(+d.ors_male);
-
-      })
-      .attr("cy", function(d) {
-        return yScale(+d.ors_female);
-      })
-      .attr("fill", function(d) {
-
-        if (d.region === "Sub-Saharan Africa") {
-          return "RGB(222,102,0)";
-        }
-
-        else {
-          return "#BFBFBF";
-        }
-
-      });
-
-
-
-      circles
-      .on("mouseover", mouseoverFunc)
+      circles = update_circles(data, 'ors_male', 'ors_female');
+      circles.on("mouseover", mouseoverFunc);
 
       function mouseoverFunc(d) {
         d3.select(this)
@@ -797,45 +627,48 @@ function remove_nulls(data, illness) {
       labelx2("Boys receiving ORS treatment (%)");
       labely4("Girls receiving ORS treatment (%)");
 
+      var thisButton = d3.select(this);
+      d3.selectAll("button").classed("selected", false);
+      thisButton.classed("selected", true);
 
-      button
-           var thisButton = d3.select(this);
-               d3.selectAll("button").classed("selected", false);
-               thisButton.classed("selected", true);
-
-               d3.selectAll("text.dotlabel").remove();
-               var dotlabel = svg.selectAll("text.dotlabel")
-                                   .data(data, function(d) {
-                                     if(d.country === "Somalia") {
-                                     return d.country;
-                                     }
-                                     })
-                                     .enter()
-                                     .append("text")
-                                     .attr("transform", function(d) {
-                                      return "translate(" + xScale(+d.ors_male) + "," + yScale(+d.ors_female) + ")";
-                                     })
-                                     .attr({
-                                       "dx": "10px",
-                                       "dy": "6px"
-                                     })
-                                     .attr("class", "dotlabel")
-                                     .style("opacity", 0)
-                                     .text(function(d) {
-                                     if(d.country === "Somalia") {
-                                     return d.country;
-                                     }
-                                     });
-                                     // transition them.
-                                 dotlabel.transition()
-                                   .duration(2000)
-                                   .style("opacity", 1);
-                                 dotlabel.exit().remove();
+      d3.selectAll("text.dotlabel").remove();
+      var dotlabel = svg.selectAll("text.dotlabel")
+           .data(data, function(d) {
+             return d.country;
+             });
+           dotlabel
+             .enter()
+             .append("text")
+             .attr("transform", function(d) {
+              return "translate(" + xScale(+d.ors_male) + "," + yScale(+d.ors_female) + ")";
+             })
+             .attr({
+               "dx": "5px",
+               "dy": "2px"
+             })
+             .attr("class", "dotlabel")
+             .style("opacity", 0)
+             .text(function(d) {
+               if(d.country === "Somalia") {
+                console.log(d);
+                return d.country;
+               } else {
+                return "";
+               }
+             });
+             // transition them.
+         dotlabel.transition()
+           .duration(2000)
+           .style("opacity", 1);
+         dotlabel.exit().remove();
 
 
     });
 
     d3.select("#ors2").on("click", function() {
+
+      data = remove_nulls(inputdata, "ors_urban");
+      data = remove_nulls(data, "ors_rural");
 
       d3.select("p#p7").style("display", "inline");
       d3.select("div#p0").style("display", "none");
@@ -850,49 +683,8 @@ function remove_nulls(data, illness) {
       d3.select("p#p10").style("display", "none");
       d3.select("p#p11").style("display", "none");
 
-
-      xScale.domain(d3.extent(data, function(d){
-        return + d.ors_urban;
-      }));
-
-      svg.select(".x.axis")
-      .transition()
-      .duration(2000)
-      .call(xAxis);
-
-      yScale.domain(d3.extent(data, function(d){
-        return + d.ors_rural;
-      }));
-
-      svg.select(".y.axis")
-      .transition()
-      .duration(2000)
-      .call(yAxis);
-
-      circles
-      .transition()
-      .duration(2000)
-      .attr("cx", function(d) {
-        return xScale(+d.ors_urban);
-
-      })
-      .attr("cy", function(d) {
-        return yScale(+d.ors_rural);
-      })
-      .attr("fill", function(d) {
-
-        if (d.region === "Sub-Saharan Africa") {
-          return "RGB(222,102,0)";
-        }
-
-        else {
-          return "#BFBFBF";
-        }
-
-      });
-
-      circles
-      .on("mouseover", mouseoverFunc)
+      circles = update_circles(data, 'ors_urban', 'ors_rural');
+      circles.on("mouseover", mouseoverFunc);
 
       function mouseoverFunc(d) {
         d3.select(this)
@@ -912,44 +704,47 @@ function remove_nulls(data, illness) {
       labely3("Children receiving ORS treatment in rural areas (%)");
 
 
-      button
-           var thisButton = d3.select(this);
-               d3.selectAll("button").classed("selected", false);
-               thisButton.classed("selected", true);
+     var thisButton = d3.select(this);
+         d3.selectAll("button").classed("selected", false);
+         thisButton.classed("selected", true);
 
-               d3.selectAll("text.dotlabel").remove();
-               var dotlabel = svg.selectAll("text.dotlabel")
-                                   .data(data, function(d) {
-                                     if(d.country === "Djibouti") {
-                                     return d.country;
-                                     }
-                                     })
-                                     .enter()
-                                     .append("text")
-                                     .attr("transform", function(d) {
-                                      return "translate(" + xScale(+d.ors_urban) + "," + yScale(+d.ors_rural) + ")";
-                                     })
-                                     .attr({
-                                       "dx": "10px",
-                                       "dy": "4px"
-                                     })
-                                     .attr("class", "dotlabel")
-                                     .style("opacity", 0)
-                                     .text(function(d) {
-                                     if(d.country === "Djibouti") {
-                                     return d.country;
-                                     }
-                                     });
-                                     // transition them.
-                                 dotlabel.transition()
-                                   .duration(2000)
-                                   .style("opacity", 1);
-                                 dotlabel.exit().remove();
+         d3.selectAll("text.dotlabel").remove();
+         var dotlabel = svg.selectAll("text.dotlabel")
+                             .data(data, function(d) {
+                               return d.country;
+                               });
+       dotlabel
+         .enter()
+         .append("text")
+         .attr("transform", function(d) {
+          return "translate(" + xScale(+d.ors_urban) + "," + yScale(+d.ors_rural) + ")";
+         })
+         .attr({
+           "dx": "10px",
+           "dy": "4px"
+         })
+         .attr("class", "dotlabel")
+         .style("opacity", 0)
+         .text(function(d) {
+         if(d.country === "Djibouti") {
+         return d.country;
+         } else {
+          return "";
+         }
+         });
+         // transition them.
+     dotlabel.transition()
+       .duration(2000)
+       .style("opacity", 1);
+     dotlabel.exit().remove();
 
 
     });
 
     d3.select("#ors3").on("click", function() {
+
+      data = remove_nulls(inputdata, "ors_poor");
+      data = remove_nulls(data, "ors_rich");
 
       d3.select("p#p8").style("display", "inline");
       d3.select("div#p0").style("display", "none");
@@ -964,48 +759,8 @@ function remove_nulls(data, illness) {
       d3.select("p#p10").style("display", "none");
       d3.select("p#p11").style("display", "none");
 
-      xScale.domain(d3.extent(data, function(d){
-        return + d.ors_rich;
-      }));
-
-      svg.select(".x.axis")
-      .transition()
-      .duration(2000)
-      .call(xAxis);
-
-      yScale.domain(d3.extent(data, function(d){
-        return + d.ors_poor;
-      }));
-
-      svg.select(".y.axis")
-      .transition()
-      .duration(2000)
-      .call(yAxis);
-
-      circles
-      .transition()
-      .duration(2000)
-      .attr("cx", function(d) {
-        return xScale(+d.ors_rich);
-
-      })
-      .attr("cy", function(d) {
-        return yScale(+d.ors_poor);
-      })
-      .attr("fill", function(d) {
-
-        if (d.region === "Sub-Saharan Africa") {
-          return "RGB(222,102,0)";
-        }
-
-        else {
-          return "#BFBFBF";
-        }
-
-      });
-
-      circles
-      .on("mouseover", mouseoverFunc)
+      circles = update_circles(data, 'ors_rich', 'ors_poor');
+      circles.on("mouseover", mouseoverFunc);
 
       function mouseoverFunc(d) {
         d3.select(this)
@@ -1025,46 +780,50 @@ function remove_nulls(data, illness) {
       labely("Poor children receiving ORS treatment (%)");
 
 
-      button
-           var thisButton = d3.select(this);
-               d3.selectAll("button").classed("selected", false);
-               thisButton.classed("selected", true);
+     var thisButton = d3.select(this);
+         d3.selectAll("button").classed("selected", false);
+         thisButton.classed("selected", true);
 
 
-               d3.selectAll("text.dotlabel").remove();
-               var dotlabel = svg.selectAll("text.dotlabel")
-                                   .data(data, function(d) {
-                                     if(d.country === "Chad" || d.country === "Nigeria" || d.country === "Burkina Faso") {
-                                     return d.country;
-                                     }
-                                     })
-                                     .enter()
-                                     .append("text")
-                                     .attr("transform", function(d) {
-                                      return "translate(" + xScale(+d.ors_rich) + "," + yScale(+d.ors_poor) + ")";
-                                     })
-                                     .attr({
-                                       "dx": "10px",
-                                       "dy": "5px"
-                                     })
-                                     .attr("class", "dotlabel")
-                                     .style("opacity", 0)
-                                     .text(function(d) {
-                                     if(d.country === "Chad" || d.country === "Nigeria" || d.country === "Burkina Faso") {
-                                     return d.country;
-                                     }
-                                     });
-                                     // transition them.
-                                 dotlabel.transition()
-                                   .duration(2000)
-                                   .style("opacity", 1);
-                                 dotlabel.exit().remove();
+         d3.selectAll("text.dotlabel").remove();
+         var dotlabel = svg.selectAll("text.dotlabel")
+                             .data(data, function(d) {
+                               return d.country;
+                               });
+     dotlabel
+       .enter()
+       .append("text")
+       .attr("transform", function(d) {
+        return "translate(" + xScale(+d.ors_rich) + "," + yScale(+d.ors_poor) + ")";
+       })
+       .attr({
+         "dx": "10px",
+         "dy": "5px"
+       })
+       .attr("class", "dotlabel")
+       .style("opacity", 0)
+       .text(function(d) {
+       if(d.country === "Chad" || d.country === "Nigeria" || d.country === "Burkina Faso") {
+       return d.country;
+       } else {
+        return "";
+       }
+       });
+       // transition them.
+   dotlabel.transition()
+     .duration(2000)
+     .style("opacity", 1);
+   dotlabel.exit().remove();
 
 
     });
 
 
     d3.select("#ors4").on("click", function() {
+
+      data = remove_nulls(inputdata, "pneu_male");
+      data = remove_nulls(data, "pneu_female");
+
 
       d3.select("p#p9").style("display", "inline");
       d3.select("div#p0").style("display", "none");
@@ -1079,49 +838,8 @@ function remove_nulls(data, illness) {
       d3.select("p#p10").style("display", "none");
       d3.select("p#p11").style("display", "none");
 
-
-      xScale.domain(d3.extent(data, function(d){
-        return + d.pneu_male;
-      }));
-
-      svg.select(".x.axis")
-      .transition()
-      .duration(2000)
-      .call(xAxis);
-
-      yScale.domain(d3.extent(data, function(d){
-        return + d.pneu_female;
-      }));
-
-      svg.select(".y.axis")
-      .transition()
-      .duration(2000)
-      .call(yAxis);
-
-      circles
-      .transition()
-      .duration(2000)
-      .attr("cx", function(d) {
-        return xScale(+d.pneu_male);
-
-      })
-      .attr("cy", function(d) {
-        return yScale(+d.pneu_female);
-      })
-      .attr("fill", function(d) {
-
-        if (d.region === "Sub-Saharan Africa") {
-          return "RGB(222,102,0)";
-        }
-
-        else {
-          return "#BFBFBF";
-        }
-
-      });
-
-      circles
-      .on("mouseover", mouseoverFunc)
+      circles = update_circles(data, 'pneu_male', 'pneu_female');
+      circles.on("mouseover", mouseoverFunc);
 
       function mouseoverFunc(d) {
         d3.select(this)
@@ -1140,46 +858,49 @@ function remove_nulls(data, illness) {
       labelx4("Boys, with suspected pneumonia, treated (%)");
       labely("Girls, with suspected pneumonia, treated (%)");
 
-      button
-           var thisButton = d3.select(this);
-               d3.selectAll("button").classed("selected", false);
-               thisButton.classed("selected", true);
+     var thisButton = d3.select(this);
+         d3.selectAll("button").classed("selected", false);
+         thisButton.classed("selected", true);
 
 
-               d3.selectAll("text.dotlabel").remove();
-               var dotlabel = svg.selectAll("text.dotlabel")
-                                   .data(data, function(d) {
-                                     if(d.country === "Somalia" || d.country === "Uganda") {
-                                     return d.country;
-                                     }
-                                     })
-                                     .enter()
-                                     .append("text")
-                                     .attr("transform", function(d) {
-                                      return "translate(" + xScale(+d.pneu_male) + "," + yScale(+d.pneu_female) + ")";
-                                     })
-                                     .attr({
-                                       "dx": "10px",
-                                       "dy": "5px"
-                                     })
-                                     .attr("class", "dotlabel")
-                                     .style("opacity", 0)
-                                     .text(function(d) {
-                                     if(d.country === "Somalia" || d.country === "Uganda") {
-                                     return d.country;
-                                     }
-                                     });
-                                     // transition them.
-                                 dotlabel.transition()
-                                   .duration(2000)
-                                   .style("opacity", 1);
-                                 dotlabel.exit().remove();
+         d3.selectAll("text.dotlabel").remove();
+         var dotlabel = svg.selectAll("text.dotlabel")
+             .data(data, function(d) {
+               return d.country;
+               });
 
-
+             dotlabel
+               .enter()
+               .append("text")
+               .attr("transform", function(d) {
+                return "translate(" + xScale(+d.pneu_male) + "," + yScale(+d.pneu_female) + ")";
+               })
+               .attr({
+                 "dx": "10px",
+                 "dy": "5px"
+               })
+               .attr("class", "dotlabel")
+               .style("opacity", 0)
+               .text(function(d) {
+               if(d.country === "Somalia" || d.country === "Uganda") {
+                  return d.country;
+               } else {
+                return "";
+               }
+               });
+               // transition them.
+           dotlabel.transition()
+             .duration(2000)
+             .style("opacity", 1);
+           dotlabel.exit().remove();
 
     });
 
     d3.select("#ors5").on("click", function() {
+
+      data = remove_nulls(inputdata, "pneu_urban");
+      data = remove_nulls(data, "pneu_rural");
+
 
       d3.select("p#p10").style("display", "inline");
       d3.select("div#p0").style("display", "none");
@@ -1194,48 +915,8 @@ function remove_nulls(data, illness) {
       d3.select("p#p9").style("display", "none");
       d3.select("p#p11").style("display", "none");
 
-      xScale.domain(d3.extent(data, function(d){
-        return + d.pneu_urban;
-      }));
-
-      svg.select(".x.axis")
-      .transition()
-      .duration(2000)
-      .call(xAxis);
-
-      yScale.domain(d3.extent(data, function(d){
-        return + d.pneu_rural;
-      }));
-
-      svg.select(".y.axis")
-      .transition()
-      .duration(2000)
-      .call(yAxis);
-
-      circles
-      .transition()
-      .duration(2000)
-      .attr("cx", function(d) {
-        return xScale(+d.pneu_urban);
-
-      })
-      .attr("cy", function(d) {
-        return yScale(+d.pneu_rural);
-      })
-      .attr("fill", function(d) {
-
-        if (d.region === "Sub-Saharan Africa") {
-          return "RGB(222,102,0)";
-        }
-
-        else {
-          return "#BFBFBF";
-        }
-
-      });
-
-      circles
-      .on("mouseover", mouseoverFunc)
+      circles = update_circles(data, 'pneu_urban', 'pneu_rural');
+      circles.on("mouseover", mouseoverFunc);
 
       function mouseoverFunc(d) {
         d3.select(this)
@@ -1254,51 +935,54 @@ function remove_nulls(data, illness) {
       labelx3("Children, with suspected pneumonia, treated in urban areas (%)");
       labely2("Children, with suspected pneumonia, treated in rural areas (%)");
 
-      button
            var thisButton = d3.select(this);
                d3.selectAll("button").classed("selected", false);
                thisButton.classed("selected", true);
 
-               button
-                    var thisButton = d3.select(this);
-                        d3.selectAll("button").classed("selected", false);
-                        thisButton.classed("selected", true);
+  var thisButton = d3.select(this);
+    d3.selectAll("button").classed("selected", false);
+    thisButton.classed("selected", true);
 
 
-                        d3.selectAll("text.dotlabel").remove();
-                        var dotlabel = svg.selectAll("text.dotlabel")
-                                            .data(data, function(d) {
-                                              if(d.country === "Malawi" || d.country === "Ghana" || d.country === "Guinea" || d.country === "Chad") {
-                                              return d.country;
-                                              }
-                                              })
-                                              .enter()
-                                              .append("text")
-                                              .attr("transform", function(d) {
-                                               return "translate(" + xScale(+d.pneu_urban) + "," + yScale(+d.pneu_rural) + ")";
-                                              })
-                                              .attr({
-                                                "dx": "10px",
-                                                "dy": "4px"
-                                              })
-                                              .attr("class", "dotlabel")
-                                              .style("opacity", 0)
-                                              .text(function(d) {
-                                              if(d.country === "Malawi" || d.country === "Ghana" || d.country === "Guinea" || d.country === "Chad") {
-                                              return d.country;
-                                              }
-                                              });
-                                              // transition them.
-                                          dotlabel.transition()
-                                            .duration(2000)
-                                            .style("opacity", 1);
-                                          dotlabel.exit().remove();
+    d3.selectAll("text.dotlabel").remove();
+    var dotlabel = svg.selectAll("text.dotlabel")
+                        .data(data, function(d) {
+                          return d.country;
+                          });
+        dotlabel
+          .enter()
+          .append("text")
+          .attr("transform", function(d) {
+           return "translate(" + xScale(+d.pneu_urban) + "," + yScale(+d.pneu_rural) + ")";
+          })
+          .attr({
+            "dx": "10px",
+            "dy": "4px"
+          })
+          .attr("class", "dotlabel")
+          .style("opacity", 0)
+          .text(function(d) {
+          if(d.country === "Malawi" || d.country === "Ghana" || d.country === "Guinea" || d.country === "Chad") {
+          return d.country;
+          } else {
+            return "";
+          }
+          });
+          // transition them.
+      dotlabel.transition()
+        .duration(2000)
+        .style("opacity", 1);
+      dotlabel.exit().remove();
 
 
     });
 
 
     d3.select("#ors6").on("click", function() {
+
+      data = remove_nulls(inputdata, "pneu_poor");
+      data = remove_nulls(data, "pneu_rich");
+
 
       d3.select("p#p11").style("display", "inline");
       d3.select("div#p0").style("display", "none");
@@ -1313,48 +997,9 @@ function remove_nulls(data, illness) {
       d3.select("p#p9").style("display", "none");
       d3.select("p#p10").style("display", "none");
 
+      circles = update_circles(data, 'pneu_rich', 'pneu_poor');
+      circles.on("mouseover", mouseoverFunc);
 
-      xScale.domain(d3.extent(data, function(d){
-        return + d.pneu_rich;
-      }));
-
-      svg.select(".x.axis")
-      .transition()
-      .duration(2000)
-      .call(xAxis);
-
-      yScale.domain(d3.extent(data, function(d){
-        return + d.pneu_poor;
-      }));
-
-      svg.select(".y.axis")
-      .transition()
-      .duration(2000)
-      .call(yAxis);
-
-      circles
-      .transition()
-      .duration(2000)
-      .attr("cx", function(d) {
-        return xScale(+d.pneu_rich);
-
-      })
-      .attr("cy", function(d) {
-        return yScale(+d.pneu_poor);
-      })
-      .attr("fill", function(d) {
-
-        if (d.region === "Sub-Saharan Africa") {
-          return "RGB(222,102,0)";
-        }
-        else {
-          return "#BFBFBF";
-        }
-
-      });
-
-      circles
-      .on("mouseover", mouseoverFunc)
 
       function mouseoverFunc(d) {
         d3.select(this)
@@ -1373,47 +1018,46 @@ function remove_nulls(data, illness) {
       labelx("Rich children, with suspected pneumonia, treated (%)");
       labely3("Poor children, with suspected pneumonia, treated (%)");
 
+     var thisButton = d3.select(this);
+         d3.selectAll("button").classed("selected", false);
+         thisButton.classed("selected", true);
 
-      button
-           var thisButton = d3.select(this);
-               d3.selectAll("button").classed("selected", false);
-               thisButton.classed("selected", true);
+         d3.selectAll("text.dotlabel").remove();
+         var dotlabel = svg.selectAll("text.dotlabel")
+                             .data(data, function(d) {
+                               return d.country;
+                               });
 
-               d3.selectAll("text.dotlabel").remove();
-               var dotlabel = svg.selectAll("text.dotlabel")
-                                   .data(data, function(d) {
-                                     if(d.country === "Gambia" || d.country === "Ghana" || d.country === "Senegal") {
-                                     return d.country;
-                                     }
-                                     })
-                                     .enter()
-                                     .append("text")
-                                     .attr("transform", function(d) {
-                                      return "translate(" + xScale(+d.pneu_rich) + "," + yScale(+d.pneu_poor) + ")";
-                                     })
-                                     .attr({
-                                       "dx": "-46px",
-                                       "dy": "3px"
-                                     })
-                                     .attr("class", "dotlabel")
-                                     .style("opacity", 0)
-                                     .text(function(d) {
-                                     if(d.country === "Gambia" || d.country === "Ghana" || d.country === "Senegal") {
-                                     return d.country;
-                                     }
-                                     });
-                                     // transition them.
-                                 dotlabel.transition()
-                                   .duration(2000)
-                                   .style("opacity", 1);
-                                 dotlabel.exit().remove();
+        dotlabel
+         .enter()
+         .append("text")
+         .attr("transform", function(d) {
+          return "translate(" + xScale(+d.pneu_rich) + "," + yScale(+d.pneu_poor) + ")";
+         })
+         .attr({
+           "dx": "-46px",
+           "dy": "3px"
+         })
+         .attr("class", "dotlabel")
+         .style("opacity", 0)
+         .text(function(d) {
+         if(d.country === "Gambia" || d.country === "Ghana" || d.country === "Senegal") {
+         return d.country;
+         } else {
+          return "";
+         }
+         });
+         // transition them.
+     dotlabel.transition()
+       .duration(2000)
+       .style("opacity", 1);
+     dotlabel.exit().remove();
 
     });
 
   });
 
   function mousemoveFunc(d) {
-
     return tooltip
     .style("top", (d3.event.pageY - 10) + "px" )
     .style("left", (d3.event.pageX + 10) + "px");
